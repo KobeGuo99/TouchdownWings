@@ -1,0 +1,13 @@
+
+/* src/styles.css */
+.outlined-text {
+    color: #BC131F;  
+    font-weight: bold;
+    text-shadow:
+      -1px -1px 0 #d3d3d3,  /* Light Gray */
+      1px -1px 0 #d3d3d3,
+      -1px 1px 0 #d3d3d3,
+      1px 1px 0 #d3d3d3;
+  }
+  
+  

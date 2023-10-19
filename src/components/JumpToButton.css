@@ -1,0 +1,15 @@
+.jump-to-button button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #333;  
+    color: #fff;  
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .jump-to-button button:hover {
+    background-color: #555;  
+  }
+  

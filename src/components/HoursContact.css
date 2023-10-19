@@ -1,0 +1,15 @@
+
+.gold-bg {
+    background-color: #FFD700;
+}
+
+
+.hours-contact-bg {
+    background-image: url('../assets/hours_background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #000;
+}
+  
+  
