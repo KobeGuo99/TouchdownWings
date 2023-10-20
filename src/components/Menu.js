@@ -144,8 +144,8 @@ function Menu() {
       items: [
         { name: "Funnel Cake", price: "2.39" },
         { name: "Cheesecake (with strawberry topping)", price: "2.99" },
-        { name: "Fried Cheesecake (with strawberry topping)", price: "5.29" },
         { name: "Chocolate Brownie Bites", price: "4.25" },
+        { name: "Fried Cheesecake (with strawberry topping)", price: "5.29" },
       ],
     },
     {
