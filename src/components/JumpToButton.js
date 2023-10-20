@@ -9,6 +9,7 @@ function JumpToButton({ categories }) {
       const element = document.getElementById(id);
       element.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+    event.target.value = '';
   };
 
   return (
