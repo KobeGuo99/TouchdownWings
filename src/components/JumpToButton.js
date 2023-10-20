@@ -1,32 +1,26 @@
-// src/components/JumpToButton.js
-import React, { useState } from 'react';
+import React from 'react';
 import './JumpToButton.css';
 
 function JumpToButton({ categories }) {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const jumpToCategory = (id) => {
-    const element = document.getElementById(id);
-    element.scrollIntoView({ behavior: 'smooth' });
-    setIsOpen(false);
+  const jumpToCategory = (event) => {
+    const id = event.target.value;
+    if (id) {
+      const element = document.getElementById(id);
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <div className="jump-to-button">
-      <button onClick={toggleMenu}>Jump To</button>
-      {isOpen && (
-        <div className="jump-to-menu">
-          {categories.map((category, index) => (
-            <button key={index} onClick={() => jumpToCategory(category.id)}>  
-              {category.title}
-            </button>
-          ))}
-        </div>
-      )}
+      <select onChange={jumpToCategory} className="jump-to-select">
+        <option value="">Select</option>
+        {categories.map((category, index) => (
+          <option key={index} value={category.id}>
+            {category.title}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }
