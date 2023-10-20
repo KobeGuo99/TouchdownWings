@@ -96,7 +96,7 @@ function Menu() {
         { name: "Hot Chili", price: "2.99" },
         { name: "Corn Dog", price: "2.49" },
         { name: "Texas Toast (2 pcs)", price: "1.89" },
-        { name: "Cole Slaw (4 pcs)", price: "1.89" },
+        { name: "Hushpuppy (4 pcs)", price: "1.89" },
       ],
     },
     {

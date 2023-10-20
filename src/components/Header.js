@@ -21,28 +21,6 @@ function Header() {
           <h1 className="">Touchdown Wings</h1>
           <p className="fs-2 mb-0">Tullahoma, TN</p>
         </div>
-
-        <div className="collapse navbar-collapse flex-grow-0 mx-auto ps-5" id="navbarNav">
-          <div className="d-flex justify-content-center text-center ps-5">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link ps-5" href="#">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Contact
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Menu
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
     </nav>
   );
