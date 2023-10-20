@@ -1,10 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./MenuCategory.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 function MenuCategory({ id, title, description, items, subcategories }) {
   const hasMultipleOptions =
     items && items.some((item) => typeof item.price === "object");
+
+    const renderPepperIcons = (spiciness) => {
+      const peppers = [];
+      for (let i = 0; i < spiciness; i++) {
+        peppers.push(<FontAwesomeIcon icon={["fas", "pepper-hot"]} key={i} />);
+      } 
+      return peppers;
+  };
+  
 
   return (
     <div className="card mb-4" id={id}>
@@ -36,6 +47,7 @@ function MenuCategory({ id, title, description, items, subcategories }) {
                 <tr key={index}>
                   <td>
                     {item.name}
+                    {item.spiciness && renderPepperIcons(item.spiciness)}
                     {item.description && (
                       <div className="item-description">{item.description}</div>
                     )}
@@ -60,11 +72,15 @@ function MenuCategory({ id, title, description, items, subcategories }) {
             <h5 className="card-title">{subcategory.subcategoryTitle}</h5>
             <ul className="list-unstyled">
               {subcategory.items.map((item, index) => (
-                <li key={index}>{item.name}</li>
+                <li key={index}>
+                  {item.name}
+                  {item.spiciness && renderPepperIcons(item.spiciness)}
+                </li>
               ))}
             </ul>
           </div>
         ))}
+        
     </div>
   );
 }

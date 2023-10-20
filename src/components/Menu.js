@@ -2,6 +2,10 @@ import React from "react";
 import MenuCategory from "./MenuCategory";
 import "./Menu.css";
 import JumpToButton from "./JumpToButton";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
+library.add(fas);
 
 function Menu() {
   const menuData = [
@@ -29,14 +33,14 @@ function Menu() {
         {
           subcategoryTitle: "Buffalo Style",
           items: [
-            { name: "Mild" },
-            { name: "Hot" },
-            { name: "X-Hot" },
-            { name: "Crazy Hot" },
-            { name: "Die Hot" },
-            { name: "Buffalo Garlic" },
-            { name: "Cajun" },
-            { name: "Jamaican Jerk" },
+            { name: "Mild " },
+            { name: "Hot ", spiciness: 1 },
+            { name: "X-Hot ", spiciness: 2 },
+            { name: "Crazy Hot ", spiciness: 3 },
+            { name: "Die Hot ", spiciness: 6 },
+            { name: "Buffalo Garlic ", spiciness: 1 },
+            { name: "Cajun ", spiciness: 1 },
+            { name: "Jamaican Jerk ", spiciness: 1 },
           ],
         },
         {
@@ -54,7 +58,7 @@ function Menu() {
           items: [
             { name: "B.B.Q." },
             { name: "Honey B.B.Q." },
-            { name: "Hot B.B.Q." },
+            { name: "Hot B.B.Q. ", spiciness: 1 },
             { name: "B.B.Q. Chipotle" },
             { name: "Honey Gold" },
           ],
@@ -68,9 +72,9 @@ function Menu() {
             { name: "Honey Mustard" },
             { name: "Golden Garlic" },
             { name: "Teriyaki Sesame" },
-            { name: "Asian Fuze" },
+            { name: "Asian Fuze ", spiciness: 1 },
             { name: "Cajun Ranch" },
-            { name: "Mango Habanero" },
+            { name: "Mango Habanero ", spiciness: 2 },
           ],
         },
       ],
