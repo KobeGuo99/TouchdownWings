@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/TouchdownWings/static/css/main.f6221a97.css",
-    "main.js": "/TouchdownWings/static/js/main.5f61318b.js",
+    "main.js": "/TouchdownWings/static/js/main.3239a1c6.js",
     "static/js/787.e04aaa9c.chunk.js": "/TouchdownWings/static/js/787.e04aaa9c.chunk.js",
     "static/media/hours_background.jpg": "/TouchdownWings/static/media/hours_background.0bd59b6aba0dd3ff6c64.jpg",
     "static/media/tdw_logo.png": "/TouchdownWings/static/media/tdw_logo.cab0a8282486d1218faf.png",
     "index.html": "/TouchdownWings/index.html",
     "main.f6221a97.css.map": "/TouchdownWings/static/css/main.f6221a97.css.map",
-    "main.5f61318b.js.map": "/TouchdownWings/static/js/main.5f61318b.js.map",
+    "main.3239a1c6.js.map": "/TouchdownWings/static/js/main.3239a1c6.js.map",
     "787.e04aaa9c.chunk.js.map": "/TouchdownWings/static/js/787.e04aaa9c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f6221a97.css",
-    "static/js/main.5f61318b.js"
+    "static/js/main.3239a1c6.js"
   ]
 }
