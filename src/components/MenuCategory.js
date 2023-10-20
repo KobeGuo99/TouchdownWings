@@ -37,7 +37,7 @@ function MenuCategory({ id, title, description, items, subcategories }) {
                   <td>
                     {item.name}
                     {item.description && (
-                      <div className="item-description ">{item.description}</div>
+                      <div className="item-description">{item.description}</div>
                     )}
                   </td>
                   {typeof item.price === "object" ? (

@@ -7,7 +7,7 @@ function JumpToButton({ categories }) {
     const id = event.target.value;
     if (id) {
       const element = document.getElementById(id);
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 

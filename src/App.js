@@ -3,6 +3,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Header from './components/Header';
 import HoursContact from './components/HoursContact';
 import Menu from './components/Menu';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Header />
       <HoursContact />
       <Menu />
+      <Footer />
     </div>
   );
 }

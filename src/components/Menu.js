@@ -47,7 +47,6 @@ function Menu() {
             { name: "Lemon Pepper" },
             { name: "Garlic Salt" },
             { name: "Jamaican Jerk" },
-
           ],
         },
         {
@@ -132,7 +131,6 @@ function Menu() {
       items: [
         { name: "Celery (10 pcs)", price: "1.00" },
         { name: "Sauce or Dressing", price: "0.70" },
-
       ],
     },
     {
@@ -147,20 +145,17 @@ function Menu() {
     {
       title: "Butterfly Shrimp",
       id: "Butterfly_Shrimp",
-      description:
-        "Served with Cocktail sauce or a sauce of your choice",
+      description: "Served with Cocktail sauce or a sauce of your choice",
       items: [
         { name: "5 pcs", price: "5.99" },
         { name: "10 pcs", price: "9.99" },
         { name: "20 pcs", price: "18.99" },
-
       ],
     },
     {
       title: "Catfish Filet",
       id: "Catfish_Filet",
-      description:
-        "Add French Fries and drink for $3.79 extra",
+      description: "Add French Fries and drink for $3.79 extra",
       items: [
         { name: "Catfish Nuggets (6 pcs)", price: "6.19" },
         { name: "Small (3 pcs) plus hushpuppies and slaw", price: "8.29" },
@@ -171,28 +166,160 @@ function Menu() {
     {
       title: "Sandwich Combos",
       id: "Sandwich_Combos",
-      description:
-        "Combo comes with French Fries and Drink",
+      description: "Combo comes with French Fries and Drink",
       items: [
-        { name: "Fried Chicken Tender", price: { Sandwich: "8.59", Combo: "11.59" } },
+        {
+          name: "Fried Chicken Tender",
+          price: { Sandwich: "8.59", Combo: "11.59" },
+        },
         { name: "Catfish", price: { Sandwich: "8.59", Combo: "11.59" } },
         { name: "Shrimp", price: { Sandwich: "8.59", Combo: "11.59" } },
         { name: "Philly Cheese", price: { Sandwich: "8.59", Combo: "11.59" } },
         { name: "Chicken Philly", price: { Sandwich: "8.59", Combo: "11.59" } },
-        { name: "B.B.Q. Pork with Slaw", price: { Sandwich: "8.59", Combo: "11.59" } },
+        {
+          name: "B.B.Q. Pork with Slaw",
+          price: { Sandwich: "8.59", Combo: "11.59" },
+        },
       ],
     },
     {
-      title: "Kick-Offs",
+      title: "Kick Offs",
       id: "Kick_Offs",
       items: [
-        { 
-          name: "Garbage Fries", 
-          price: { Small: "5.59", Large: "9.99" },
-          description: "A generous portion of fries, topped with Backfire Chili, Salsa, Shredded Cheese, Jalapenos, Black Olives, and Sour Cream"  
+        {
+          name: "Garbage Fries",
+          price: { Small: "5.59", Large: "8.99" },
+          description:
+            "A generous portion of fries, topped with Backfire Chili, Salsa, Shredded Cheese, Jalapenos, Black Olives, and Sour Cream",
         },
-        
-
+        { name: "Fried Pickle Chips", price: "5.99" },
+        { name: "Fried Pickle Spears", price: "5.99" },
+        { name: "Mozzarella Cheese Sticks (5 pcs)", price: "5.49" },
+        { name: "Cheddar Poppers (5 pcs)", price: "5.49" },
+        { name: "Fried Mushrooms (10 pcs)", price: "5.49" },
+        { name: "Onion Rings", price: "5.99" },
+        { name: "Cheddar Broccoli (5 pcs)", price: "5.49" },
+      ],
+    },
+    {
+      title: "Family Meal Deals",
+      id: "Family_Meal_Deals",
+      items: [
+        {
+          name: "Family Meal",
+          price: "37.99",
+          description:
+            "10 Wings, 10 Tenders, 2 large orders of fries, and a 2-liter Soda",
+        },
+        {
+          name: "Wings and Shrimp Deal",
+          price: "54.99",
+          description:
+            "30 Wings, 15 Shrimp, 2 large orders of fries, and a 2-liter Soda",
+        },
+        {
+          name: "Catfish Family Meal",
+          price: "37.99",
+          description:
+            "12 Catfish Filets, 12 hushpuppies, 1 large order of fries, and a 2-liter Soda",
+        },
+        {
+          name: "Super Deal",
+          price: "79.99",
+          description:
+            "40 Wings, 15 Tenders, 2 large orders of fries, and a 2-liter Soda",
+        },
+      ],
+    },
+    {
+      title: "Beverages",
+      id: "Beverages",
+      items: [
+        { name: "Soda or Tea (20 oz)", price: "1.89" },
+        { name: "Soda or Tea (32 oz)", price: "2.59" },
+        { name: "Bottled Drink", price: "2.25" },
+        { name: "Bottled Water", price: "1.25" },
+        { name: "2 Liter", price: "3.55" },
+        { name: "Domestic Beer", price: "2.75" },
+        { name: "Imported Beer", price: "3.75" },
+      ],
+    },
+    {
+      title: "Hibachi Entrees",
+      id: "Hibachi_Entrees",
+      description:
+        "with Fried Rice, Zucchini, Onion, and Broccoli. ASK FOR YUMMY SAUCE FOR FRIED RICE",
+      items: [
+        { name: "Vegetable (Zucchini, Onion, & Broccoli)", price: "9.49" },
+        { name: "Chicken", price: "9.99" },
+        { name: "Beef (Yakiniku)", price: "10.99" },
+        { name: "Shrimp", price: "10.99" },
+        { name: "Chicken & Shrimp", price: "11.99" },
+        { name: "Chicken & Beef (Yakiniku)", price: "12.29" },
+        { name: "Shrimp & Beef (Yakiniku)", price: "12.99" },
+        { name: "House Special Hibachi (Chicken, Beef, & Shrimp)", price: "14.99" },
+      ],
+    },
+    {
+      title: "Fried Rice",
+      id: "Fried_Rice",
+      description:
+        "with Egg & Yummy Sauce",
+      items: [
+        { name: "Fried Rice", price: { Small: "3.69", Large: "6.99" } },
+        { name: "Vegetable Fried Rice", price: { Small: "5.89", Large: "9.79" } },
+        { name: "Chicken Fried Rice", price: { Small: "5.89", Large: "9.79" } },
+        { name: "Beef Fried Rice", price: { Small: "6.19", Large: "10.99" } },
+        { name: "Shrimp Fried Rice", price: { Small: "6.19", Large: "10.99" } },
+        { name: "House Special Fried Rice (Chicken, Beef, Shrimp)", price: { Small: "7.69", Large: "12.79" } },
+      ],
+    },
+    {
+      title: "Lo Mein",
+      id: "Lo_Mein",
+      items: [
+        { name: "Lo Mein", price: { Small: "4.49", Large: "7.79" } },
+        { name: "Vegetable Lo Mein", price: { Small: "6.49", Large: "10.99" } },
+        { name: "Chicken Lo Mein", price: { Small: "6.49", Large: "10.99" } },
+        { name: "Beef Lo Mein", price: { Small: "6.79", Large: "11.59" } },
+        { name: "Shrimp Lo Mein", price: { Small: "6.79", Large: "11.59" } },
+        { name: "House Special Lo Mein (Chicken, Beef, Shrimp)", price: { Small: "8.19", Large: "13.29" } },
+      ],
+    },
+    {
+      title: "Sweet and Sour Chicken",
+      id: "Sweet_and_Sour_Chicken",
+      description: "with Fried Rice or White Rice",
+      items: [
+        { name: "Sweet & Sour Chicken", price: "11.99"},
+      ],
+    },
+    {
+      title: "General Tso's and Sesame Chicken",
+      id: "General_Tso's_and_Sesame_Chicken",
+      description: "with Fried Rice or White Rice",
+      items: [
+        { name: "General Tso's Chicken (Spicy)", price: { Small: "8.99", Large: "12.99" } },
+        { name: "Sesame Chicken", price: { Small: "8.99", Large: "12.99" } },
+      ],
+    },
+    {
+      title: "Side Orders",
+      id: "Side_Orders",
+      items: [
+        { name: "Vegetable", price: "5.99"},
+        { name: "Chicken", price: "5.29"},
+        { name: "Beef", price: "5.99"},
+        { name: "Shrimp", price: "5.99"},
+        { name: "Edamame (Soy Bean)", price: "4.59"},
+        { name: "Crab Rangoon (6 pcs)", price: "6.29"},
+        { name: "Fried Dumpling (8 pcs)", price: "5.69"},
+        { name: "Egg Roll (Pork) (1 pc)", price: "1.99"},
+        { name: "Egg Roll (Pork) (3 pcs)", price: "5.59"},
+        { name: "Spring Roll (Vegetable) (3 pcs)", price: "3.99"},
+        { name: "Spring Roll (Vegetable) (6 pcs)", price: "6.99"},
+        { name: "Yummy Sauce (1 pint)", price: "3.75"},
+        { name: "Yummy Sauce (1 quart)", price: "6.99"},
       ],
     },
   ];
@@ -201,7 +328,7 @@ function Menu() {
     <div className="bg-gold text-dark py-5">
       <div className="container text-center">
         <div className="menu-header">
-          <h2 className="mb-4 menu-title">Menu</h2>
+          <h2 className="mb-4 menu-title menu-margin">Menu</h2>
           <JumpToButton categories={menuData} />
         </div>
 
@@ -209,7 +336,7 @@ function Menu() {
           <MenuCategory
             key={index}
             title={category.title}
-            id={category.title.replace(/ /g, "_")}
+            id={category.id}
             items={category.items}
             description={category.description}
             subcategories={category.subcategories}

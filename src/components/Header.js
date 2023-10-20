@@ -5,8 +5,8 @@ import "./Header.css";
 function Header() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3">
-      <div className="container d-flex flex-lg-row flex-column justify-content-between align-items-center">
-        <div className="logo-container d-flex justify-content-center flex-grow-1">
+      <div className="container d-flex flex-lg-row flex-column justify-content-center align-items-center">
+        <div className="logo-container d-flex justify-content-center flex-grow-1 mx-auto">
           <a className="navbar-brand" href="#">
             <img
               src={logo}
@@ -17,16 +17,16 @@ function Header() {
           </a>
         </div>
 
-        <div className="navbar-text mb-0 font-weight-bold text-danger outlined-text text-center flex-grow-1">
+        <div className="navbar-text mb-0 font-weight-bold text-danger outlined-text text-center flex-grow-1 mx-auto">
           <h1 className="">Touchdown Wings</h1>
           <p className="fs-2 mb-0">Tullahoma, TN</p>
         </div>
 
-        <div className="collapse navbar-collapse flex-grow-0" id="navbarNav">
-          <div className="d-flex justify-content-center text-center">
+        <div className="collapse navbar-collapse flex-grow-0 mx-auto ps-5" id="navbarNav">
+          <div className="d-flex justify-content-center text-center ps-5">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link ps-5" href="#">
                   Home
                 </a>
               </li>
@@ -47,5 +47,6 @@ function Header() {
     </nav>
   );
 }
+
 
 export default Header;
