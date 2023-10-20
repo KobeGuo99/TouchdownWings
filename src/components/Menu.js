@@ -70,6 +70,7 @@ function Menu() {
             { name: "Teriyaki Sesame" },
             { name: "Asian Fuze" },
             { name: "Cajun Ranch" },
+            { name: "Mango Habanero" },
           ],
         },
       ],
@@ -140,6 +141,7 @@ function Menu() {
         { name: "Funnel Cake", price: "2.39" },
         { name: "Cheesecake (with strawberry topping)", price: "2.99" },
         { name: "Fried Cheesecake (with strawberry topping)", price: "5.29" },
+        { name: "Chocolate Brownie Bites", price: "4.25" },
       ],
     },
     {
@@ -264,7 +266,7 @@ function Menu() {
       title: "Fried Rice",
       id: "Fried_Rice",
       description:
-        "with Egg & Yummy Sauce",
+        "with Egg (does not include vegetables) & Yummy Sauce on the side",
       items: [
         { name: "Fried Rice", price: { Small: "3.69", Large: "6.99" } },
         { name: "Vegetable Fried Rice", price: { Small: "5.89", Large: "9.79" } },
@@ -277,6 +279,7 @@ function Menu() {
     {
       title: "Lo Mein",
       id: "Lo_Mein",
+      description: "does not include vegetables",
       items: [
         { name: "Lo Mein", price: { Small: "4.49", Large: "7.79" } },
         { name: "Vegetable Lo Mein", price: { Small: "6.49", Large: "10.99" } },
