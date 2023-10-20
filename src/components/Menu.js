@@ -2,8 +2,8 @@ import React from "react";
 import MenuCategory from "./MenuCategory";
 import "./Menu.css";
 import JumpToButton from "./JumpToButton";
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 
 library.add(fas);
 
@@ -263,7 +263,10 @@ function Menu() {
         { name: "Chicken & Shrimp", price: "11.99" },
         { name: "Chicken & Beef (Yakiniku)", price: "12.29" },
         { name: "Shrimp & Beef (Yakiniku)", price: "12.99" },
-        { name: "House Special Hibachi (Chicken, Beef, & Shrimp)", price: "14.99" },
+        {
+          name: "House Special Hibachi (Chicken, Beef, & Shrimp)",
+          price: "14.99",
+        },
       ],
     },
     {
@@ -273,11 +276,17 @@ function Menu() {
         "with Egg (does not include vegetables) & Yummy Sauce on the side",
       items: [
         { name: "Fried Rice", price: { Small: "3.69", Large: "6.99" } },
-        { name: "Vegetable Fried Rice", price: { Small: "5.89", Large: "9.79" } },
+        {
+          name: "Vegetable Fried Rice",
+          price: { Small: "5.89", Large: "9.79" },
+        },
         { name: "Chicken Fried Rice", price: { Small: "5.89", Large: "9.79" } },
         { name: "Beef Fried Rice", price: { Small: "6.19", Large: "10.99" } },
         { name: "Shrimp Fried Rice", price: { Small: "6.19", Large: "10.99" } },
-        { name: "House Special Fried Rice (Chicken, Beef, Shrimp)", price: { Small: "7.69", Large: "12.79" } },
+        {
+          name: "House Special Fried Rice (Chicken, Beef, Shrimp)",
+          price: { Small: "7.69", Large: "12.79" },
+        },
       ],
     },
     {
@@ -290,23 +299,27 @@ function Menu() {
         { name: "Chicken Lo Mein", price: { Small: "6.49", Large: "10.99" } },
         { name: "Beef Lo Mein", price: { Small: "6.79", Large: "11.59" } },
         { name: "Shrimp Lo Mein", price: { Small: "6.79", Large: "11.59" } },
-        { name: "House Special Lo Mein (Chicken, Beef, Shrimp)", price: { Small: "8.19", Large: "13.29" } },
+        {
+          name: "House Special Lo Mein (Chicken, Beef, Shrimp)",
+          price: { Small: "8.19", Large: "13.29" },
+        },
       ],
     },
     {
       title: "Sweet and Sour Chicken",
       id: "Sweet_and_Sour_Chicken",
       description: "with Fried Rice or White Rice",
-      items: [
-        { name: "Sweet & Sour Chicken", price: "11.99"},
-      ],
+      items: [{ name: "Sweet & Sour Chicken", price: "11.99" }],
     },
     {
       title: "General Tso's and Sesame Chicken",
       id: "General_Tso's_and_Sesame_Chicken",
       description: "with Fried Rice or White Rice",
       items: [
-        { name: "General Tso's Chicken (Spicy)", price: { Small: "8.99", Large: "12.99" } },
+        {
+          name: "General Tso's Chicken (Spicy)",
+          price: { Small: "8.99", Large: "12.99" },
+        },
         { name: "Sesame Chicken", price: { Small: "8.99", Large: "12.99" } },
       ],
     },
@@ -314,19 +327,19 @@ function Menu() {
       title: "Side Orders",
       id: "Side_Orders",
       items: [
-        { name: "Vegetable", price: "5.99"},
-        { name: "Chicken", price: "5.29"},
-        { name: "Beef", price: "5.99"},
-        { name: "Shrimp", price: "5.99"},
-        { name: "Edamame (Soy Bean)", price: "4.59"},
-        { name: "Crab Rangoon (6 pcs)", price: "6.29"},
-        { name: "Fried Dumpling (8 pcs)", price: "5.69"},
-        { name: "Egg Roll (Pork) (1 pc)", price: "1.99"},
-        { name: "Egg Roll (Pork) (3 pcs)", price: "5.59"},
-        { name: "Spring Roll (Vegetable) (3 pcs)", price: "3.99"},
-        { name: "Spring Roll (Vegetable) (6 pcs)", price: "6.99"},
-        { name: "Yummy Sauce (1 pint)", price: "3.75"},
-        { name: "Yummy Sauce (1 quart)", price: "6.99"},
+        { name: "Vegetable", price: "5.99" },
+        { name: "Chicken", price: "5.29" },
+        { name: "Beef", price: "5.99" },
+        { name: "Shrimp", price: "5.99" },
+        { name: "Edamame (Soy Bean)", price: "4.59" },
+        { name: "Crab Rangoon (6 pcs)", price: "6.29" },
+        { name: "Fried Dumpling (8 pcs)", price: "5.69" },
+        { name: "Egg Roll (Pork) (1 pc)", price: "1.99" },
+        { name: "Egg Roll (Pork) (3 pcs)", price: "5.59" },
+        { name: "Spring Roll (Vegetable) (3 pcs)", price: "3.99" },
+        { name: "Spring Roll (Vegetable) (6 pcs)", price: "6.99" },
+        { name: "Yummy Sauce (1 pint)", price: "3.75" },
+        { name: "Yummy Sauce (1 quart)", price: "6.99" },
       ],
     },
   ];
@@ -334,8 +347,8 @@ function Menu() {
   return (
     <div className="bg-gold text-dark py-5">
       <div className="container text-center">
-        <div className="menu-header">
-          <h2 className="mb-4 menu-title menu-margin">Menu</h2>
+        <div className="menu-header d-flex justify-content-center align-items-center">
+          <h2 className="mb-4 menu-title">Menu</h2>
           <JumpToButton categories={menuData} />
         </div>
 

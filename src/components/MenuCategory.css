@@ -1,3 +1,12 @@
 .item-description {
     font-size: 0.8rem; 
-  }
+}
+
+.card {
+  max-width: 800px;  
+  margin: 0 auto;    
+}
+
+.item-description {
+  font-size: 0.8rem; 
+}

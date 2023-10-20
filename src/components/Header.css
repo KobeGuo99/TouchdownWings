@@ -1,11 +1,22 @@
 .outlined-text {
-    color: #BC131F;  
-    font-weight: bold;
-    text-shadow:
-      -1px -1px 0 #d3d3d3,  
-      1px -1px 0 #d3d3d3,
-      -1px 1px 0 #d3d3d3,
-      1px 1px 0 #d3d3d3;
+  color: #bc131f;
+  font-weight: bold;
+  text-shadow: -1px -1px 0 #d3d3d3, 1px -1px 0 #d3d3d3, -1px 1px 0 #d3d3d3,
+    1px 1px 0 #d3d3d3;
 }
-  
-  
+
+@media (min-width: 992px) {
+  .navbar {
+    height: 150px; 
+  }
+  .navbar-text {
+    flex-grow: 2;
+    text-align: center;
+  }
+  .logo-container {
+    margin-right: auto; 
+  }
+  .text-box{
+    margin-left: 0px;
+  }
+}

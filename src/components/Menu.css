@@ -6,10 +6,25 @@
 }
 
 .menu-title {
-  margin: 0 auto;
+  margin: 0px auto 100px 200px;
+  font-weight: bold;
 }
 
 .menu-margin {
   margin-left: 150px;
   font-weight: bold;
+}
+
+@media (min-width: 992px) {
+  .menu-title {
+    margin: 0px auto 100px 525px;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 400px) {
+  .menu-title {
+    margin: 0px 60px 0px 140px;
+    font-weight: bold;
+  }
 }
