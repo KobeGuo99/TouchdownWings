@@ -22,7 +22,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .menu-title {
     margin: 0px 60px 0px 140px;
     font-weight: bold;
