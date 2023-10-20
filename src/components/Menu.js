@@ -188,10 +188,10 @@ function Menu() {
       items: [
         { 
           name: "Garbage Fries", 
-          price: { Small: "5.59", Large: "8.99" },
+          price: { Small: "5.59", Large: "9.99" },
           description: "A generous portion of fries, topped with Backfire Chili, Salsa, Shredded Cheese, Jalapenos, Black Olives, and Sour Cream"  
         },
-      
+        
 
       ],
     },
