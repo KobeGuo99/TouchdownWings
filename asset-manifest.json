@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/TouchdownWings/static/css/main.d5e5e7cb.css",
-    "main.js": "/TouchdownWings/static/js/main.7c361ed8.js",
+    "main.css": "/TouchdownWings/static/css/main.1468fb67.css",
+    "main.js": "/TouchdownWings/static/js/main.f7c14c4e.js",
     "static/js/787.e04aaa9c.chunk.js": "/TouchdownWings/static/js/787.e04aaa9c.chunk.js",
     "static/media/hours_background.jpg": "/TouchdownWings/static/media/hours_background.0bd59b6aba0dd3ff6c64.jpg",
     "static/media/tdw_logo.png": "/TouchdownWings/static/media/tdw_logo.cab0a8282486d1218faf.png",
     "index.html": "/TouchdownWings/index.html",
-    "main.d5e5e7cb.css.map": "/TouchdownWings/static/css/main.d5e5e7cb.css.map",
-    "main.7c361ed8.js.map": "/TouchdownWings/static/js/main.7c361ed8.js.map",
+    "main.1468fb67.css.map": "/TouchdownWings/static/css/main.1468fb67.css.map",
+    "main.f7c14c4e.js.map": "/TouchdownWings/static/js/main.f7c14c4e.js.map",
     "787.e04aaa9c.chunk.js.map": "/TouchdownWings/static/js/787.e04aaa9c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d5e5e7cb.css",
-    "static/js/main.7c361ed8.js"
+    "static/css/main.1468fb67.css",
+    "static/js/main.f7c14c4e.js"
   ]
 }
