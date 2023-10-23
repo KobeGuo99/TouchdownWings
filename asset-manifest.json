@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.12741365.css",
-    "main.js": "/static/js/main.48cfaf51.js",
+    "main.css": "/static/css/main.6131b0a1.css",
+    "main.js": "/static/js/main.c67c398c.js",
     "static/js/787.e04aaa9c.chunk.js": "/static/js/787.e04aaa9c.chunk.js",
     "static/media/hours_background.jpg": "/static/media/hours_background.0bd59b6aba0dd3ff6c64.jpg",
     "static/media/tdw_logo.png": "/static/media/tdw_logo.cab0a8282486d1218faf.png",
     "index.html": "/index.html",
-    "main.12741365.css.map": "/static/css/main.12741365.css.map",
-    "main.48cfaf51.js.map": "/static/js/main.48cfaf51.js.map",
+    "main.6131b0a1.css.map": "/static/css/main.6131b0a1.css.map",
+    "main.c67c398c.js.map": "/static/js/main.c67c398c.js.map",
     "787.e04aaa9c.chunk.js.map": "/static/js/787.e04aaa9c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.12741365.css",
-    "static/js/main.48cfaf51.js"
+    "static/css/main.6131b0a1.css",
+    "static/js/main.c67c398c.js"
   ]
 }
