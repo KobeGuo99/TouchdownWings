@@ -4,7 +4,7 @@ import "./Header.css";
 
 function Header() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+    <nav className="navbar navbar-expand-lg navbar-dark dark-background py-3">
       <div className="container d-flex flex-lg-row flex-column justify-content-between align-items-center text-box">
         <div className="logo-container">
           <a className="navbar-brand" href="#">
@@ -17,8 +17,8 @@ function Header() {
           </a>
         </div>
 
-        <div className="navbar-text mb-0 font-weight-bold text-danger outlined-text text-center d-flex flex-column justify-content-center align-items-center">
-          <h1 className="">Touchdown Wings</h1>
+        <div className="navbar-text mb-0 font-weight-bold outlined-text text-center d-flex flex-column justify-content-center align-items-center">
+          <p className="fs-1">Touchdown Wings</p>
           <p className="fs-2 mb-0">Tullahoma, TN</p>
         </div>
       </div>

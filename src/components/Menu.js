@@ -13,7 +13,7 @@ function Menu() {
       title: "Buffalo Wings",
       id: "Buffalo_Wings",
       description:
-        "Traditional or Boneless with celery, choice of Ranch or Bluecheese. Add French Fries & drink for $3.79 extra",
+        "Traditional or Boneless with celery, choice of Ranch or Blue cheese. Add French Fries & drink for $3.79 extra",
       items: [
         { name: "5 pcs", price: { Boneless: "5.59", Traditional: "6.29" } },
         { name: "10 pcs", price: { Boneless: "9.49", Traditional: "11.29" } },
@@ -108,7 +108,7 @@ function Menu() {
       title: "Fresh Salads",
       id: "Fresh_Salads",
       description:
-        "Served with Ranch, Bluecheese, Italian, Thousand Island, or Honey Mustard",
+        "Served with Ranch, Blue cheese, Italian, Thousand Island, or Honey Mustard",
       items: [
         { name: "Side Salad", price: "3.39" },
         { name: "Garden Salad", price: "5.89" },

@@ -1,9 +1,15 @@
 .outlined-text {
-  color: #bc131f;
+  color: #2b54a7;
   font-weight: bold;
   text-shadow: -1px -1px 0 #d3d3d3, 1px -1px 0 #d3d3d3, -1px 1px 0 #d3d3d3,
     1px 1px 0 #d3d3d3;
+  font-family: 'Roboto', sans-serif;
 }
+
+.dark-background{
+  background-color: #000000;
+}
+
 
 @media (min-width: 992px) {
   .navbar {
