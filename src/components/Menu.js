@@ -15,14 +15,14 @@ function Menu() {
       description:
         "Traditional or Boneless with celery, choice of Ranch or Blue cheese. Add French Fries & drink for $3.79 extra",
       items: [
-        { name: "5 pcs", price: { Boneless: "5.59", Traditional: "6.29" } },
-        { name: "10 pcs", price: { Boneless: "9.49", Traditional: "11.29" } },
-        { name: "20 pcs", price: { Boneless: "18.29", Traditional: "21.99" } },
-        { name: "30 pcs", price: { Boneless: "26.39", Traditional: "32.99" } },
-        { name: "50 pcs", price: { Boneless: "43.49", Traditional: "54.99" } },
+        { name: "5 pcs", price: { Boneless: "5.99", Traditional: "6.49" } },
+        { name: "10 pcs", price: { Boneless: "9.79", Traditional: "11.59" } },
+        { name: "20 pcs", price: { Boneless: "18.99", Traditional: "22.59" } },
+        { name: "30 pcs", price: { Boneless: "27.99", Traditional: "33.59" } },
+        { name: "50 pcs", price: { Boneless: "45.99", Traditional: "55.99" } },
         {
           name: "100 pcs",
-          price: { Boneless: "86.99", Traditional: "109.99" },
+          price: { Boneless: "90.99", Traditional: "109.99" },
         },
       ],
     },
@@ -94,10 +94,10 @@ function Menu() {
       title: "Sidelines",
       id: "Sidelines",
       items: [
-        { name: "Crispy Fries", price: { Small: "2.79", Large: "4.79" } },
-        { name: "Cheese Fries", price: { Small: "3.29", Large: "5.79" } },
-        { name: "Bacon Cheese Fries", price: { Small: "4.49", Large: "6.79" } },
-        { name: "Cole Slaw", price: "1.25" },
+        { name: "Crispy Fries", price: { Small: "3.29", Large: "5.29" } },
+        { name: "Cheese Fries", price: { Small: "3.79", Large: "6.29" } },
+        { name: "Bacon Cheese Fries", price: { Small: "4.99", Large: "7.29" } },
+        { name: "Cole Slaw", price: "1.35" },
         { name: "Hot Chili", price: "2.99" },
         { name: "Corn Dog", price: "2.49" },
         { name: "Texas Toast (2 pcs)", price: "1.89" },
@@ -110,10 +110,10 @@ function Menu() {
       description:
         "Served with Ranch, Blue cheese, Italian, Thousand Island, or Honey Mustard",
       items: [
-        { name: "Side Salad", price: "3.39" },
-        { name: "Garden Salad", price: "5.89" },
-        { name: "Burnie's Salad", price: "8.69" },
-        { name: "Grilled Chicken Salad", price: "8.99" },
+        { name: "Side Salad", price: "3.69" },
+        { name: "Garden Salad", price: "6.29" },
+        { name: "Burnie's Salad", price: "8.99" },
+        { name: "Grilled Chicken Salad", price: "9.49" },
         { name: "Buffalo Shrimp Salad", price: "9.49" },
         { name: "Catfish Salad", price: "9.49" },
       ],
@@ -142,7 +142,7 @@ function Menu() {
       title: "Desserts",
       id: "Desserts",
       items: [
-        { name: "Funnel Cake", price: "2.39" },
+        { name: "Funnel Cake", price: "2.49" },
         { name: "Cheesecake (with strawberry topping)", price: "2.99" },
         { name: "Chocolate Brownie Bites", price: "4.25" },
         { name: "Fried Cheesecake (with strawberry topping)", price: "5.29" },
@@ -154,8 +154,8 @@ function Menu() {
       description: "Served with Cocktail sauce or a sauce of your choice",
       items: [
         { name: "5 pcs", price: "5.99" },
-        { name: "10 pcs", price: "9.99" },
-        { name: "20 pcs", price: "18.99" },
+        { name: "10 pcs", price: "10.49" },
+        { name: "20 pcs", price: "19.99" },
       ],
     },
     {
@@ -163,10 +163,10 @@ function Menu() {
       id: "Catfish_Filet",
       description: "Add French Fries and drink for $3.79 extra",
       items: [
-        { name: "Catfish Nuggets (6 pcs)", price: "6.19" },
-        { name: "Small (3 pcs) plus hushpuppies and slaw", price: "8.29" },
-        { name: "Regular (5 pcs) plus hushpuppies and slaw", price: "12.29" },
-        { name: "Large (7 pcs) plus hushpuppies and slaw", price: "16.49" },
+        { name: "Catfish Nuggets (6 pcs)", price: "6.29" },
+        { name: "Small (3 pcs) plus hushpuppies and slaw", price: "8.49" },
+        { name: "Regular (5 pcs) plus hushpuppies and slaw", price: "12.49" },
+        { name: "Large (7 pcs) plus hushpuppies and slaw", price: "16.99" },
       ],
     },
     {
@@ -180,8 +180,8 @@ function Menu() {
         },
         { name: "Catfish", price: { Sandwich: "8.59", Combo: "11.59" } },
         { name: "Shrimp", price: { Sandwich: "8.59", Combo: "11.59" } },
-        { name: "Philly Cheese", price: { Sandwich: "8.59", Combo: "11.59" } },
-        { name: "Chicken Philly", price: { Sandwich: "8.59", Combo: "11.59" } },
+        { name: "Philly Cheese", price: { Sandwich: "9.29", Combo: "11.99" } },
+        { name: "Chicken Philly", price: { Sandwich: "9.29", Combo: "11.99" } },
         {
           name: "B.B.Q. Pork with Slaw",
           price: { Sandwich: "8.59", Combo: "11.59" },
@@ -194,7 +194,7 @@ function Menu() {
       items: [
         {
           name: "Garbage Fries",
-          price: { Small: "5.59", Large: "8.99" },
+          price: { Small: "6.49", Large: "9.49" },
           description:
             "A generous portion of fries, topped with Backfire Chili, Salsa, Shredded Cheese, Jalapenos, Black Olives, and Sour Cream",
         },
@@ -202,9 +202,9 @@ function Menu() {
         { name: "Fried Pickle Spears", price: "5.99" },
         { name: "Mozzarella Cheese Sticks (5 pcs)", price: "5.49" },
         { name: "Cheddar Poppers (5 pcs)", price: "5.49" },
-        { name: "Fried Mushrooms (10 pcs)", price: "5.49" },
+        { name: "Fried Mushrooms (10 pcs)", price: "5.69" },
         { name: "Onion Rings", price: "5.99" },
-        { name: "Cheddar Broccoli (5 pcs)", price: "5.49" },
+        { name: "Cheddar Broccoli (5 pcs)", price: "5.69" },
       ],
     },
     {
@@ -219,13 +219,13 @@ function Menu() {
         },
         {
           name: "Wings and Shrimp Deal",
-          price: "54.99",
+          price: "55.99",
           description:
             "30 Wings, 15 Shrimp, 2 large orders of fries, and a 2-liter Soda",
         },
         {
           name: "Catfish Family Meal",
-          price: "37.99",
+          price: "39.99",
           description:
             "12 Catfish Filets, 12 hushpuppies, 1 large order of fries, and a 2-liter Soda",
         },
@@ -256,16 +256,16 @@ function Menu() {
       description:
         "with Fried Rice, Zucchini, Onion, and Broccoli. ASK FOR YUMMY SAUCE FOR FRIED RICE",
       items: [
-        { name: "Vegetable (Zucchini, Onion, & Broccoli)", price: "9.49" },
-        { name: "Chicken", price: "9.99" },
-        { name: "Beef (Yakiniku)", price: "10.99" },
-        { name: "Shrimp", price: "10.99" },
-        { name: "Chicken & Shrimp", price: "11.99" },
-        { name: "Chicken & Beef (Yakiniku)", price: "12.29" },
-        { name: "Shrimp & Beef (Yakiniku)", price: "12.99" },
+        { name: "Vegetable (Zucchini, Onion, & Broccoli)", price: "9.69" },
+        { name: "Chicken", price: "10.29" },
+        { name: "Beef (Yakiniku)", price: "11.29" },
+        { name: "Shrimp", price: "11.29" },
+        { name: "Chicken & Shrimp", price: "12.29" },
+        { name: "Chicken & Beef (Yakiniku)", price: "12.59" },
+        { name: "Shrimp & Beef (Yakiniku)", price: "13.29" },
         {
           name: "House Special Hibachi (Chicken, Beef, & Shrimp)",
-          price: "14.99",
+          price: "15.49",
         },
       ],
     },
@@ -275,17 +275,17 @@ function Menu() {
       description:
         "with Egg (does not include vegetables) & Yummy Sauce on the side",
       items: [
-        { name: "Fried Rice", price: { Small: "3.69", Large: "6.99" } },
+        { name: "Fried Rice", price: { Small: "3.79", Large: "6.99" } },
         {
           name: "Vegetable Fried Rice",
-          price: { Small: "5.89", Large: "9.79" },
+          price: { Small: "5.99", Large: "9.99" },
         },
-        { name: "Chicken Fried Rice", price: { Small: "5.89", Large: "9.79" } },
-        { name: "Beef Fried Rice", price: { Small: "6.19", Large: "10.99" } },
-        { name: "Shrimp Fried Rice", price: { Small: "6.19", Large: "10.99" } },
+        { name: "Chicken Fried Rice", price: { Small: "5.99", Large: "9.99" } },
+        { name: "Beef Fried Rice", price: { Small: "6.39", Large: "11.29" } },
+        { name: "Shrimp Fried Rice", price: { Small: "6.39", Large: "11.29" } },
         {
           name: "House Special Fried Rice (Chicken, Beef, Shrimp)",
-          price: { Small: "7.69", Large: "12.79" },
+          price: { Small: "7.89", Large: "12.99" },
         },
       ],
     },
@@ -294,14 +294,14 @@ function Menu() {
       id: "Lo_Mein",
       description: "does not include vegetables",
       items: [
-        { name: "Lo Mein", price: { Small: "4.49", Large: "7.79" } },
-        { name: "Vegetable Lo Mein", price: { Small: "6.49", Large: "10.99" } },
-        { name: "Chicken Lo Mein", price: { Small: "6.49", Large: "10.99" } },
-        { name: "Beef Lo Mein", price: { Small: "6.79", Large: "11.59" } },
-        { name: "Shrimp Lo Mein", price: { Small: "6.79", Large: "11.59" } },
+        { name: "Lo Mein", price: { Small: "4.69", Large: "7.99" } },
+        { name: "Vegetable Lo Mein", price: { Small: "6.69", Large: "11.29" } },
+        { name: "Chicken Lo Mein", price: { Small: "6.69", Large: "11.29" } },
+        { name: "Beef Lo Mein", price: { Small: "6.99", Large: "11.99" } },
+        { name: "Shrimp Lo Mein", price: { Small: "6.99", Large: "11.99" } },
         {
           name: "House Special Lo Mein (Chicken, Beef, Shrimp)",
-          price: { Small: "8.19", Large: "13.29" },
+          price: { Small: "8.29", Large: "13.59" },
         },
       ],
     },
@@ -309,7 +309,7 @@ function Menu() {
       title: "Sweet and Sour Chicken",
       id: "Sweet_and_Sour_Chicken",
       description: "with Fried Rice or White Rice",
-      items: [{ name: "Sweet & Sour Chicken", price: "11.99" }],
+      items: [{ name: "Sweet & Sour Chicken", price: "12.49" }],
     },
     {
       title: "General Tso's and Sesame Chicken",
@@ -318,9 +318,9 @@ function Menu() {
       items: [
         {
           name: "General Tso's Chicken (Spicy)",
-          price: { Small: "8.99", Large: "12.99" },
+          price: { Small: "9.29", Large: "13.49" },
         },
-        { name: "Sesame Chicken", price: { Small: "8.99", Large: "12.99" } },
+        { name: "Sesame Chicken", price: { Small: "9.29", Large: "13.49" } },
       ],
     },
     {
