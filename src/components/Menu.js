@@ -180,8 +180,8 @@ function Menu() {
         },
         { name: "Catfish", price: { Sandwich: "8.59", Combo: "11.59" } },
         { name: "Shrimp", price: { Sandwich: "8.59", Combo: "11.59" } },
-        { name: "Philly Cheese", price: { Sandwich: "9.29", Combo: "11.99" } },
-        { name: "Chicken Philly", price: { Sandwich: "9.29", Combo: "11.99" } },
+        { name: "Philly Cheese", price: { Sandwich: "9.49", Combo: "12.49" } },
+        { name: "Chicken Philly", price: { Sandwich: "9.49", Combo: "12.49" } },
         {
           name: "B.B.Q. Pork with Slaw",
           price: { Sandwich: "8.59", Combo: "11.59" },
@@ -294,7 +294,7 @@ function Menu() {
       id: "Lo_Mein",
       description: "does not include vegetables",
       items: [
-        { name: "Lo Mein", price: { Small: "4.69", Large: "7.99" } },
+        { name: "Lo Mein", price: { Small: "4.99", Large: "7.99" } },
         { name: "Vegetable Lo Mein", price: { Small: "6.69", Large: "11.29" } },
         { name: "Chicken Lo Mein", price: { Small: "6.69", Large: "11.29" } },
         { name: "Beef Lo Mein", price: { Small: "6.99", Large: "11.99" } },
