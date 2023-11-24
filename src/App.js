@@ -4,6 +4,7 @@ import Header from './components/Header';
 import HoursContact from './components/HoursContact';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
+import FoodGallery from './components/FoodGallery';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <HoursContact />
       <Menu />
+      <FoodGallery />
       <Footer />
     </div>
   );
