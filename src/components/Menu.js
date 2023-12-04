@@ -245,7 +245,7 @@ function Menu() {
         { name: "Soda or Tea (32 oz)", price: "2.59" },
         { name: "Bottled Drink", price: "2.25" },
         { name: "Bottled Water", price: "1.25" },
-        { name: "2 Liter", price: "3.55" },
+        { name: "2 Liter", price: "4.79" },
         { name: "Domestic Beer", price: "2.75" },
         { name: "Imported Beer", price: "3.75" },
       ],
