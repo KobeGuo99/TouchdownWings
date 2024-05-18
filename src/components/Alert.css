@@ -1,0 +1,29 @@
+
+.custom-alert {
+    margin: 20px auto; 
+    padding: 30px 100px; 
+    width: 75%; 
+    text-align: center;
+    font-size: 2em; 
+    font-weight: bold;
+    box-sizing: border-box;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .custom-alert {
+      width: 90%;  
+      padding: 20px 50px; 
+      font-size: 1.5em;  
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .custom-alert {
+      width: 95%;  
+      padding: 15px 20px; 
+      font-size: 1.2em;  
+    }
+  }
+  
+  
