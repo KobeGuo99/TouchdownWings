@@ -13,7 +13,7 @@ function Menu() {
       title: "Buffalo Wings",
       id: "Buffalo_Wings",
       description:
-        "Traditional or Boneless with celery, choice of Ranch or Blue cheese. Add French Fries & drink for $3.79 extra",
+        "Traditional or Boneless with celery, choice of Ranch or Blue cheese. Add French Fries & drink for $4.25 extra",
       items: [
         { name: "5 pcs", price: { Boneless: "6.19", Traditional: "6.79" } },
         { name: "10 pcs", price: { Boneless: "9.89", Traditional: "11.89" } },
@@ -41,6 +41,8 @@ function Menu() {
             { name: "Buffalo Garlic ", spiciness: 1 },
             { name: "Cajun ", spiciness: 1 },
             { name: "Jamaican Jerk ", spiciness: 1 },
+            { name: "Mango Habanero ", spiciness: 2 },
+            { name: "Honey Hot ", spiciness: 1 },
           ],
         },
         {
@@ -56,7 +58,6 @@ function Menu() {
         {
           subcategoryTitle: "B.B.Q. Style",
           items: [
-            { name: "B.B.Q." },
             { name: "Honey B.B.Q." },
             { name: "Hot B.B.Q. ", spiciness: 1 },
             { name: "B.B.Q. Chipotle" },
@@ -74,7 +75,6 @@ function Menu() {
             { name: "Teriyaki Sesame" },
             { name: "Asian Fuze ", spiciness: 1 },
             { name: "Cajun Ranch" },
-            { name: "Mango Habanero ", spiciness: 2 },
           ],
         },
       ],
@@ -161,7 +161,6 @@ function Menu() {
     {
       title: "Catfish Filet",
       id: "Catfish_Filet",
-      description: "Add French Fries and drink for $3.79 extra",
       items: [
         { name: "Catfish Nuggets (6 pcs)", price: "6.69" },
         { name: "Small (3 pcs) plus hushpuppies and slaw", price: "8.79" },
