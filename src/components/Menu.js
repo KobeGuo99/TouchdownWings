@@ -85,9 +85,9 @@ function Menu() {
       description:
         "Served with your choice of sauce on it or sauce on the side",
       items: [
-        { name: "3 pcs (1 sauce)", price: "6.99" },
-        { name: "5 pcs (2 sauces)", price: "10.99" },
-        { name: "10 pcs (3 sauces)", price: "20.49" },
+        { name: "3 pcs (1 sauce)", price: "7.29" },
+        { name: "5 pcs (2 sauces)", price: "11.49" },
+        { name: "10 pcs (3 sauces)", price: "21.29" },
       ],
     },
     {
@@ -164,7 +164,7 @@ function Menu() {
       items: [
         { name: "Catfish Nuggets (6 pcs)", price: "6.69" },
         { name: "Small (3 pcs) plus hushpuppies and slaw", price: "8.79" },
-        { name: "Regular (5 pcs) plus hushpuppies and slaw", price: "12.99" },
+        { name: "Regular (5 pcs) plus hushpuppies and slaw", price: "13.29" },
         { name: "Large (7 pcs) plus hushpuppies and slaw", price: "17.99" },
       ],
     },
@@ -334,10 +334,10 @@ function Menu() {
         { name: "Crab Rangoon (6 pcs)", price: "6.49" },
         { name: "Fried Dumpling (8 pcs)", price: "5.89" },
         { name: "Egg Roll (Pork) (1 pc)", price: "1.99" },
-        { name: "Egg Roll (Pork) (3 pcs)", price: "5.59" },
+        { name: "Egg Roll (Pork) (3 pcs)", price: "5.69" },
         { name: "Spring Roll (Vegetable) (3 pcs)", price: "3.99" },
         { name: "Spring Roll (Vegetable) (6 pcs)", price: "6.99" },
-        { name: "Yummy Sauce (1 pint)", price: "3.75" },
+        { name: "Yummy Sauce (1 pint)", price: "3.99" },
         { name: "Yummy Sauce (1 quart)", price: "6.99" },
       ],
     },
