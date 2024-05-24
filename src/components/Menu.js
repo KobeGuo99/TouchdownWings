@@ -212,13 +212,13 @@ function Menu() {
       items: [
         {
           name: "Family Meal",
-          price: "39.99",
+          price: "43.49",
           description:
             "10 Wings, 10 Tenders, 2 large orders of fries, and a 2-liter Soda",
         },
         {
           name: "Wings and Shrimp Deal",
-          price: "56.99",
+          price: "60.49",
           description:
             "30 Wings, 15 Shrimp, 2 large orders of fries, and a 2-liter Soda",
         },
@@ -230,7 +230,7 @@ function Menu() {
         },
         {
           name: "Super Deal",
-          price: "80.99",
+          price: "86.49",
           description:
             "40 Wings, 15 Tenders, 2 large orders of fries, and a 2-liter Soda",
         },
