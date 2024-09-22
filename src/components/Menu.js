@@ -142,9 +142,9 @@ function Menu() {
       title: "Desserts",
       id: "Desserts",
       items: [
-        { name: "Funnel Cake", price: "2.79" },
-        { name: "Cheesecake (with strawberry topping)", price: "3.29" },
-        { name: "Chocolate Brownie Bites", price: "4.29" },
+        { name: "Funnel Cake", price: "2.89" },
+        { name: "Cheesecake (with strawberry topping)", price: "3.39" },
+        { name: "Chocolate Brownie Bites", price: "4.39" },
         { name: "Fried Cheesecake (with strawberry topping)", price: "5.49" },
       ],
     },
@@ -193,17 +193,17 @@ function Menu() {
       items: [
         {
           name: "Garbage Fries",
-          price: { Small: "6.69", Large: "9.69" },
+          price: { Small: "6.79", Large: "9.79" },
           description:
             "A generous portion of fries, topped with Backfire Chili, Salsa, Shredded Cheese, Jalapenos, Black Olives, and Sour Cream",
         },
         { name: "Fried Pickle Chips", price: "5.99" },
         { name: "Fried Pickle Spears", price: "5.99" },
-        { name: "Mozzarella Cheese Sticks (5 pcs)", price: "5.49" },
-        { name: "Cheddar Poppers (5 pcs)", price: "5.49" },
-        { name: "Fried Mushrooms (10 pcs)", price: "5.69" },
+        { name: "Mozzarella Cheese Sticks (5 pcs)", price: "5.99" },
+        { name: "Cheddar Poppers (5 pcs)", price: "5.99" },
+        { name: "Fried Mushrooms (10 pcs)", price: "5.99" },
         { name: "Onion Rings", price: "5.99" },
-        { name: "Cheddar Broccoli (5 pcs)", price: "5.69" },
+        { name: "Cheddar Broccoli (5 pcs)", price: "5.99" },
       ],
     },
     {
@@ -212,13 +212,13 @@ function Menu() {
       items: [
         {
           name: "Family Meal",
-          price: "43.49",
+          price: "43.99",
           description:
             "10 Wings, 10 Tenders, 2 large orders of fries, and a 2-liter Soda",
         },
         {
           name: "Wings and Shrimp Deal",
-          price: "60.49",
+          price: "60.99",
           description:
             "30 Wings, 15 Shrimp, 2 large orders of fries, and a 2-liter Soda",
         },
@@ -230,7 +230,7 @@ function Menu() {
         },
         {
           name: "Super Deal",
-          price: "86.49",
+          price: "86.99",
           description:
             "40 Wings, 15 Tenders, 2 large orders of fries, and a 2-liter Soda",
         },
@@ -256,15 +256,15 @@ function Menu() {
         "with Fried Rice, Zucchini, Onion, and Broccoli. ASK FOR YUMMY SAUCE FOR FRIED RICE",
       items: [
         { name: "Vegetable (Zucchini, Onion, & Broccoli)", price: "9.99" },
-        { name: "Chicken", price: "10.69" },
-        { name: "Beef (Yakiniku)", price: "11.69" },
-        { name: "Shrimp", price: "11.69" },
+        { name: "Chicken", price: "10.79" },
+        { name: "Beef (Yakiniku)", price: "11.79" },
+        { name: "Shrimp", price: "11.79" },
         { name: "Chicken & Shrimp", price: "12.99" },
-        { name: "Chicken & Beef (Yakiniku)", price: "13.39" },
+        { name: "Chicken & Beef (Yakiniku)", price: "13.49" },
         { name: "Shrimp & Beef (Yakiniku)", price: "13.99" },
         {
           name: "House Special Hibachi (Chicken, Beef, & Shrimp)",
-          price: "16.49",
+          price: "16.59",
         },
       ],
     },
@@ -274,17 +274,17 @@ function Menu() {
       description:
         "with Egg (does not include vegetables) & Yummy Sauce on the side",
       items: [
-        { name: "Fried Rice", price: { Small: "4.09", Large: "7.29" } },
+        { name: "Fried Rice", price: { Small: "4.19", Large: "7.39" } },
         {
           name: "Vegetable Fried Rice",
-          price: { Small: "6.39", Large: "10.59" },
+          price: { Small: "6.49", Large: "10.69" },
         },
-        { name: "Chicken Fried Rice", price: { Small: "6.39", Large: "10.59" } },
-        { name: "Beef Fried Rice", price: { Small: "6.79", Large: "11.99" } },
-        { name: "Shrimp Fried Rice", price: { Small: "6.79", Large: "11.99" } },
+        { name: "Chicken Fried Rice", price: { Small: "6.49", Large: "10.69" } },
+        { name: "Beef Fried Rice", price: { Small: "6.89", Large: "12.09" } },
+        { name: "Shrimp Fried Rice", price: { Small: "6.89", Large: "12.09" } },
         {
           name: "House Special Fried Rice (Chicken, Beef, Shrimp)",
-          price: { Small: "8.29", Large: "13.69" },
+          price: { Small: "8.39", Large: "13.79" },
         },
       ],
     },
@@ -293,14 +293,14 @@ function Menu() {
       id: "Lo_Mein",
       description: "does not include vegetables",
       items: [
-        { name: "Lo Mein", price: { Small: "5.09", Large: "8.29" } },
-        { name: "Vegetable Lo Mein", price: { Small: "7.09", Large: "11.99" } },
-        { name: "Chicken Lo Mein", price: { Small: "7.09", Large: "11.99" } },
-        { name: "Beef Lo Mein", price: { Small: "7.39", Large: "12.69" } },
-        { name: "Shrimp Lo Mein", price: { Small: "7.39", Large: "12.69" } },
+        { name: "Lo Mein", price: { Small: "5.19", Large: "8.39" } },
+        { name: "Vegetable Lo Mein", price: { Small: "7.19", Large: "12,09" } },
+        { name: "Chicken Lo Mein", price: { Small: "7.19", Large: "12.09" } },
+        { name: "Beef Lo Mein", price: { Small: "7.49", Large: "12.79" } },
+        { name: "Shrimp Lo Mein", price: { Small: "7.49", Large: "12.79" } },
         {
           name: "House Special Lo Mein (Chicken, Beef, Shrimp)",
-          price: { Small: "8.69", Large: "14.29" },
+          price: { Small: "8.79", Large: "14.39" },
         },
       ],
     },
@@ -317,9 +317,9 @@ function Menu() {
       items: [
         {
           name: "General Tso's Chicken (Spicy)",
-          price: { Small: "9.59", Large: "13.99" },
+          price: { Small: "9.65", Large: "13.99" },
         },
-        { name: "Sesame Chicken", price: { Small: "9.59", Large: "13.99" } },
+        { name: "Sesame Chicken", price: { Small: "9.65", Large: "13.99" } },
       ],
     },
     {
