@@ -9,11 +9,11 @@ import AlertMessage from './components/Alert';
 import { useState } from 'react';
 
 function App() {
-  const [alertMessage, setAlertMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState('Closed on Fri., March 14 - Thurs., March 20. Will reopen on Friday, March 21. Sorry for the inconvenience!');
   return (
     <div>
       <Header />
-      {/* <AlertMessage message={alertMessage} /> */}
+      <AlertMessage message={alertMessage} />
       <HoursContact />
       <Menu />
       {/* <FoodGallery /> */}
