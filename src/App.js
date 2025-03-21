@@ -13,7 +13,7 @@ function App() {
   return (
     <div>
       <Header />
-      <AlertMessage message={alertMessage} />
+      {/* <AlertMessage message={alertMessage} /> */}
       <HoursContact />
       <Menu />
       {/* <FoodGallery /> */}
