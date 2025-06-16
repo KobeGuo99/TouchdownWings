@@ -128,18 +128,24 @@
 
 .time-display {
   margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .time-display .day {
   font-weight: 600;
   color: #2b54a7;
   font-size: 0.97rem;
+  text-align: left;
 }
 
 .time-display .time {
   font-weight: 700;
   color: #1e3c7a;
   font-size: 0.97rem;
+  text-align: right;
+  margin-left: 1rem;
 }
 
 .status-badge {
