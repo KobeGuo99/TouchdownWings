@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.1d5f0f32.css",
-    "main.js": "/static/js/main.bc7d2c97.js",
+    "main.css": "/static/css/main.32320628.css",
+    "main.js": "/static/js/main.641b40b4.js",
     "static/js/787.e04aaa9c.chunk.js": "/static/js/787.e04aaa9c.chunk.js",
     "static/media/18.jpg": "/static/media/18.70a22f25ba447c0e2487.jpg",
     "static/media/24.jpg": "/static/media/24.00557b10f39e1161a767.jpg",
@@ -23,6 +23,7 @@
     "static/media/10.jpg": "/static/media/10.e41d37ade0705e8b7a44.jpg",
     "static/media/13.jpg": "/static/media/13.bb85af394a4f2593bc13.jpg",
     "static/media/6.jpg": "/static/media/6.5ffba73b61ab839c24cc.jpg",
+    "static/media/wings_example.jpg": "/static/media/wings_example.3df88e955cc5a2a2b22a.jpg",
     "static/media/3.jpg": "/static/media/3.ab9423001071dfd69729.jpg",
     "static/media/9.jpg": "/static/media/9.89730c774dcf405a8b3b.jpg",
     "static/media/12.jpg": "/static/media/12.7edb2007f864dc1a2dd2.jpg",
@@ -34,12 +35,12 @@
     "static/media/hours_background.jpg": "/static/media/hours_background.0bd59b6aba0dd3ff6c64.jpg",
     "static/media/tdw_logo.png": "/static/media/tdw_logo.cab0a8282486d1218faf.png",
     "index.html": "/index.html",
-    "main.1d5f0f32.css.map": "/static/css/main.1d5f0f32.css.map",
-    "main.bc7d2c97.js.map": "/static/js/main.bc7d2c97.js.map",
+    "main.32320628.css.map": "/static/css/main.32320628.css.map",
+    "main.641b40b4.js.map": "/static/js/main.641b40b4.js.map",
     "787.e04aaa9c.chunk.js.map": "/static/js/787.e04aaa9c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1d5f0f32.css",
-    "static/js/main.bc7d2c97.js"
+    "static/css/main.32320628.css",
+    "static/js/main.641b40b4.js"
   ]
 }
