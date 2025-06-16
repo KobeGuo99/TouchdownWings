@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-scroll';
@@ -65,13 +65,34 @@ const ModernMenu = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+  const categoryLinksRef = useRef(null);
+  const [atScrollStart, setAtScrollStart] = useState(true);
+  const [atScrollEnd, setAtScrollEnd] = useState(false);
 
   const handleScroll = (e) => {
     const { scrollLeft, scrollWidth, clientWidth } = e.target;
-    // Check if we're near the end of the scroll
-    const isNearEnd = scrollWidth - scrollLeft - clientWidth < 10;
-    setIsScrolled(isNearEnd);
+    setAtScrollStart(scrollLeft <= 2);
+    setAtScrollEnd(scrollLeft + clientWidth >= scrollWidth - 2);
+    setIsScrolled(scrollLeft + clientWidth >= scrollWidth - 10);
   };
+
+  const handleArrowClick = () => {
+    if (categoryLinksRef.current) {
+      categoryLinksRef.current.scrollBy({ left: 500, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    if (!activeCategory || !categoryLinksRef.current) return;
+    const activeLink = categoryLinksRef.current.querySelector('.category-link.active');
+    if (activeLink) {
+      const linkRect = activeLink.getBoundingClientRect();
+      const containerRect = categoryLinksRef.current.getBoundingClientRect();
+      if (linkRect.left < containerRect.left || linkRect.right > containerRect.right) {
+        activeLink.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+  }, [activeCategory]);
 
   const filteredMenuData = menuData.filter(category => {
     const matchesSearch = category.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -101,12 +122,15 @@ const ModernMenu = () => {
     <div className="modern-menu" id="menu-section" ref={ref}>
       <CategoryNav>
         <Container>
-          <Row className="align-items-center">
-            <Col md={8}>
-              <div className={`category-links-container ${isScrolled ? 'scrolled' : ''}`}>
-                <div 
+          <Row className="align-items-center g-2">
+            <Col md={8} style={{ position: 'relative' }}>
+              <div className={`category-links-container ${isScrolled ? 'scrolled' : ''}`}> 
+                <div
                   className="category-links"
+                  ref={categoryLinksRef}
                   onScroll={handleScroll}
+                  tabIndex={0}
+                  style={{ scrollBehavior: 'smooth' }}
                 >
                   {menuData.map((category) => (
                     <Link
@@ -116,20 +140,30 @@ const ModernMenu = () => {
                       smooth={true}
                       offset={-150}
                       duration={800}
-                      className="category-link"
+                      className={`category-link ${activeCategory === category.id ? 'active' : ''}`}
                       onSetActive={() => setActiveCategory(category.id)}
                     >
                       {category.title}
                     </Link>
                   ))}
                 </div>
+                {!atScrollEnd && (
+                  <button
+                    className="scroll-arrow"
+                    onClick={handleArrowClick}
+                    aria-label="Scroll categories right"
+                    style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', zIndex: 2, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                  >
+                    <span className="arrow-icon">→</span>
+                  </button>
+                )}
               </div>
             </Col>
             <Col md={4}>
               <SearchBar>
                 <input
                   type="text"
-                  placeholder="Search menu..."
+                  placeholder="Search our menu..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
