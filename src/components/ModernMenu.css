@@ -21,9 +21,6 @@
   transition: opacity 0.3s ease;
 }
 
-.category-links-container::before {
-  /* Remove the arrow indicator pseudo-element */
-}
 
 .category-links {
   display: flex;

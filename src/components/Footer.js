@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css";
 import logo from "../assets/tdw_logo.png";
+import { FaHeart } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -26,6 +27,13 @@ function Footer() {
             <p className="mb-0">
               &copy; 2023 Touchdown Wings. All rights reserved.
             </p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 text-center mt-3">
+            <div className="credit">
+              Crafted with <FaHeart className="heart-icon" /> by Kobe Guo
+            </div>
           </div>
         </div>
       </div>
