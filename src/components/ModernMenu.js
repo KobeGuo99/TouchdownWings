@@ -60,10 +60,18 @@ const SearchBar = styled.div`
 const ModernMenu = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('');
+  const [isScrolled, setIsScrolled] = useState(false);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const handleScroll = (e) => {
+    const { scrollLeft, scrollWidth, clientWidth } = e.target;
+    // Check if we're near the end of the scroll
+    const isNearEnd = scrollWidth - scrollLeft - clientWidth < 10;
+    setIsScrolled(isNearEnd);
+  };
 
   const filteredMenuData = menuData.filter(category => {
     const matchesSearch = category.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -95,21 +103,26 @@ const ModernMenu = () => {
         <Container>
           <Row className="align-items-center">
             <Col md={8}>
-              <div className="category-links">
-                {menuData.map((category) => (
-                  <Link
-                    key={category.id}
-                    to={category.id}
-                    spy={true}
-                    smooth={true}
-                    offset={-100}
-                    duration={500}
-                    className="category-link"
-                    onSetActive={() => setActiveCategory(category.id)}
-                  >
-                    {category.title}
-                  </Link>
-                ))}
+              <div className={`category-links-container ${isScrolled ? 'scrolled' : ''}`}>
+                <div 
+                  className="category-links"
+                  onScroll={handleScroll}
+                >
+                  {menuData.map((category) => (
+                    <Link
+                      key={category.id}
+                      to={category.id}
+                      spy={true}
+                      smooth={true}
+                      offset={-150}
+                      duration={800}
+                      className="category-link"
+                      onSetActive={() => setActiveCategory(category.id)}
+                    >
+                      {category.title}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </Col>
             <Col md={4}>

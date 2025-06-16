@@ -3,17 +3,83 @@
   min-height: 100vh;
 }
 
+.category-links-container {
+  position: relative;
+  width: 100%;
+}
+
+.category-links-container::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.98));
+  pointer-events: none;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.category-links-container::before {
+  content: '→';
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #FF6B35;
+  font-size: 1.5rem;
+  opacity: 0.9;
+  pointer-events: none;
+  animation: bounceRight 2s infinite;
+  z-index: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  font-weight: bold;
+}
+
+@keyframes bounceRight {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(-50%) translateX(0);
+    opacity: 0.9;
+  }
+  40% {
+    transform: translateY(-50%) translateX(8px);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(-50%) translateX(4px);
+    opacity: 0.95;
+  }
+}
+
 .category-links {
   display: flex;
   gap: 1rem;
   overflow-x: auto;
   padding: 0.5rem 0;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(43, 84, 167, 0.3) transparent;
+  -ms-overflow-style: auto;
+  padding-right: 30px; /* Add padding to prevent text from going under the gradient */
 }
 
 .category-links::-webkit-scrollbar {
-  display: none;
+  height: 4px;
+  display: block;
+}
+
+.category-links::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 2px;
+}
+
+.category-links::-webkit-scrollbar-thumb {
+  background-color: rgba(43, 84, 167, 0.3);
+  border-radius: 2px;
+}
+
+.category-links::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(43, 84, 167, 0.5);
 }
 
 .category-link {
@@ -25,6 +91,7 @@
   transition: all 0.3s ease;
   cursor: pointer;
   font-weight: 500;
+  scroll-margin-top: 100px;
 }
 
 .category-link:hover,
@@ -267,4 +334,10 @@
   .price {
     font-size: 0.9rem;
   }
+}
+
+/* Hide the gradient and arrow when scrolled to the end */
+.category-links-container.scrolled::after,
+.category-links-container.scrolled::before {
+  opacity: 0;
 } 
