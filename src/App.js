@@ -15,10 +15,10 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <AlertMessage message={alertMessage} />
+      {/* <AlertMessage message={alertMessage} /> */}
       <HoursContact />
       <ModernMenu />
-      <FoodGallery />
+      {/* <FoodGallery /> */}
       <Footer />
     </div>
   );
