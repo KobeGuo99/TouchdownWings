@@ -26,3 +26,122 @@
     margin-left: 0px;
   }
 }
+
+.header-section {
+  background-color: #2b54a7;
+  padding: 1.5rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.logo-wrapper {
+  flex-shrink: 0;
+}
+
+.header-logo {
+  height: 80px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.header-text {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-text h1 {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-text p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0;
+}
+
+.menu-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: white;
+  color: #2b54a7;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.menu-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: #2b54a7;
+  text-decoration: none;
+}
+
+.menu-button svg {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .header-section {
+    padding: 1rem 0;
+    position: relative;
+    background-color: #2b54a7;
+    z-index: 1000;
+  }
+  .header-content {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+  .header-logo {
+    height: 50px;
+  }
+  .header-text h1 {
+    font-size: 1.75rem;
+    margin-top: 0.5rem;
+  }
+  .header-text p {
+    font-size: 1rem;
+    margin-top: 0.25rem;
+  }
+  .menu-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-section {
+    padding: 0.75rem 0;
+  }
+  .header-logo {
+    height: 45px;
+  }
+  .header-text h1 {
+    font-size: 1.5rem;
+  }
+  .header-text p {
+    font-size: 0.9rem;
+  }
+  .menu-button {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+  }
+}

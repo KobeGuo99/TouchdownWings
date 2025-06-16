@@ -65,17 +65,95 @@
 }
 
 @media (max-width: 768px) {
+  .modern-menu {
+    padding-top: 1rem;
+  }
+  
+  .category-nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 0.75rem 0;
+    z-index: 999;
+  }
+  
   .category-links {
-    padding-bottom: 1rem;
+    padding: 0.5rem 0;
+    margin: 0 -0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
   
   .category-link {
     font-size: 0.9rem;
     padding: 0.4rem 0.8rem;
+    white-space: nowrap;
+  }
+  
+  .search-container {
+    margin: 0.5rem 0;
+    max-width: 100%;
+  }
+  
+  .search-input {
+    font-size: 0.9rem;
+    padding: 0.4rem 2rem 0.4rem 0.75rem;
+  }
+  
+  .menu-card {
+    margin-bottom: 1rem;
+  }
+  
+  .menu-card-header {
+    padding: 0.75rem;
+  }
+  
+  .menu-card-header h2 {
+    font-size: 1.25rem;
+  }
+  
+  .menu-card-body {
+    padding: 1rem;
   }
   
   .menu-item {
-    margin-bottom: 1rem;
+    padding: 0.75rem;
+  }
+  
+  .price {
+    font-size: 0.95rem;
+  }
+  
+  .menu-badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-nav {
+    top: 0;
+  }
+  
+  .category-link {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.7rem;
+  }
+  
+  .menu-card-header h2 {
+    font-size: 1.1rem;
+  }
+  
+  .menu-card-body {
+    padding: 0.75rem;
+  }
+  
+  .menu-item {
+    padding: 0.5rem;
+  }
+  
+  .price {
+    font-size: 0.9rem;
   }
 }
 

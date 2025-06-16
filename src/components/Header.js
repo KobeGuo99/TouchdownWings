@@ -1,29 +1,40 @@
 import React from "react";
+import { Link } from "react-scroll";
+import { FaChevronDown } from "react-icons/fa";
 import logo from "../assets/tdw_logo.png";
 import "./Header.css";
 
 function Header() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark dark-background py-3">
-      <div className="container d-flex flex-lg-row flex-column justify-content-between align-items-center text-box">
-        <div className="logo-container">
-          <a className="navbar-brand" href="#">
+    <div className="header-section">
+      <div className="container">
+        <div className="header-content">
+          <div className="logo-wrapper">
             <img
               src={logo}
               alt="Touchdown Wings Logo"
-              width="200"
-              className="mr-3"
+              className="header-logo"
             />
-          </a>
-        </div>
-
-        <div className="navbar-text mb-0 font-weight-bold outlined-text text-center d-flex flex-column justify-content-center align-items-center">
-          <p className="fs-1">Touchdown Wings</p>
-          <p className="fs-2 mb-0">Tullahoma, TN</p>
+          </div>
+          <div className="header-text">
+            <h1>Touchdown Wings</h1>
+            <p>Tullahoma, TN</p>
+          </div>
+          <Link
+            to="menu-section"
+            spy={true}
+            smooth={false}
+            duration={0}
+            className="menu-button"
+          >
+            <span>View Menu</span>
+            <FaChevronDown />
+          </Link>
         </div>
       </div>
-    </nav>
+    </div>
   );
 }
 
 export default Header;
+

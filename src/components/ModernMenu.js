@@ -90,7 +90,7 @@ const ModernMenu = () => {
   };
 
   return (
-    <div className="modern-menu" ref={ref}>
+    <div className="modern-menu" id="menu-section" ref={ref}>
       <CategoryNav>
         <Container>
           <Row className="align-items-center">
