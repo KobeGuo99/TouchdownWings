@@ -165,7 +165,7 @@ const ModernMenu = () => {
 
   const scrollToCategory = (categoryId) => {
     scroller.scrollTo(categoryId, {
-      duration: 800,
+      duration: 50,
       smooth: true,
       offset: -100,
       containerId: 'menu-section'
@@ -242,7 +242,7 @@ const ModernMenu = () => {
                       spy={false}
                       smooth={true}
                       offset={-100}
-                      duration={800}
+                      duration={50}
                       className={`category-link ${activeCategory === category.id ? 'active' : ''}`}
                       onClick={() => handleCategoryClick(category.id)}
                     >
