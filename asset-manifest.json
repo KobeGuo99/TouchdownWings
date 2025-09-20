@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.2f286307.css",
-    "main.js": "/static/js/main.65d70637.js",
+    "main.js": "/static/js/main.0541f043.js",
     "static/js/787.e04aaa9c.chunk.js": "/static/js/787.e04aaa9c.chunk.js",
     "static/media/18.jpg": "/static/media/18.70a22f25ba447c0e2487.jpg",
     "static/media/24.jpg": "/static/media/24.00557b10f39e1161a767.jpg",
@@ -36,11 +36,11 @@
     "static/media/tdw_logo.png": "/static/media/tdw_logo.cab0a8282486d1218faf.png",
     "index.html": "/index.html",
     "main.2f286307.css.map": "/static/css/main.2f286307.css.map",
-    "main.65d70637.js.map": "/static/js/main.65d70637.js.map",
+    "main.0541f043.js.map": "/static/js/main.0541f043.js.map",
     "787.e04aaa9c.chunk.js.map": "/static/js/787.e04aaa9c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2f286307.css",
-    "static/js/main.65d70637.js"
+    "static/js/main.0541f043.js"
   ]
 }
