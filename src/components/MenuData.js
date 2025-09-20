@@ -132,10 +132,10 @@ const menuData = [
     title: "Desserts",
     id: "Desserts",
     items: [
-      { name: "Funnel Cake", price: "2.89" },
-      { name: "Cheesecake (with strawberry topping)", price: "3.39" },
-      { name: "Chocolate Brownie Bites", price: "4.39" },
-      { name: "Fried Cheesecake (with strawberry topping)", price: "5.49" },
+      { name: "Funnel Cake", price: "2.99" },
+      { name: "Cheesecake (with strawberry topping)", price: "3.59" },
+      { name: "Chocolate Brownie Bites", price: "4.59" },
+      { name: "Fried Cheesecake (with strawberry topping)", price: "5.89" },
     ],
   },
   {
