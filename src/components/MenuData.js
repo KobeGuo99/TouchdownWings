@@ -286,8 +286,8 @@ const menuData = [
       { name: "Lo Mein", price: { Small: "5.49", Large: "8.79" } },
       { name: "Vegetable Lo Mein", price: { Small: "7.49", Large: "12.49" } },
       { name: "Chicken Lo Mein", price: { Small: "7.49", Large: "12.49" } },
-      { name: "Beef Lo Mein", price: { Small: "7.89", Large: "12.79" } },
-      { name: "Shrimp Lo Mein", price: { Small: "7.89", Large: "12.79" } },
+      { name: "Beef Lo Mein", price: { Small: "7.89", Large: "13.29" } },
+      { name: "Shrimp Lo Mein", price: { Small: "7.89", Large: "13.29" } },
       {
         name: "House Special Lo Mein (Chicken, Beef, Shrimp)",
         price: { Small: "9.29", Large: "14.89" },
@@ -307,9 +307,9 @@ const menuData = [
     items: [
       {
         name: "General Tso's Chicken (Spicy)",
-        price: { Small: "9.99", Large: "14.39" },
+        price: { Small: "9.99", Large: "14.49" },
       },
-      { name: "Sesame Chicken", price: { Small: "9.99", Large: "14.39" } },
+      { name: "Sesame Chicken", price: { Small: "9.99", Large: "14.49" } },
     ],
   },
   {
