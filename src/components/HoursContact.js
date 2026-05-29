@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { FaClock, FaPhone, FaMapMarkerAlt, FaDoorOpen, FaDoorClosed, FaUtensils } from 'react-icons/fa';
+import { FaClock, FaPhone, FaMapMarkerAlt, FaDoorOpen, FaDoorClosed } from 'react-icons/fa';
+import { specialClosure } from './SiteSettings';
 import './HoursContact.css';
 
 // Override variable - set to true to force restaurant open, false to force closed, null for normal time-based check
@@ -9,6 +10,10 @@ const FORCE_RESTAURANT_STATUS = null;
 function HoursContact() {
   // Check if restaurant is currently open in Central Time
   const isCurrentlyOpen = () => {
+    if (specialClosure.isActive) {
+      return false;
+    }
+
     // If override is set, return that value
     if (FORCE_RESTAURANT_STATUS !== null) {
       return FORCE_RESTAURANT_STATUS;
@@ -147,4 +152,3 @@ function HoursContact() {
 }
 
 export default HoursContact;
-

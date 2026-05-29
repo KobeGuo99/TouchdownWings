@@ -1,13 +1,26 @@
 
 import React from 'react';
 import './Alert.css';
-import { Alert } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { FaExclamationTriangle } from 'react-icons/fa';
 
-const AlertMessage = ({ message }) => {
+const AlertMessage = ({ isActive, message }) => {
+  if (!isActive || !message) {
+    return null;
+  }
+
   return (
-    <Alert variant="warning" className="custom-alert">
-      {message}
-    </Alert>
+    <section className="special-closure-alert" aria-live="polite">
+      <Container>
+        <div className="special-closure-content">
+          <FaExclamationTriangle className="special-closure-icon" />
+          <div>
+            {/* <p className="special-closure-label">Special Closure Notice</p> */}
+            <p className="special-closure-message">{message}</p>
+          </div>
+        </div>
+      </Container>
+    </section>
   );
 };
 
