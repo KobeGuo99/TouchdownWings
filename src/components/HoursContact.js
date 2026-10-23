@@ -28,10 +28,10 @@ function HoursContact() {
     const currentTime = hour + minute / 60;
 
     if (day === 1) return false; // Monday
-    if (day === 0) return currentTime >= 12 && currentTime < 20.5; // Sunday
-    if (day === 6) return currentTime >= 11 && currentTime < 21.5; // Saturday
-    if (day === 5) return currentTime >= 11 && currentTime < 21.5; // Friday
-    return currentTime >= 11 && currentTime < 21; // Tuesday-Thursday
+    if (day === 0) return currentTime >= 12 && currentTime < 20; // Sunday
+    if (day === 6) return currentTime >= 11 && currentTime < 21; // Saturday
+    if (day === 5) return currentTime >= 11 && currentTime < 21; // Friday
+    return currentTime >= 11 && currentTime < 20.5; // Tuesday-Thursday
   };
 
   return (
@@ -74,19 +74,19 @@ function HoursContact() {
                 <div className="info-item">
                   <div className="time-display">
                     <span className="day">Tuesday - Thursday  </span>
-                    <span className="time">11am - 9pm</span>
+                    <span className="time">11am - 8:30pm</span>
                   </div>
                 </div>
                 <div className="info-item">
                   <div className="time-display">
                     <span className="day">Friday & Saturday</span>
-                    <span className="time">11am - 9:30pm</span>
+                    <span className="time">11am - 9pm</span>
                   </div>
                 </div>
                 <div className="info-item">
                   <div className="time-display">
                     <span className="day">Sunday</span>
-                    <span className="time">12pm - 8:30pm</span>
+                    <span className="time">12pm - 8pm</span>
                   </div>
                 </div>
               </div>
