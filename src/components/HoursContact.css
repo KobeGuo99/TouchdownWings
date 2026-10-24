@@ -141,12 +141,28 @@
   .facts { grid-template-columns: 1fr; gap: 20px; }
 }
 @media (min-width: 560px) {
-  .mast-top { flex-direction: row; justify-content: space-between; align-items: center; gap: 24px; }
   .mast { padding-top: 30px; }
-  .board { min-width: 240px; }
   .facts { grid-template-columns: 1fr 1fr; gap: 26px 36px; }
   .fact-v { font-size: 17px; }
   .fact-sub { font-size: 13.5px; }
+}
+
+/* The lockup needs ~550px and the scoreboard 240px, so side-by-side only
+   fits from about 860px. Below that the two stack, exactly as they do on a
+   phone. Matches the breakpoint where the desktop rail appears. */
+@media (min-width: 900px) {
+  .mast-top {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px 24px;
+  }
+  /* basis 0 so the row is laid out from the scoreboard's width outwards:
+     the lockup takes what is left and wraps its own text, instead of
+     flexbox breaking the whole row onto two lines at max-content */
+  .mast-mark { flex: 1 1 0; min-width: 0; }
+  .board { flex: 0 1 auto; min-width: 240px; }
 }
 @media (min-width: 760px) {
   .facts { grid-template-columns: repeat(3, 1fr); }

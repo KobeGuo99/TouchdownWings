@@ -38,11 +38,11 @@ function Footer() {
             {restaurant.cityStateZip}
           </p>
           <p>
-            <a href={restaurant.mapsUrl} target="_blank" rel="noopener noreferrer">
+            <a href={restaurant.directionsUrl} target="_blank" rel="noopener noreferrer">
               Get directions
             </a>
           </p>
-          <p><DoorDashLink /></p>
+          <DoorDashLink />
         </div>
 
         <div>

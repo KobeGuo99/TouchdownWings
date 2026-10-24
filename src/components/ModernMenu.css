@@ -339,7 +339,8 @@ mark { background: var(--gold); color: #2B1B00; padding: 0 2px; border-radius: 1
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  padding: 6px calc(var(--pad) + var(--safe-l)) calc(24px + var(--safe-b)) calc(var(--pad) + var(--safe-r));
+  /* padding lives on the children so the sticky header can span edge to edge */
+  padding: 0 0 calc(24px + var(--safe-b));
   transform: translateY(101%);
   /* hidden rather than merely off-screen, so its 20 links are not
      reachable by Tab while the sheet is closed */
@@ -352,7 +353,33 @@ mark { background: var(--gold); color: #2B1B00; padding: 0 2px; border-radius: 1
   visibility: visible;
   transition: transform .22s cubic-bezier(.3,.8,.4,1), visibility 0s;
 }
-.grab { width: 40px; height: 4px; background: var(--rule-2); margin: 9px auto 14px; border-radius: 2px; }
+/* stays put while the section list scrolls underneath */
+.sheet-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--card);
+  border-bottom: 2px solid var(--ink);
+  padding: 0 calc(var(--pad) + var(--safe-r)) 10px calc(var(--pad) + var(--safe-l));
+}
+.grab { width: 40px; height: 4px; background: var(--rule-2); margin: 9px auto 12px; border-radius: 2px; }
+.sheet-head-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sheet-head-row .sign { color: var(--ink-3); }
+.sheet-close {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 0 16px;
+  cursor: pointer;
+  font-family: var(--slab);
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--card);
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+}
+.sheet-body { padding: 14px calc(var(--pad) + var(--safe-r)) 0 calc(var(--pad) + var(--safe-l)); }
 .sheet .rail-group + .rail-group { margin-top: 16px; }
 .sheet .sheet-items { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
 .sheet a {

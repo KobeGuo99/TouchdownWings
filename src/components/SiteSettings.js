@@ -98,12 +98,15 @@ export const restaurant = {
   // unless the restaurant physically moves to another zone.
   timeZone: "America/Chicago",
 
-  // ↓ Built from the three values above. Nothing to edit here —
-  //   this is what stops the displayed number and the dial button
-  //   from drifting apart.
+  // ↓ Built from the values above. Nothing to edit here — this is what
+  //   stops the displayed number and the dial button from drifting apart.
   phoneHref: `tel:+1${PHONE.replace(/\D/g, "")}`,
-  mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    `${STREET} ${CITY_STATE_ZIP}`
+
+  // Opens Google Maps with the destination already set, so a customer gets
+  // a route rather than a business listing they have to tap again. The
+  // starting point is left blank on purpose — Maps fills in their location.
+  directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+    `Touchdown Wings, ${STREET}, ${CITY_STATE_ZIP}`
   )}`,
 };
 

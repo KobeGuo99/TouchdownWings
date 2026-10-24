@@ -63,7 +63,7 @@ function HoursContact() {
             <div className="fact-v">{restaurant.street}</div>
             <div className="fact-sub">
               {restaurant.cityStateZip} ·{" "}
-              <a href={restaurant.mapsUrl} target="_blank" rel="noopener noreferrer">
+              <a href={restaurant.directionsUrl} target="_blank" rel="noopener noreferrer">
                 Directions
               </a>
             </div>

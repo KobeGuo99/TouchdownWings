@@ -415,8 +415,20 @@ function ModernMenu() {
         aria-modal="true"
         aria-label="Jump to a section"
       >
-        <div className="grab" />
-        {nav(() => setSheetOpen(false))}
+        <div className="sheet-head">
+          <div className="grab" />
+          <div className="sheet-head-row">
+            <span className="sign">Jump to a section</span>
+            <button
+              type="button"
+              className="sheet-close"
+              onClick={() => setSheetOpen(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+        <div className="sheet-body">{nav(() => setSheetOpen(false))}</div>
       </div>
     </>
   );

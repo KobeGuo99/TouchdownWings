@@ -21,20 +21,20 @@ function DoorDashLink({ className = "" }) {
     </>
   );
 
-  // Without a URL it is still worth saying, just not as a link
-  if (!doorDash.url) {
-    return <span className={`dd-link is-static ${className}`}>{inner}</span>;
-  }
-
-  return (
-    <a
-      className={`dd-link ${className}`}
-      href={doorDash.url}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+  const link = doorDash.url ? (
+    <a className="dd-link" href={doorDash.url} target="_blank" rel="noopener noreferrer">
       {inner}
     </a>
+  ) : (
+    // Without a URL it is still worth saying, just not as a link
+    <span className="dd-link is-static">{inner}</span>
+  );
+
+  return (
+    <div className={`dd ${className}`.trim()}>
+      {link}
+      <small className="dd-note">DoorDash prices may differ.</small>
+    </div>
   );
 }
 

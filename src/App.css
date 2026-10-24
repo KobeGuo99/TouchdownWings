@@ -85,7 +85,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: rgba(200,55,29,.15);
-  overflow-x: hidden;
 }
 
 /* iOS ignores body{overflow:hidden}; the sheet pins the body instead */

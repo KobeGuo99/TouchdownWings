@@ -27,5 +27,15 @@
   .dd-link:hover span { border-bottom-color: var(--doordash); }
 }
 
+/* a quiet caveat, not a second call to action */
+.dd-note {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
 /* on the dark footer */
 .footer .dd-link { color: var(--sign-fg); margin-top: 0; }
+.footer .dd-note { color: var(--sign-fg-2); }
