@@ -14,13 +14,23 @@
   gap: 10px;
 }
 /* the actual mark, so the brand is present for the whole scroll
-   rather than only at the very top of the page */
+   rather than only at the very top of the page. Tapping it returns to
+   the top — the menu runs long, so this matters most on a phone. */
 .brand {
-  height: 34px;
-  width: auto;
-  display: block;
+  display: flex;
+  align-items: center;
   flex: 0 0 auto;
+  min-height: 44px;
+  padding: 0 6px 0 0;
+  margin-left: -2px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
 }
+.brand img { height: 34px; width: auto; display: block; }
+.brand:active img { transform: translateY(1px); }
 .topbar .spacer { flex: 1 1 auto; min-width: 0; }
 
 .pill {
@@ -72,7 +82,7 @@
 }
 .call:active { transform: translateY(2px); box-shadow: none; }
 
-@media (max-width: 400px) { .brand { height: 29px; } }
+@media (max-width: 400px) { .brand img { height: 29px; } }
 @media (min-width: 440px) {
   .pill .t-long { display: inline; }
   .pill .t-short { display: none; }

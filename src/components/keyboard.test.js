@@ -38,3 +38,27 @@ test("opening the sheet moves focus into it; Escape closes it and gives focus ba
   expect(button).toHaveAttribute("aria-expanded", "false");
   expect(document.activeElement).toBe(button);
 });
+
+test("the logo in the sticky bar is a labelled control that returns to the top", () => {
+  const scrollTo = jest.fn();
+  window.scrollTo = scrollTo;
+
+  render(<App />);
+  const brand = screen.getByRole("button", { name: /back to top/i });
+  expect(brand.tagName).toBe("BUTTON");
+
+  fireEvent.click(brand);
+  expect(scrollTo).toHaveBeenCalledWith({ top: 0 });
+});
+
+test("the bar logo is not announced twice", () => {
+  const { container } = render(<App />);
+  // the masthead heading already names the restaurant
+  expect(container.querySelector(".brand img")).toHaveAttribute("alt", "");
+  expect(container.querySelector("h1").textContent).toMatch(/Touchdown\s*Wings/);
+});
+
+test("the heading says which Touchdown Wings this is", () => {
+  const { container } = render(<App />);
+  expect(container.querySelector("h1").textContent).toMatch(/Tullahoma/i);
+});

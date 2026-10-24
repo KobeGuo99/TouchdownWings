@@ -29,7 +29,9 @@
   flex: 0 0 auto;
   display: block;
 }
-.mast-mark span {
+.mast-name { min-width: 0; }
+.mast-word {
+  display: block;
   font-family: var(--slab);
   font-weight: 800;
   text-transform: uppercase;
@@ -38,9 +40,28 @@
   letter-spacing: -.015em;
   color: var(--ink);
   text-wrap: balance;
-  min-width: 0;
 }
 .mast-mark b { color: var(--sauce); font-weight: 800; }
+.mast-city {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: clamp(6px, 1.4vw, 10px);
+  font-family: var(--sign);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: clamp(10px, 2.3vw, 13px);
+  font-weight: 700;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.mast-city::before {
+  content: "";
+  width: clamp(18px, 4vw, 34px);
+  height: 3px;
+  background: var(--gold);
+  flex: none;
+}
 
 /* the one loud element on the page */
 .board {

@@ -111,6 +111,35 @@ export const restaurant = {
 };
 
 
+// ── TELLING THIS LOCATION APART ──────────────────────────────
+//  "Touchdown Wings" is not a unique name, so search engines need
+//  help tying this website to THIS restaurant. Filling these in is
+//  the strongest signal you can send from the site itself.
+export const identity = {
+  // Every other place this exact restaurant is listed. Paste the full
+  // URLs — Google uses them to confirm the website and the listing are
+  // the same business. The Google Business Profile link matters most.
+  //
+  //   Google Business Profile: open your profile -> Share -> copy link
+  //   Facebook page, Yelp page, Instagram, TripAdvisor...
+  //
+  // Example:
+  //   profiles: [
+  //     "https://www.facebook.com/yourpage",
+  //     "https://www.yelp.com/biz/your-listing",
+  //   ],
+  profiles: [],
+
+  // Exact coordinates pin the listing to this address rather than a
+  // same-named restaurant elsewhere.
+  //   In Google Maps: right-click the restaurant -> click the numbers
+  //   at the top of the menu to copy them -> paste below.
+  // Leave both null and they are simply left out.
+  latitude: 35.3759619,
+  longitude: -86.2236379,
+};
+
+
 // ── DELIVERY ─────────────────────────────────────────────────
 //  We take orders by phone; DoorDash handles delivery. This is
 //  mentioned as a line of text, not a big delivery button, so the

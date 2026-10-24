@@ -1,5 +1,5 @@
 import React from "react";
-import { hours, restaurant, doorDash } from "./SiteSettings";
+import { hours, restaurant, doorDash, identity } from "./SiteSettings";
 
 const DAY_KEYS = [
   "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday",
@@ -40,7 +40,11 @@ export function buildSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
+    // a stable identifier for this specific restaurant
+    "@id": `${restaurant.siteUrl}/#restaurant`,
     name: restaurant.name,
+    // the name alone is ambiguous; this is the form people actually search
+    alternateName: `${restaurant.name} ${city}`,
     url: restaurant.siteUrl,
     telephone: `+1${restaurant.phone.replace(/\D/g, "")}`,
     address: {
@@ -52,13 +56,27 @@ export function buildSchema() {
       addressCountry: "US",
     },
     servesCuisine: ["Chicken Wings", "American", "Hibachi", "Chinese"],
+    areaServed: { "@type": "City", name: city, containedInPlace: { "@type": "State", name: "Tennessee" } },
+    hasMap: restaurant.directionsUrl,
     priceRange: "$",
     acceptsReservations: false,
     hasMenu: `${restaurant.siteUrl}/#menu`,
     openingHoursSpecification: openingHours(),
   };
 
-  if (doorDash.enabled && doorDash.url) schema.sameAs = [doorDash.url];
+  if (identity.latitude != null && identity.longitude != null) {
+    schema.geo = {
+      "@type": "GeoCoordinates",
+      latitude: identity.latitude,
+      longitude: identity.longitude,
+    };
+  }
+
+  // every other listing that is demonstrably this same restaurant
+  const sameAs = [...(identity.profiles || [])];
+  if (doorDash.enabled && doorDash.url) sameAs.push(doorDash.url);
+  if (sameAs.length) schema.sameAs = sameAs;
+
   return schema;
 }
 

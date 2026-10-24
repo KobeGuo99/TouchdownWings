@@ -20,7 +20,16 @@ function Header() {
   return (
     <header className="topbar">
       <div className="wrap topbar-in">
-        <img className="brand" src={logo} alt={`${restaurant.name} logo`} />
+        <button
+          type="button"
+          className="brand"
+          onClick={() => window.scrollTo({ top: 0 })}
+          aria-label="Back to top"
+        >
+          {/* alt is empty: the masthead heading already names the
+              restaurant, so the button's own label is what matters */}
+          <img src={logo} alt="" />
+        </button>
         <div className="spacer" />
 
         <span

@@ -24,8 +24,14 @@ function HoursContact() {
                 would otherwise announce it twice. */}
             <h1 className="mast-mark">
               <img src={logo} alt="" />
-              <span>
-                Touchdown <b>Wings</b>
+              <span className="mast-name">
+                <span className="mast-word">
+                  Touchdown <b>Wings</b>
+                </span>
+                {/* a city line, the way a team carries its town. "Touchdown
+                    Wings" is not a unique name, so the heading itself has to
+                    say which one this is. */}
+                <span className="mast-city">Tullahoma, Tennessee</span>
               </span>
             </h1>
           </div>
