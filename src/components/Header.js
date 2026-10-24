@@ -1,40 +1,50 @@
 import React from "react";
-import { Link } from "react-scroll";
-import { FaChevronDown } from "react-icons/fa";
-import logo from "../assets/tdw_logo.png";
+// trimmed copy of tdw_logo.png — the original has ~20% transparent
+// padding baked in, which pushed the mark out of alignment
+import logo from "../assets/tdw_logo_mark.png";
+import { restaurant } from "./SiteSettings";
+import { useOpenStatus } from "./openStatus";
 import "./Header.css";
 
+const PhoneIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z" />
+  </svg>
+);
+
+// Slim sticky bar. Its whole job is that the phone number and the
+// open/closed state are reachable from anywhere on the page.
 function Header() {
+  const status = useOpenStatus();
+
   return (
-    <div className="header-section">
-      <div className="container">
-        <div className="header-content">
-          <div className="logo-wrapper">
-            <img
-              src={logo}
-              alt="Touchdown Wings Logo"
-              className="header-logo"
-            />
-          </div>
-          <div className="header-text">
-            <h1>Touchdown Wings</h1>
-            <p>Tullahoma, TN</p>
-          </div>
-          <Link
-            to="menu-section"
-            spy={true}
-            smooth={false}
-            duration={0}
-            className="menu-button"
-          >
-            <span>View Menu</span>
-            <FaChevronDown />
-          </Link>
-        </div>
+    <header className="topbar">
+      <div className="wrap topbar-in">
+        <img className="brand" src={logo} alt={`${restaurant.name} logo`} />
+        <div className="spacer" />
+
+        <span
+          className={`pill ${status.ready ? (status.isOpen ? "is-open" : "is-closed") : "is-pending"}`}
+          aria-hidden={!status.ready}
+        >
+          {status.ready ? (
+            <>
+              <span className="dot" />
+              <span className="t-long">{status.short}</span>
+              <span className="t-short">{status.isOpen ? "Open" : "Closed"}</span>
+            </>
+          ) : (
+            <span aria-hidden="true">&nbsp;</span>
+          )}
+        </span>
+
+        <a className="call" href={restaurant.phoneHref}>
+          <PhoneIcon />
+          <span>{restaurant.phone}</span>
+        </a>
       </div>
-    </div>
+    </header>
   );
 }
 
 export default Header;
-

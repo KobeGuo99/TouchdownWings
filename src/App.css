@@ -1,163 +1,141 @@
-/* Global styles */
+@import "./assets/fonts/fonts.css";
+
+/* ============================================================
+   TOUCHDOWN WINGS — "Friday night counter menu"
+   Kraft paper, ink navy, pennant gold, hot sauce red. The menu
+   already speaks football (Kick Offs = appetizers, Sidelines =
+   sides), so the design follows its lead.
+
+   Mobile-first: phones are the primary device for a takeout menu
+   and the desktop rail is the enhancement, not the baseline.
+============================================================ */
 :root {
-  --primary-color: #2b54a7;
-  --secondary-color: #f8f9fa;
-  --accent-color: #ffc107;
-  --text-color: #333;
-  --light-text: #666;
-  --border-color: #dee2e6;
-  --success-color: #28a745;
-  --danger-color: #dc3545;
-  --warning-color: #ffc107;
-  --info-color: #17a2b8;
+  --paper:   #EDE3CF;   /* kraft takeout bag */
+  --paper-2: #E4D8BE;
+  --card:    #F7F1E2;
+  --ink:     #11284F;   /* deep navy ink */
+  --ink-2:   #4A5B77;
+  --ink-3:   #5D6571;   /* WCAG AA on kraft: 4.62 */
+  --rule:    #C9BA9B;
+  --rule-2:  #AD9C7C;
+
+  --blue:    #2B54A7;   /* the original brand blue, kept */
+  --gold:    #F2B126;   /* pennant gold */
+  --gold-dk: #9A6B06;
+  --sauce:   #C8371D;   /* hot sauce */
+  --doordash: #D92B06;  /* brand red, darkened for contrast on kraft */
+
+  --board:   #0D1526;   /* scoreboard plate */
+  --board-2: #F2B126;
+  --board-edge: #11284F;
+  --sign-bg: #11284F;   /* top bar + footer: dark in both themes */
+  --sign-fg: #F2E7D2;
+  --sign-fg-2: #B9AE97;
+
+  /* Self-hosted, so every phone renders the same thing.
+     Rokkitt stands in for Rockwell (Apple/Office only); Libre Franklin
+     is Franklin Gothic's open descendant — the American signage and
+     newspaper vernacular, which is the register a counter menu lives in. */
+  --slab: "Rokkitt", Rockwell, "Roboto Slab", Georgia, serif;
+  --sign: "Libre Franklin", system-ui, -apple-system, sans-serif;
+  --body: "Libre Franklin", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* resolve to 0px without viewport-fit=cover, so they are always safe to use */
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --pad: 16px;
+
+  --bar-h: 52px;
+  --bar-total: calc(var(--bar-h) + var(--safe-t));
+  --tools-h: 64px;
+  --chrome: calc(var(--bar-total) + var(--tools-h));
+  --rail-w: 226px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:#0B1424; --paper-2:#101C31; --card:#0F1A2D;
+    --ink:#F2E7D2; --ink-2:#A9B4C8; --ink-3:#77849D;
+    --rule:#2A3A55; --rule-2:#3D5075;
+    --blue:#7FA3EE; --gold:#F6C04A; --gold-dk:#A87A12;
+    --sauce:#F0664A;
+    --doordash:#FF5A3C;
+    --board:#05090F; --board-2:#F6C04A; --board-edge:#46597E;
+    --sign-bg:#060C17; --sign-fg:#F2E7D2; --sign-fg-2:#9AA7BD;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;  /* stop iOS inflating type in landscape */
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: var(--text-color);
-  line-height: 1.6;
-  background-color: var(--secondary-color);
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(200,55,29,.15);
+  overflow-x: hidden;
 }
 
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* iOS ignores body{overflow:hidden}; the sheet pins the body instead */
+body.locked { position: fixed; inset: 0 0 auto 0; width: 100%; overflow: hidden; }
+
+:focus-visible { outline: 2.5px solid var(--sauce); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, html { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  margin-bottom: 1rem;
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: calc(var(--pad) + var(--safe-l));
+  padding-right: calc(var(--pad) + var(--safe-r));
 }
 
-/* Links */
-a {
-  color: var(--primary-color);
+/* keyboard users should not have to tab the whole masthead to reach the menu */
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  z-index: 200;
+  transform: translateY(-200%);
+  background: var(--gold);
+  color: #11284F;
+  font-family: var(--slab);
+  font-weight: 800;
+  font-size: 15px;
+  padding: 12px 18px;
+  border-radius: 3px;
   text-decoration: none;
-  transition: color 0.3s ease;
+  box-shadow: 0 2px 0 var(--gold-dk);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* small-caps signage label */
+.sign {
+  font-family: var(--sign);
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  font-size: 11px;
+  font-weight: 700;
 }
 
-a:hover {
-  color: darken(var(--primary-color), 10%);
-  text-decoration: none;
-}
-
-/* Buttons */
-.btn {
-  border-radius: 25px;
-  padding: 0.5rem 1.5rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-}
-
-.btn-primary:hover {
-  background-color: darken(var(--primary-color), 10%);
-  border-color: darken(var(--primary-color), 10%);
-}
-
-/* Cards */
-.card {
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Container */
-.container {
-  max-width: 1200px;
-  padding: 0 1rem;
-}
-
-/* Spacing utilities */
-.section-padding {
-  padding: 4rem 0;
-}
-
-.section-margin {
-  margin: 4rem 0;
-}
-
-/* Responsive images */
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--secondary-color);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: darken(var(--primary-color), 10%);
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.5s ease-out;
-}
-
-/* Media queries */
-@media (max-width: 768px) {
-  .section-padding {
-    padding: 2rem 0;
-  }
-  
-  .section-margin {
-    margin: 2rem 0;
-  }
-  
-  .container {
-    padding: 0 0.5rem;
-  }
-}
-
-/* Print styles */
-@media print {
-  .no-print {
-    display: none !important;
-  }
-  
-  body {
-    background-color: white;
-  }
-  
-  .container {
-    max-width: 100%;
-    padding: 0;
-  }
+@media (min-width: 560px) { :root { --pad: 20px; } }
+@media (max-width: 374px) { :root { --pad: 12px; } }
+@media (min-width: 900px) and (min-height: 680px) {
+  :root { --bar-h: 56px; --tools-h: 66px; }
 }

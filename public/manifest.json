@@ -1,25 +1,16 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Touchdown Wings",
+  "name": "Touchdown Wings — Tullahoma, TN",
+  "description": "Menu, prices, hours and phone number for Touchdown Wings in Tullahoma, Tennessee.",
   "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
+    { "src": "favicon.ico", "sizes": "48x48 32x32 16x16", "type": "image/x-icon" },
+    { "src": "logo192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "logo512.png", "type": "image/png", "sizes": "512x512" },
+    { "src": "logo512.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#11284F",
+  "background_color": "#EDE3CF"
 }

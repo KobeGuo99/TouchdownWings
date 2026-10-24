@@ -1,0 +1,31 @@
+.dd-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  min-height: 40px;
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 650;
+  text-decoration: none;
+}
+.dd-mark {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  color: var(--doordash);
+}
+/* echoes the gold rule under the phone number rather than reading as a
+   default browser link */
+.dd-link span {
+  border-bottom: 2px solid color-mix(in srgb, var(--doordash) 55%, transparent);
+  padding-bottom: 3px;
+}
+.dd-link.is-static span { border-bottom: 0; padding-bottom: 0; }
+
+@media (hover: hover) and (pointer: fine) {
+  .dd-link:hover span { border-bottom-color: var(--doordash); }
+}
+
+/* on the dark footer */
+.footer .dd-link { color: var(--sign-fg); margin-top: 0; }

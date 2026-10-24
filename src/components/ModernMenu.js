@@ -1,372 +1,425 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { Link, scroller } from 'react-scroll';
-import { Container, Row, Col, Card, Badge } from 'react-bootstrap';
-import { FaPepperHot, FaSearch, FaFilter, FaArrowUp } from 'react-icons/fa';
-import styled from '@emotion/styled';
-import menuData from './MenuData';
-import './ModernMenu.css';
+import React, { useState, useMemo, useEffect, useRef } from "react";
+import { FaPepperHot } from "react-icons/fa";
+import menu from "./MenuData";
+import { restaurant } from "./SiteSettings";
+import "./ModernMenu.css";
 
-const StyledCard = styled(Card)`
-  transition: transform 0.3s ease-in-out;
-  border: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-`;
+// Only the peppers earned are drawn — the way a printed menu does it.
+// The legend by the sauces explains that the scale runs to six.
+const Heat = ({ level }) => (
+  <span className="heat" role="img" aria-label={`Heat ${level} of 6`}>
+    {Array.from({ length: level }, (_, i) => (
+      <FaPepperHot key={i} aria-hidden="true" />
+    ))}
+  </span>
+);
 
-const CategoryNav = styled.div`
-  position: sticky;
-  top: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
-  padding: 1rem 0;
-  border-bottom: 1px solid #eee;
-`;
-
-const SearchBar = styled.div`
-  position: relative;
-  margin: 1rem 0;
-  
-  input {
-    width: 100%;
-    padding: 0.5rem 2.5rem 0.5rem 1rem;
-    border: 2px solid #eee;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    
-    &:focus {
-      border-color: #2b54a7;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(43, 84, 167, 0.1);
-    }
-  }
-  
-  .search-icon {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #666;
-  }
-`;
-
-const ToTopButton = styled.button`
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(43, 84, 167, 0.9);
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-
-  &:hover {
-    background: rgba(43, 84, 167, 1);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (max-width: 768px) {
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 36px;
-    height: 36px;
-  }
-`;
-
-const ModernMenu = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [activeCategory, setActiveCategory] = useState('');
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-  const categoryLinksRef = useRef(null);
-  const [atScrollStart, setAtScrollStart] = useState(true);
-  const [atScrollEnd, setAtScrollEnd] = useState(false);
-  const categoryRefs = useRef({});
-  const observerRef = useRef(null);
-  const [showToTop, setShowToTop] = useState(false);
-  const menuSectionRef = useRef(null);
-
-  const handleScroll = (e) => {
-    const { scrollLeft, scrollWidth, clientWidth } = e.target;
-    setAtScrollStart(scrollLeft <= 2);
-    setAtScrollEnd(scrollLeft + clientWidth >= scrollWidth - 2);
-    setIsScrolled(scrollLeft + clientWidth >= scrollWidth - 10);
-  };
-
-  const handleArrowClick = () => {
-    if (categoryLinksRef.current) {
-      const container = categoryLinksRef.current;
-      const scrollAmount = Math.min(300, container.scrollWidth - container.scrollLeft - container.clientWidth);
-      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-  };
-
-  // Update active category based on which section is most visible
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-45% 0px -45% 0px',
-      threshold: [0, 0.5, 1]
-    };
-
-    observerRef.current = new IntersectionObserver((entries) => {
-      // Find the entry with the highest intersection ratio
-      const mostVisibleEntry = entries.reduce((max, entry) => {
-        return entry.intersectionRatio > max.intersectionRatio ? entry : max;
-      }, entries[0]);
-
-      if (mostVisibleEntry && mostVisibleEntry.isIntersecting) {
-        setActiveCategory(mostVisibleEntry.target.id);
-      }
-    }, observerOptions);
-
-    // Observe all category sections
-    Object.values(categoryRefs.current).forEach(ref => {
-      if (ref) observerRef.current.observe(ref);
-    });
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, []);
-
-  const handleCategoryClick = (categoryId) => {
-    setActiveCategory(categoryId);
-    scrollToCategory(categoryId);
-  };
-
-  const scrollToCategory = (categoryId) => {
-    scroller.scrollTo(categoryId, {
-      duration: 50,
-      smooth: true,
-      offset: -100,
-      containerId: 'menu-section'
-    });
-  };
-
-  const filteredMenuData = menuData.filter(category => {
-    const matchesSearch = category.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      category.items?.some(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesSearch;
-  });
-
-  const renderSpiciness = (spiciness) => {
-    return Array(spiciness).fill().map((_, i) => (
-      <FaPepperHot key={i} className="text-danger" />
-    ));
-  };
-
-  const renderPrice = (price) => {
-    if (typeof price === 'object') {
-      return Object.entries(price).map(([type, value]) => (
-        <div key={type} className="price-option">
-          <Badge bg="secondary" className="me-2">{type}</Badge>
-          <span>${value}</span>
-        </div>
-      ));
-    }
-    return <span>${price}</span>;
-  };
-
-  // Handle scroll to show/hide to-top button
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!menuSectionRef.current) return;
-      
-      const rect = menuSectionRef.current.getBoundingClientRect();
-      const isInView = rect.top <= 0 && rect.bottom >= 0;
-      setShowToTop(isInView);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    scroller.scrollTo('menu-section', {
-      duration: 800,
-      smooth: true,
-      offset: 0
-    });
-  };
-
+function Highlight({ text, query }) {
+  if (!query) return <>{text}</>;
+  const at = text.toLowerCase().indexOf(query);
+  // the query may have been normalised past a literal match (e.g. "b b q")
+  if (at < 0) return <>{text}</>;
+  if (at < 0) return <>{text}</>;
   return (
-    <div className="modern-menu" id="menu-section" ref={(el) => {
-      ref(el);
-      menuSectionRef.current = el;
-    }}>
-      <CategoryNav>
-        <Container>
-          <Row className="align-items-center g-2">
-            <Col md={8} style={{ position: 'relative' }}>
-              <div className={`category-links-container ${isScrolled ? 'scrolled' : ''}`}> 
-                <div
-                  className="category-links"
-                  ref={categoryLinksRef}
-                  onScroll={handleScroll}
-                  tabIndex={0}
-                  style={{ scrollBehavior: 'smooth' }}
-                >
-                  {menuData.map((category) => (
-                    <Link
-                      key={category.id}
-                      to={category.id}
-                      spy={false}
-                      smooth={true}
-                      offset={-100}
-                      duration={50}
-                      className={`category-link ${activeCategory === category.id ? 'active' : ''}`}
-                      onClick={() => handleCategoryClick(category.id)}
-                    >
-                      {category.title}
-                    </Link>
-                  ))}
-                </div>
-                {!atScrollEnd && (
-                  <button
-                    className="scroll-arrow"
-                    onClick={handleArrowClick}
-                    aria-label="Scroll categories right"
-                    style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', zIndex: 2, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-                  >
-                    <span className="arrow-icon">→</span>
-                  </button>
-                )}
-              </div>
-            </Col>
-            <Col md={4}>
-              <SearchBar>
-                <input
-                  type="text"
-                  placeholder="Search our menu..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <FaSearch className="search-icon" />
-              </SearchBar>
-            </Col>
-          </Row>
-        </Container>
-      </CategoryNav>
+    <>
+      {text.slice(0, at)}
+      <mark>{text.slice(at, at + query.length)}</mark>
+      {text.slice(at + query.length)}
+    </>
+  );
+}
 
-      <Container className="py-5">
-        <AnimatePresence>
-          {filteredMenuData.map((category) => (
-            <motion.div
-              key={category.id}
-              ref={el => categoryRefs.current[category.id] = el}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-              id={category.id}
-            >
-              <StyledCard>
-                <Card.Header className="bg-primary text-white">
-                  <h2 className="h4 mb-0">{category.title}</h2>
-                </Card.Header>
-                {category.description && (
-                  <Card.Body className="border-bottom">
-                    <p className="text-muted mb-0">{category.description}</p>
-                  </Card.Body>
-                )}
-                <Card.Body>
-                  {category.subcategories ? (
-                    // Render subcategories for sauces
-                    category.subcategories.map((subcategory, subIndex) => (
-                      <div key={subIndex} className="mb-4">
-                        <h5 className="h6 mb-3 text-primary">{subcategory.subcategoryTitle}</h5>
-                        <Row>
-                          {subcategory.items.map((item, itemIndex) => (
-                            <Col key={itemIndex} md={6} className="mb-3">
-                              <div className="menu-item">
-                                <div className="d-flex justify-content-between align-items-start">
-                                  <div>
-                                    <h5 className="mb-1">{item.name}</h5>
-                                    {item.spiciness && (
-                                      <div className="spiciness-indicator">
-                                        {renderSpiciness(item.spiciness)}
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            </Col>
-                          ))}
-                        </Row>
-                      </div>
-                    ))
-                  ) : (
-                    // Render regular items with prices
-                    <Row>
-                      {category.items?.map((item, index) => (
-                        <Col key={index} md={6} className="mb-4">
-                          <div className="menu-item">
-                            <div className="d-flex justify-content-between align-items-start">
-                              <div>
-                                <h5 className="mb-1">{item.name}</h5>
-                                {item.spiciness && (
-                                  <div className="spiciness-indicator">
-                                    {renderSpiciness(item.spiciness)}
-                                  </div>
-                                )}
-                                {item.description && (
-                                  <p className="text-muted small mb-2">{item.description}</p>
-                                )}
-                              </div>
-                              <div className="price">
-                                {renderPrice(item.price)}
-                              </div>
-                            </div>
-                          </div>
-                        </Col>
-                      ))}
-                    </Row>
-                  )}
-                </Card.Body>
-              </StyledCard>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </Container>
+// "2 liter" finds "2-liter"; "bbq" finds "B.B.Q."
+export const normalise = (text) =>
+  (text || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+const squash = (text) => (text || "").toLowerCase().replace(/[^a-z0-9]/g, "");
 
-      <ToTopButton 
-        className={showToTop ? 'visible' : ''}
-        onClick={scrollToTop}
-        aria-label="Scroll to top"
-      >
-        <FaArrowUp />
-      </ToTopButton>
+const matches = (text, q) =>
+  normalise(text).includes(q) || squash(text).includes(squash(q));
+
+// Search covers item names, descriptions, sauces, the category note, and the
+// size labels — "boneless" and "traditional" live in priceColumns and the
+// note, so without those a customer searching the two things we are known
+// for found nothing.
+export function filterCategory(category, q) {
+  if (!q) return category;
+
+  const categoryMatches =
+    matches(category.title, q) ||
+    matches(category.note, q) ||
+    (category.priceColumns || []).some((c) => matches(c, q));
+
+  if (category.sauceGroups) {
+    if (categoryMatches) return category;
+    const sauceGroups = category.sauceGroups
+      .map((g) => ({ ...g, sauces: g.sauces.filter((s) => matches(s.name, q)) }))
+      .filter((g) => g.sauces.length);
+    return sauceGroups.length ? { ...category, sauceGroups } : null;
+  }
+
+  if (categoryMatches) return category;
+
+  const items = (category.items || []).filter(
+    (it) => matches(it.name, q) || matches(it.description, q)
+  );
+  return items.length ? { ...category, items } : null;
+}
+
+const countOf = (c) =>
+  c.sauceGroups
+    ? c.sauceGroups.reduce((n, g) => n + g.sauces.length, 0)
+    : (c.items || []).length;
+
+function ItemName({ item, query }) {
+  return (
+    <div className="row-name">
+      <Highlight text={item.name} query={query} />
+      {item.heat ? (
+        <>
+          {" "}
+          <Heat level={item.heat} />
+        </>
+      ) : null}
     </div>
   );
-};
+}
 
-export default ModernMenu; 
+function Category({ category, query }) {
+  const hasColumns = category.priceColumns && category.priceColumns.length > 1;
+
+  return (
+    <section className="cat" id={category.id}>
+      <div className="cat-head">
+        <h3>
+          <Highlight text={category.title} query={query} />
+        </h3>
+        <span className="bar" />
+      </div>
+      {category.note && <p className="cat-note">{category.note}</p>}
+
+      {category.sauceGroups ? (
+        <>
+          <div className="legend">
+            <b>Heat scale</b>
+            <span className="key">
+              <Heat level={1} /> a little kick
+            </span>
+            <span className="key">
+              <Heat level={3} /> seriously hot
+            </span>
+            <span className="key">
+              <Heat level={6} /> Die Hot, the hottest we make
+            </span>
+          </div>
+          {category.sauceGroups.map((group) => (
+            <div className="sub-block" key={group.title}>
+              <span className="sub-h sign">{group.title}</span>
+              <div className="sauce-list">
+                {group.sauces.map((sauce, i) => (
+                  <div className="sauce-item" key={`${group.title}-${i}`}>
+                    <span className="nm">
+                      <Highlight text={sauce.name} query={query} />
+                      {sauce.heat ? (
+                        <>
+                          &nbsp;
+                          <Heat level={sauce.heat} />
+                        </>
+                      ) : null}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </>
+      ) : hasColumns ? (
+        /* a real price matrix — columns are earned here, not a default */
+        <div className="matrix">
+          <div className="mx-head">
+            {category.priceColumns.map((label) => (
+              <span className="sign" key={label}>
+                {label}
+              </span>
+            ))}
+          </div>
+          {category.items.map((item, i) => (
+            <div className="mx-row" key={`${category.id}-${i}`}>
+              <div className="mx-main">
+                <ItemName item={item} query={query} />
+                {item.description && (
+                  <div className="row-desc">
+                    <Highlight text={item.description} query={query} />
+                  </div>
+                )}
+              </div>
+              {item.prices.length > 1 ? (
+                category.priceColumns.map((label, k) => (
+                  <div className="mx-p" key={label}>
+                    ${item.prices[k]}
+                  </div>
+                ))
+              ) : (
+                /* One price in a multi-column category spans and centres across
+                   the whole price area. Right-aligning it would park it under
+                   the last column header — "Cole Slaw, Large, $1.35". */
+                <div
+                  className="mx-p wide"
+                  style={{ width: `calc(var(--mx-col) * ${category.priceColumns.length})` }}
+                >
+                  ${item.prices[0]}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        /* classic dot leaders: each price stays tied to its own item */
+        <div className="rows">
+          {category.items.map((item, i) => (
+            <div className="row" key={`${category.id}-${i}`}>
+              <div className="row-line">
+                <span className="row-name">
+                  <Highlight text={item.name} query={query} />
+                  {item.heat ? (
+                    <>
+                      {" "}
+                      <Heat level={item.heat} />
+                    </>
+                  ) : null}
+                </span>
+                <span className="lead" />
+                <span className="row-price">${item.prices[0]}</span>
+              </div>
+              {item.description && (
+                <div className="row-desc">
+                  <Highlight text={item.description} query={query} />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function ModernMenu() {
+  const [search, setSearch] = useState("");
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [activeId, setActiveId] = useState("");
+  const menuRef = useRef(null);
+  const sheetRef = useRef(null);
+  const jumpRef = useRef(null);
+
+  const query = normalise(search);
+
+  const { groups, total } = useMemo(() => {
+    let total = 0;
+    const groups = [];
+    for (const g of menu) {
+      const categories = g.categories
+        .map((c) => filterCategory(c, query))
+        .filter(Boolean);
+      if (!categories.length) continue;
+      for (const c of categories) total += countOf(c);
+      groups.push({ ...g, categories });
+    }
+    return { groups, total };
+  }, [query]);
+
+  // highlight the section currently under the reader
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") return undefined;
+    const sections = menuRef.current?.querySelectorAll(".cat");
+    if (!sections?.length) return undefined;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActiveId(e.target.id);
+        });
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, [groups]);
+
+  // iOS ignores body{overflow:hidden}, so pin the body and restore the
+  // exact scroll position when the sheet closes
+  useEffect(() => {
+    if (!sheetOpen) return undefined;
+    const y = window.scrollY;
+    document.body.style.top = `-${y}px`;
+    document.body.classList.add("locked");
+    return () => {
+      document.body.classList.remove("locked");
+      document.body.style.top = "";
+      const previous = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = "auto";
+      try {
+        window.scrollTo(0, y);
+      } catch {
+        /* no scrolling outside a real browser */
+      }
+      document.documentElement.style.scrollBehavior = previous;
+    };
+  }, [sheetOpen]);
+
+  // While the sheet is open it is the only thing on screen, so keyboard
+  // focus has to stay inside it: move focus in on open, cycle Tab within it,
+  // and hand focus back to the button that opened it on close.
+  useEffect(() => {
+    if (!sheetOpen) return undefined;
+
+    const sheet = sheetRef.current;
+    const opener = jumpRef.current;
+    const focusable = () => [
+      ...sheet.querySelectorAll('a[href], button:not([disabled])'),
+    ];
+
+    focusable()[0]?.focus();
+
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setSheetOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const items = focusable();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+
+      if (!sheet.contains(document.activeElement)) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      opener?.focus();
+    };
+  }, [sheetOpen]);
+
+  const nav = (onPick) =>
+    groups.map((g) => (
+      <div className="rail-group sheet-group" key={g.group}>
+        <div className="rail-h sign">{g.group}</div>
+        <div className="sheet-items">
+          {g.categories.map((c) => (
+            <a
+              key={c.id}
+              href={`#${c.id}`}
+              className={activeId === c.id ? "active" : undefined}
+              onClick={onPick}
+            >
+              {c.title}
+              <span className="n">{countOf(c)}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    ));
+
+  return (
+    <>
+      <div className="tools">
+        <div className="wrap tools-in">
+          <div className={`search${query ? " has-q" : ""}`}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" strokeWidth="2.6" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M20 20l-3.5-3.5" />
+            </svg>
+            <input
+              id="menu-search"
+              type="search"
+              value={search}
+              placeholder="Search the menu…"
+              aria-label="Search the menu"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            {query && (
+              <button className="clear" aria-label="Clear search" onClick={() => setSearch("")}>
+                ×
+              </button>
+            )}
+          </div>
+          <button
+            ref={jumpRef}
+            className="jump-btn"
+            aria-expanded={sheetOpen}
+            aria-haspopup="dialog"
+            onClick={() => setSheetOpen((v) => !v)}
+          >
+            Sections
+          </button>
+        </div>
+      </div>
+
+      <main className="wrap layout">
+        <nav className="rail" aria-label="Menu sections">
+          {nav(undefined)}
+        </nav>
+
+        <div id="menu" ref={menuRef}>
+          {total === 0 ? (
+            <div className="empty">
+              <strong>Nothing on the menu matches “{search.trim()}”</strong>
+              Try “wings”, “catfish” or “lo mein” — or just call us at{" "}
+              <a href={restaurant.phoneHref}>{restaurant.phone}</a>.
+            </div>
+          ) : (
+            <>
+              {query && (
+                <div className="count">
+                  {total} item{total === 1 ? "" : "s"} matching “{search.trim()}”
+                </div>
+              )}
+              {groups.map((g) => (
+                <React.Fragment key={g.group}>
+                  <div className="yard">
+                    <div className="yard-h">
+                      <h2>{g.group}</h2>
+                      <span className="pip" />
+                      <span className="hash" />
+                    </div>
+                  </div>
+                  {g.categories.map((c) => (
+                    <Category key={c.id} category={c} query={query} />
+                  ))}
+                </React.Fragment>
+              ))}
+            </>
+          )}
+        </div>
+      </main>
+
+      <div
+        className={`sheet-bg${sheetOpen ? " on" : ""}`}
+        onClick={() => setSheetOpen(false)}
+      />
+      <div
+        ref={sheetRef}
+        className={`sheet${sheetOpen ? " on" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Jump to a section"
+      >
+        <div className="grab" />
+        {nav(() => setSheetOpen(false))}
+      </div>
+    </>
+  );
+}
+
+export default ModernMenu;

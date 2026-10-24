@@ -1,147 +1,79 @@
-.outlined-text {
-  color: #2b54a7;
-  font-weight: bold;
-  text-shadow: -1px -1px 0 #d3d3d3, 1px -1px 0 #d3d3d3, -1px 1px 0 #d3d3d3,
-    1px 1px 0 #d3d3d3;
-  font-family: 'Roboto', sans-serif;
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  height: var(--bar-total);
+  padding-top: var(--safe-t);
+  background: var(--sign-bg);
+  border-bottom: 3px solid var(--gold);
 }
-
-.dark-background{
-  background-color: #000000;
-}
-
-
-@media (min-width: 992px) {
-  .navbar {
-    height: 150px; 
-  }
-  .navbar-text {
-    flex-grow: 2;
-    text-align: center;
-  }
-  .logo-container {
-    margin-right: auto; 
-  }
-  .text-box{
-    margin-left: 0px;
-  }
-}
-
-.header-section {
-  background-color: #2b54a7;
-  padding: 1.5rem 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1000;
-}
-
-.header-content {
+.topbar-in {
+  height: var(--bar-h);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
+  gap: 10px;
 }
-
-.logo-wrapper {
-  flex-shrink: 0;
-}
-
-.header-logo {
-  height: 80px;
+/* the actual mark, so the brand is present for the whole scroll
+   rather than only at the very top of the page */
+.brand {
+  height: 34px;
   width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  display: block;
+  flex: 0 0 auto;
 }
+.topbar .spacer { flex: 1 1 auto; min-width: 0; }
 
-.header-text {
-  flex-grow: 1;
-  text-align: center;
-}
-
-.header-text h1 {
-  color: white;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.header-text p {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 1.2rem;
-  margin: 0.5rem 0 0;
-}
-
-.menu-button {
+.pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  background-color: white;
-  color: #2b54a7;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 600;
+  gap: 6px;
+  flex: 0 0 auto;
+  font-family: var(--sign);
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 5px 9px;
+  border-radius: 2px;
+  border: 1.5px solid;
+  justify-content: center;
+  /* reserved so the call button does not jump when the status resolves */
+  min-width: 78px;
+}
+.pill.is-pending { border-color: transparent; background: transparent; }
+@media (min-width: 440px) { .pill { min-width: 118px; } }
+.pill .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.pill.is-open { color: #8FE3A4; border-color: #3E7F50; background: rgba(47,107,58,.28); }
+.pill.is-open .dot { background: #6FDC8C; animation: tdwBlink 2.6s steps(1) infinite; }
+.pill.is-closed { color: #F6A08C; border-color: #8C3A28; background: rgba(200,55,29,.25); }
+.pill.is-closed .dot { background: #F0664A; }
+@keyframes tdwBlink { 0%,70% { opacity: 1; } 71%,100% { opacity: .25; } }
+
+.pill .t-long { display: none; }
+.pill .t-short { display: inline; }
+
+.call {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  min-height: 44px;
+  background: var(--gold);
+  color: #11284F;
   text-decoration: none;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-family: var(--slab);
+  font-weight: 800;
+  font-size: 14.5px;
+  padding: 0 13px;
+  border-radius: 3px;
+  box-shadow: 0 2px 0 var(--gold-dk);
 }
+.call:active { transform: translateY(2px); box-shadow: none; }
 
-.menu-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  color: #2b54a7;
-  text-decoration: none;
-}
-
-.menu-button svg {
-  font-size: 1.2rem;
-}
-
-@media (max-width: 768px) {
-  .header-section {
-    padding: 1rem 0;
-    position: relative;
-    background-color: #2b54a7;
-    z-index: 1000;
-  }
-  .header-content {
-    flex-direction: column;
-    gap: 0.75rem;
-    text-align: center;
-    padding: 0.5rem 0;
-  }
-  .header-logo {
-    height: 50px;
-  }
-  .header-text h1 {
-    font-size: 1.75rem;
-    margin-top: 0.5rem;
-  }
-  .header-text p {
-    font-size: 1rem;
-    margin-top: 0.25rem;
-  }
-  .menu-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .header-section {
-    padding: 0.75rem 0;
-  }
-  .header-logo {
-    height: 45px;
-  }
-  .header-text h1 {
-    font-size: 1.5rem;
-  }
-  .header-text p {
-    font-size: 0.9rem;
-  }
-  .menu-button {
-    padding: 0.4rem 0.9rem;
-    font-size: 0.85rem;
-  }
+@media (max-width: 400px) { .brand { height: 29px; } }
+@media (min-width: 440px) {
+  .pill .t-long { display: inline; }
+  .pill .t-short { display: none; }
 }

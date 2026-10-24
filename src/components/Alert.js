@@ -1,25 +1,20 @@
+import React from "react";
+import "./Alert.css";
 
-import React from 'react';
-import './Alert.css';
-import { Container } from 'react-bootstrap';
-import { FaExclamationTriangle } from 'react-icons/fa';
-
+// Banner for sudden closings. Driven by specialClosure in SiteSettings.js.
 const AlertMessage = ({ isActive, message }) => {
-  if (!isActive || !message) {
-    return null;
-  }
+  if (!isActive || !message) return null;
 
   return (
-    <section className="special-closure-alert" aria-live="polite">
-      <Container>
-        <div className="special-closure-content">
-          <FaExclamationTriangle className="special-closure-icon" />
+    <section className="notice-bar" aria-live="polite">
+      <div className="wrap">
+        <div className="notice">
           <div>
-            {/* <p className="special-closure-label">Special Closure Notice</p> */}
-            <p className="special-closure-message">{message}</p>
+            <span className="sign">Closure notice</span>
+            <p>{message}</p>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 };

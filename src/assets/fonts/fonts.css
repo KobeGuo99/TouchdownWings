@@ -1,0 +1,26 @@
+/* Self-hosted so the type is identical on every device and nothing
+   depends on a font CDN. Both are variable fonts — one file covers
+   the whole weight range each. Latin subset only.
+
+   Rokkitt        — geometric slab. The open-licensed stand-in for
+                    Rockwell, which only exists on Apple and Office
+                    machines. Carries the wordmark and headings.
+   Libre Franklin — the open descendant of Franklin Gothic, the
+                    American vernacular: newspapers, storefront
+                    signage, ballpark boards, diner menus. Body text
+                    and the small-caps labels.
+*/
+@font-face {
+  font-family: "Rokkitt";
+  src: url("./rokkitt-var.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Libre Franklin";
+  src: url("./librefranklin-var.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
