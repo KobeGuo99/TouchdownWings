@@ -1,83 +1,27 @@
-// ═════════════════════════════════════════════════════════════
-//  THE MENU — every item and price on the site comes from here.
+// ─────────────────────────────────────────────────────────────
+//  MENU — edit prices and items here. Nothing else to touch.
 //
-//  After any change: save the file, then run  npm run deploy
-// ═════════════════════════════════════════════════════════════
+//  Structure:
+//    group         a heading that covers everything inside it.
+//                  Never name a group after one of its own
+//                  categories, or the siblings look misfiled.
+//    categories[]  each gets its own heading on the page
+//      id          used for the jump links; keep it unique,
+//                  lowercase, no spaces
+//      title       shown on the page
+//      note        optional line under the title
+//      priceColumns  optional. Use ONLY when items genuinely come
+//                  in two versions, e.g. ["Boneless","Traditional"]
+//                  or ["Small","Large"]. Then give each item two
+//                  prices. An item with a single price still works
+//                  and will span the column.
+//      items[]     { name, prices: ["0.00"], description?, heat? }
+//      sauceGroups[]  used by the Sauces category instead of items
 //
-//  ── TO CHANGE A PRICE ───────────────────────────────────────
-//  Find the item and edit the number inside the quotes.
-//
-//      { name: "10 pcs", prices: ["9.89", "11.89"] },
-//                                   ↑         ↑
-//                               Boneless  Traditional
-//
-//  Prices are text, so they need the quotes, and NO dollar sign:
-//      "9.89"   correct
-//      9.89     wrong — missing quotes
-//      "$9.89"  wrong — remove the $
-//
-//
-//  ── TO ADD AN ITEM ──────────────────────────────────────────
-//  Copy a whole line from the same category, paste it below,
-//  and edit it. Keep the comma on the end.
-//
-//      { name: "Fried Okra", prices: ["4.99"] },
-//
-//  With a note under the name:
-//      { name: "Fried Okra", prices: ["4.99"], description: "Hand breaded" },
-//
-//  With a spice meter (1 = mild … 6 = Die Hot):
-//      { name: "Fire Fries", prices: ["5.99"], heat: 3 },
-//
-//
-//  ── TO REMOVE AN ITEM ───────────────────────────────────────
-//  Delete its whole line, or hide it by putting // in front:
-//      // { name: "Corn Dog", prices: ["2.49"] },
-//
-//
-//  ── TWO PRICES FOR ONE ITEM (Small/Large and the like) ──────
-//  The category declares the column names once:
-//
-//      priceColumns: ["Small", "Large"],
-//      items: [
-//        { name: "Crispy Fries", prices: ["3.69", "5.89"] },   two prices
-//        { name: "Cole Slaw",    prices: ["1.35"] },           one is fine
-//      ],
-//
-//  An item with a single price in such a category simply spans
-//  both columns. Never give an item MORE prices than there are
-//  priceColumns. A category with no priceColumns shows one price
-//  per item with dotted leaders.
-//
-//
-//  ── TO ADD A WHOLE CATEGORY ─────────────────────────────────
-//  Copy an existing category block into the group you want:
-//
-//      {
-//        id: "wraps",                       unique, lowercase, no spaces
-//        title: "Wraps",                    the heading customers see
-//        note: "Served with chips.",        optional line underneath
-//        items: [
-//          { name: "Chicken Wrap", prices: ["8.99"] },
-//        ],
-//      },
-//
-//  id must be unique — it is what the jump links point at.
-//
-//
-//  ── ABOUT THE GROUPS ────────────────────────────────────────
-//  group is the big heading over a set of categories, and it is
-//  what the Sections menu is organised by. One rule: never name
-//  a group after a category inside it. "Wings" holding Chicken
-//  Tenders makes the tenders look misfiled — "Wings & Sauces"
-//  holding Buffalo Wings and Sauces does not.
-//
-//
-//  ── IF SOMETHING LOOKS WRONG ────────────────────────────────
-//  Run  npm start  and open the browser console. Common edits
-//  that break things (a missing quote, a stray $, too many
-//  prices, a duplicate id) are reported there in plain English.
-//
+//  Prices are plain strings without the dollar sign: "6.19"
+//  heat is 1-6 and draws the little red meter.
+// ─────────────────────────────────────────────────────────────
+
 const menu = [
   {
     group: "Wings & Sauces",
