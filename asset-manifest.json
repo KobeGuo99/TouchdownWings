@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.3095413c.css",
-    "main.js": "/static/js/main.46828088.js",
+    "main.css": "/static/css/main.e671ea82.css",
+    "main.js": "/static/js/main.59fc73cc.js",
     "static/js/27.8b5363df.chunk.js": "/static/js/27.8b5363df.chunk.js",
     "static/media/tdw_logo_mark.png": "/static/media/tdw_logo_mark.535779a24769b2f22578.png",
     "static/media/librefranklin-var.woff2": "/static/media/librefranklin-var.94e2d90485e5eb51e331.woff2",
     "static/media/rokkitt-var.woff2": "/static/media/rokkitt-var.07dbae931dd623fa79f6.woff2",
+    "static/media/dseg7-bold.woff2": "/static/media/dseg7-bold.4dca6a7ccd2a657aa766.woff2",
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.3095413c.css",
-    "static/js/main.46828088.js"
+    "static/css/main.e671ea82.css",
+    "static/js/main.59fc73cc.js"
   ]
 }
