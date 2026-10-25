@@ -3,8 +3,11 @@
   position: sticky;
   top: var(--bar-total);
   z-index: 50;
+  /* opaque, so menu rows cannot show through while it is pinned */
   background: var(--paper);
-  border-bottom: 2px solid var(--ink);
+  /* a hairline, not a frame: the field keeps its own 2px outline and
+     should be the only hard edge in here */
+  border-bottom: 1px solid var(--rule);
   padding: 9px 0;
 }
 .tools-in { display: flex; gap: 9px; align-items: center; }

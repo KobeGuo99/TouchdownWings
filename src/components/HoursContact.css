@@ -1,6 +1,5 @@
 .mast {
   background: var(--card);
-  border-bottom: 2px solid var(--ink);
   padding: 24px 0 0;
 }
 .mast-top {
