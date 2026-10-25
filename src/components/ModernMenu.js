@@ -14,17 +14,25 @@ const Heat = ({ level }) => (
   </span>
 );
 
-function Highlight({ text, query }) {
-  if (!query) return <>{text}</>;
-  const at = text.toLowerCase().indexOf(query);
-  // the query may have been normalised past a literal match (e.g. "b b q")
-  if (at < 0) return <>{text}</>;
-  if (at < 0) return <>{text}</>;
+const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+function Highlight({ text, tokens }) {
+  const source = String(text ?? "");
+  if (!tokens || !tokens.length) return <>{source}</>;
+
+  // longest first, so "wings" wins over "wing" when both are in the query
+  const pattern = [...tokens]
+    .sort((a, b) => b.length - a.length)
+    .map(escapeRegExp)
+    .join("|");
+  const parts = source.split(new RegExp(`(${pattern})`, "ig"));
+  const lookup = new Set(tokens);
+
   return (
     <>
-      {text.slice(0, at)}
-      <mark>{text.slice(at, at + query.length)}</mark>
-      {text.slice(at + query.length)}
+      {parts.map((part, i) =>
+        lookup.has(part.toLowerCase()) ? <mark key={i}>{part}</mark> : part
+      )}
     </>
   );
 }
@@ -34,33 +42,51 @@ export const normalise = (text) =>
   (text || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 const squash = (text) => (text || "").toLowerCase().replace(/[^a-z0-9]/g, "");
 
-const matches = (text, q) =>
-  normalise(text).includes(q) || squash(text).includes(squash(q));
+// A query is a set of words, not one phrase. "boneless wings" has to find
+// the wing sizes even though "boneless" is a size label and "wings" is the
+// category heading — the two never sit next to each other in any one string.
+export const tokenise = (text) => normalise(text).split(" ").filter(Boolean);
 
-// Search covers item names, descriptions, sauces, the category note, and the
-// size labels — "boneless" and "traditional" live in priceColumns and the
-// note, so without those a customer searching the two things we are known
-// for found nothing.
-export function filterCategory(category, q) {
-  if (!q) return category;
+const hasWord = (haystack, token) =>
+  normalise(haystack).includes(token) || squash(haystack).includes(squash(token));
 
-  const categoryMatches =
-    matches(category.title, q) ||
-    matches(category.note, q) ||
-    (category.priceColumns || []).some((c) => matches(c, q));
+const hasEveryWord = (haystack, tokens) => tokens.every((t) => hasWord(haystack, t));
+
+// Two ways a category can answer a query:
+//   whole-category  — every word is in its heading, note or size labels
+//   per-item        — every word is in one item's own name/description,
+//                     plus the heading and size labels it inherits
+//
+// The note is deliberately left out of the per-item context. "Chicken fried
+// rice" would otherwise match the plain "Chicken" hibachi entree, because
+// that category's note happens to mention fried rice.
+export function filterCategory(category, tokens, { ambient = true } = {}) {
+  if (!tokens.length) return category;
+
+  const columns = (category.priceColumns || []).join(" ");
+  // the heading and size labels name the thing; the note merely mentions it
+  const named = [category.title, columns].join(" ");
+  const mentioned = [category.title, category.note, columns].join(" ");
+  const wholeCategory =
+    hasEveryWord(named, tokens) || (ambient && hasEveryWord(mentioned, tokens));
 
   if (category.sauceGroups) {
-    if (categoryMatches) return category;
+    if (wholeCategory) return category;
     const sauceGroups = category.sauceGroups
-      .map((g) => ({ ...g, sauces: g.sauces.filter((s) => matches(s.name, q)) }))
+      .map((g) => ({
+        ...g,
+        sauces: g.sauces.filter((s) =>
+          hasEveryWord([s.name, g.title, category.title].join(" "), tokens)
+        ),
+      }))
       .filter((g) => g.sauces.length);
     return sauceGroups.length ? { ...category, sauceGroups } : null;
   }
 
-  if (categoryMatches) return category;
+  if (wholeCategory) return category;
 
-  const items = (category.items || []).filter(
-    (it) => matches(it.name, q) || matches(it.description, q)
+  const items = (category.items || []).filter((it) =>
+    hasEveryWord([it.name, it.description, category.title, columns].join(" "), tokens)
   );
   return items.length ? { ...category, items } : null;
 }
@@ -70,10 +96,10 @@ const countOf = (c) =>
     ? c.sauceGroups.reduce((n, g) => n + g.sauces.length, 0)
     : (c.items || []).length;
 
-function ItemName({ item, query }) {
+function ItemName({ item, tokens }) {
   return (
     <div className="row-name">
-      <Highlight text={item.name} query={query} />
+      <Highlight text={item.name} tokens={tokens} />
       {item.heat ? (
         <>
           {" "}
@@ -84,14 +110,14 @@ function ItemName({ item, query }) {
   );
 }
 
-function Category({ category, query }) {
+function Category({ category, tokens }) {
   const hasColumns = category.priceColumns && category.priceColumns.length > 1;
 
   return (
     <section className="cat" id={category.id}>
       <div className="cat-head">
         <h3>
-          <Highlight text={category.title} query={query} />
+          <Highlight text={category.title} tokens={tokens} />
         </h3>
         <span className="bar" />
       </div>
@@ -118,7 +144,7 @@ function Category({ category, query }) {
                 {group.sauces.map((sauce, i) => (
                   <div className="sauce-item" key={`${group.title}-${i}`}>
                     <span className="nm">
-                      <Highlight text={sauce.name} query={query} />
+                      <Highlight text={sauce.name} tokens={tokens} />
                       {sauce.heat ? (
                         <>
                           &nbsp;
@@ -145,10 +171,10 @@ function Category({ category, query }) {
           {category.items.map((item, i) => (
             <div className="mx-row" key={`${category.id}-${i}`}>
               <div className="mx-main">
-                <ItemName item={item} query={query} />
+                <ItemName item={item} tokens={tokens} />
                 {item.description && (
                   <div className="row-desc">
-                    <Highlight text={item.description} query={query} />
+                    <Highlight text={item.description} tokens={tokens} />
                   </div>
                 )}
               </div>
@@ -179,7 +205,7 @@ function Category({ category, query }) {
             <div className="row" key={`${category.id}-${i}`}>
               <div className="row-line">
                 <span className="row-name">
-                  <Highlight text={item.name} query={query} />
+                  <Highlight text={item.name} tokens={tokens} />
                   {item.heat ? (
                     <>
                       {" "}
@@ -192,7 +218,7 @@ function Category({ category, query }) {
               </div>
               {item.description && (
                 <div className="row-desc">
-                  <Highlight text={item.description} query={query} />
+                  <Highlight text={item.description} tokens={tokens} />
                 </div>
               )}
             </div>
@@ -213,20 +239,32 @@ function ModernMenu() {
   const jumpRef = useRef(null);
 
   const query = normalise(search);
+  const tokens = useMemo(() => tokenise(search), [search]);
 
   const { groups, total } = useMemo(() => {
-    let total = 0;
-    const groups = [];
-    for (const g of menu) {
-      const categories = g.categories
-        .map((c) => filterCategory(c, query))
-        .filter(Boolean);
-      if (!categories.length) continue;
-      for (const c of categories) total += countOf(c);
-      groups.push({ ...g, categories });
-    }
-    return { groups, total };
-  }, [query]);
+    const build = (ambient) => {
+      let total = 0;
+      const groups = [];
+      for (const g of menu) {
+        const categories = g.categories
+          .map((c) => filterCategory(c, tokens, { ambient }))
+          .filter(Boolean);
+        if (!categories.length) continue;
+        for (const c of categories) total += countOf(c);
+        groups.push({ ...g, categories });
+      }
+      return { groups, total };
+    };
+
+    // One word is usually an ingredient — "ranch" should surface the wings
+    // that come with it. Several words name a dish, so a category that only
+    // scatters those words through its prose is noise once something
+    // actually matches: "chicken fried rice" must not drag in Sweet & Sour
+    // Chicken just because it is served with fried rice.
+    if (tokens.length < 2) return build(true);
+    const specific = build(false);
+    return specific.total ? specific : build(true);
+  }, [tokens]);
 
   // Filtering shortens the page, so a search run from deep in the menu
   // leaves the viewport stranded past the results. Pull them back under the
@@ -368,6 +406,16 @@ function ModernMenu() {
               value={search}
               placeholder="Search the menu…"
               aria-label="Search the menu"
+              /* This filters a menu; it is not a field anyone fills in twice.
+                 Without autoComplete the browser offers whatever was typed
+                 here before, which covers the results underneath. The query
+                 itself lives in React state, so it survives scrolling,
+                 jumping sections and opening the sheet regardless. */
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="none"
+              spellCheck={false}
+              enterKeyHint="search"
               onChange={(e) => setSearch(e.target.value)}
             />
             {query && (
@@ -426,7 +474,7 @@ function ModernMenu() {
                     </div>
                   </div>
                   {g.categories.map((c) => (
-                    <Category key={c.id} category={c} query={query} />
+                    <Category key={c.id} category={c} tokens={tokens} />
                   ))}
                 </React.Fragment>
               ))}

@@ -294,7 +294,17 @@
   /* basis 0 so the row is laid out from the scoreboard's width outwards:
      the lockup takes what is left and wraps its own text, instead of
      flexbox breaking the whole row onto two lines at max-content */
-  .mast-mark { flex: 1 1 0; min-width: 0; }
+  .mast-mark {
+    flex: 1 1 0;
+    min-width: 0;
+    /* tighter than the 1.0-1.3x cap-height rule used elsewhere: a larger
+       emblem needs less air to read as one group with the wordmark */
+    gap: 28px;
+  }
+  /* The lockup sat 64px tall against a 188px board, which left the branding
+     side looking thin. Ramps in across 960-1080 so the narrowest desktop,
+     where the row is tightest, does not get the full increase. */
+  .mast-mark img { height: clamp(72px, 7.4vw, 80px); }
   .board { flex: 0 0 300px; align-self: auto; }
 }
 @media (min-width: 760px) {
