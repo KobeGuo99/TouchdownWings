@@ -73,6 +73,17 @@ html {
   -webkit-text-size-adjust: 100%;  /* stop iOS inflating type in landscape */
   text-size-adjust: 100%;
   scroll-behavior: smooth;
+
+  /* Safari lets a page be dragged sideways even when nothing overflows,
+     via elastic overscroll. Only the x axis is pinned — y is left alone so
+     vertical momentum and pull-to-refresh behave normally. */
+  overscroll-behavior-x: none;
+
+  /* `clip`, not `hidden`: hidden would turn the root into a scroll
+     container and break the sticky header and search toolbar. clip simply
+     refuses to pan, and also contains any sub-pixel overflow that an
+     integer scrollWidth check would miss. */
+  overflow-x: clip;
 }
 
 body {
