@@ -80,7 +80,7 @@ export function getStatus({ day, time }) {
       // time you are entitled to order invites orders at the buzzer; a clock
       // visibly running out does the opposite without having to say so.
       countdownLabel: "Closing in",
-      target: `Closes ${formatTime(today.close)}`,
+      target: `Closes today at ${formatTime(today.close)}`,
     };
   }
 
@@ -110,7 +110,8 @@ export function getStatus({ day, time }) {
     // always something to count toward — a dark clock reads as broken
     countdown: hoursUntil(day, time, d, next.open) * 3600,
     countdownLabel: "Opens in",
-    target: `Opens ${added === 0 ? "" : when + " "}${formatTime(next.open)}`.replace("  ", " "),
+    // "today" / "tomorrow" / the weekday name, straight from the schedule
+    target: `Opens ${when} at ${formatTime(next.open)}`,
   };
 }
 

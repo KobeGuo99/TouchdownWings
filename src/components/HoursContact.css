@@ -185,10 +185,12 @@
   border-top: 1px solid rgba(255, 255, 255, .09);
   font-family: var(--sign);
   text-transform: uppercase;
-  letter-spacing: .12em;
-  font-size: 10px;
+  letter-spacing: .1em;
+  font-size: 11.5px;
   font-weight: 700;
-  color: #96A4BE;
+  color: #C2CDE0;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
 .sr-only {
@@ -229,6 +231,11 @@
   padding-bottom: 3px;
 }
 .fact-sub { font-size: 12.5px; color: var(--ink-2); line-height: 1.55; }
+
+/* two lines of one address: same face, same weight, tight leading, so it
+   reads as a block rather than a value with a caption underneath */
+.fact-address { line-height: 1.28; }
+.fact-address span { display: block; }
 .fact-sub a { color: var(--blue); }
 
 .week-grid { margin-top: 2px; max-width: 320px; }
@@ -272,13 +279,14 @@
   .fact-sub { font-size: 13.5px; }
 }
 
-/* The lockup needs ~550px and the scoreboard 240px, so side-by-side only
-   fits from about 860px. Below that the two stack, exactly as they do on a
-   phone. Matches the breakpoint where the desktop rail appears. */
-@media (min-width: 900px) {
+/* The lockup needs ~550px and the scoreboard 300px plus a 24px gap, so the
+   pair only genuinely fits from ~915px. Stacking full width below 960 leaves
+   comfortable margin. No wrapping: a wrapped row put the clock in a narrow
+   box with dead space beside it, which is worse than stacking. */
+@media (min-width: 960px) {
   .mast-top {
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
     gap: 20px 24px;

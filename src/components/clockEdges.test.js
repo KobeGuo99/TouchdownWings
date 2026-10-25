@@ -44,7 +44,7 @@ describe("counting across closed days", () => {
     // Sunday closes 8pm; next opening is Tuesday 11am
     const s = getStatus({ day: SUN, time: 20 });
     expect(formatClock(s.countdown)).toBe("39:00:00");
-    expect(s.target).toBe("Opens Tuesday 11am");
+    expect(s.target).toBe("Opens Tuesday at 11am");
   });
 
   it("counts Monday through to Tuesday", () => {
@@ -55,21 +55,21 @@ describe("counting across closed days", () => {
   it("says tomorrow on Saturday night, not a weekday name", () => {
     const s = getStatus({ day: SAT, time: 21 });
     expect(s.note).toBe("Back tomorrow at 12pm");
-    expect(s.target).toBe("Opens tomorrow 12pm");
+    expect(s.target).toBe("Opens tomorrow at 12pm");
   });
 
   it("counts to today's opening in the small hours", () => {
     const s = getStatus({ day: TUE, time: 2 });
     expect(s.countdownLabel).toBe("Opens in");
     expect(formatClock(s.countdown)).toBe("09:00:00");
-    expect(s.target).toBe("Opens 11am");
+    expect(s.target).toBe("Opens today at 11am");
   });
 
   it("never counts backwards into an opening that already passed", () => {
     // 9pm Tuesday: today's 11am is long gone, so the target is Wednesday
     const s = getStatus({ day: TUE, time: 21 });
     expect(formatClock(s.countdown)).toBe("14:00:00");
-    expect(s.target).toBe("Opens tomorrow 11am");
+    expect(s.target).toBe("Opens tomorrow at 11am");
   });
 });
 
@@ -134,5 +134,29 @@ describe("reading the wall clock", () => {
     // 2026-12-01T18:30:00Z is 12:30pm in Chicago (CST, UTC-6)
     const { time } = nowInZone(new Date("2026-12-01T18:30:00Z"));
     expect(time).toBeCloseTo(12.5, 3);
+  });
+});
+
+describe("the footer names the time in context", () => {
+  it("says when we close while open", () => {
+    expect(getStatus({ day: TUE, time: 15 }).target).toBe("Closes today at 8:30pm");
+    expect(getStatus({ day: FRI, time: 15 }).target).toBe("Closes today at 9pm");
+  });
+
+  it("distinguishes today, tomorrow and a named day", () => {
+    expect(getStatus({ day: TUE, time: 9 }).target).toBe("Opens today at 11am");
+    expect(getStatus({ day: TUE, time: 21 }).target).toBe("Opens tomorrow at 11am");
+    expect(getStatus({ day: SUN, time: 21 }).target).toBe("Opens Tuesday at 11am");
+  });
+
+  it("derives every label from the schedule, never a hardcoded time", () => {
+    const keys = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+    for (let day = 0; day < 7; day += 1) {
+      const s = getStatus({ day, time: 23.5 });
+      const landing = keys.findIndex((k, i) => i !== day && hours[k] && s.target.includes(
+        new Intl.NumberFormat().format(Math.floor(hours[k].open % 12 || 12))));
+      expect(landing).toBeGreaterThan(-1);
+      expect(s.target).toMatch(/^Opens (today|tomorrow|Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday) at /);
+    }
   });
 });

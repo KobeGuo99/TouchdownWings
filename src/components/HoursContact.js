@@ -101,8 +101,10 @@ function HoursContact() {
 
           <div className="fact">
             <span className="sign">Come get it</span>
-            <div className="fact-v">{restaurant.street}</div>
-            <div className="fact-sub">{restaurant.cityStateZip}</div>
+            <div className="fact-v fact-address">
+              <span>{restaurant.street}</span>
+              <span>{restaurant.cityStateZip}</span>
+            </div>
             <DirectionsLink />
           </div>
 

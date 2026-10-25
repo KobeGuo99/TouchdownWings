@@ -209,6 +209,7 @@ function ModernMenu() {
   const [activeId, setActiveId] = useState("");
   const menuRef = useRef(null);
   const sheetRef = useRef(null);
+  const searchRef = useRef(null);
   const jumpRef = useRef(null);
 
   const query = normalise(search);
@@ -225,6 +226,26 @@ function ModernMenu() {
       groups.push({ ...g, categories });
     }
     return { groups, total };
+  }, [query]);
+
+  // Filtering shortens the page, so a search run from deep in the menu
+  // leaves the viewport stranded past the results. Pull them back under the
+  // sticky controls — only when they are actually above it, so continued
+  // typing does not jitter, and via window.scrollTo so the input keeps focus
+  // and the mobile keyboard stays up.
+  useEffect(() => {
+    if (!query) return;
+    const menu = menuRef.current;
+    const tools = document.querySelector(".tools");
+    if (!menu || !tools) return;
+    const delta = menu.getBoundingClientRect().top - tools.getBoundingClientRect().bottom - 12;
+    if (delta >= -4) return;
+    // instant, not smooth: animating thousands of pixels means the next
+    // keystroke measures mid-flight and scrolls again, which is the jitter
+    const previous = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollBy(0, delta);
+    document.documentElement.style.scrollBehavior = previous;
   }, [query]);
 
   // highlight the section currently under the reader
@@ -341,6 +362,7 @@ function ModernMenu() {
               <path d="M20 20l-3.5-3.5" />
             </svg>
             <input
+              ref={searchRef}
               id="menu-search"
               type="search"
               value={search}
@@ -349,7 +371,16 @@ function ModernMenu() {
               onChange={(e) => setSearch(e.target.value)}
             />
             {query && (
-              <button className="clear" aria-label="Clear search" onClick={() => setSearch("")}>
+              <button
+                className="clear"
+                aria-label="Clear search"
+                onClick={() => {
+                  setSearch("");
+                  // the button unmounts with the query, so hand focus back
+                  // rather than dropping it on the body
+                  searchRef.current?.focus();
+                }}
+              >
                 ×
               </button>
             )}

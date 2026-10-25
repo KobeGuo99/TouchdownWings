@@ -56,7 +56,7 @@ describe("what the scoreboard says", () => {
     const midday = getStatus({ day: DAY.TUE, time: 15 });
     expect(midday.countdownLabel).toBe("Closing in");
     expect(formatClock(midday.countdown)).toBe("05:30:00"); // 3pm to 8:30pm
-    expect(midday.target).toBe("Closes 8:30pm");
+    expect(midday.target).toBe("Closes today at 8:30pm");
     expect(midday.note).toBe("We close at 8:30pm");
   });
 
@@ -76,7 +76,7 @@ describe("what the scoreboard says", () => {
     expect(beforeOpen.countdownLabel).toBe("Opens in");
     expect(formatClock(beforeOpen.countdown)).toBe("01:00:00");
     expect(beforeOpen.note).toBe("Back today at 11am");
-    expect(beforeOpen.target).toBe("Opens 11am");
+    expect(beforeOpen.target).toBe("Opens today at 11am");
   });
 
   it("always gives the board something to count toward", () => {
@@ -98,7 +98,7 @@ describe("what the scoreboard says", () => {
   it("still counts toward the next opening on a closed day", () => {
     const monday = getStatus({ day: DAY.MON, time: 12 });
     expect(monday.note).toBe("Back tomorrow at 11am");
-    expect(monday.target).toBe("Opens tomorrow 11am");
+    expect(monday.target).toBe("Opens tomorrow at 11am");
   });
 
   it("points at the next opening when shut", () => {
