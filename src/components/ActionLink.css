@@ -1,0 +1,46 @@
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 650;
+  text-decoration: none;
+}
+.action-link svg {
+  width: 17px;
+  height: 17px;
+  flex: none;
+}
+/* a rule in the tone's colour, echoing the gold one under the phone number,
+   instead of a default browser underline */
+.action-link span {
+  border-bottom: 2px solid;
+  padding-bottom: 3px;
+}
+.action-link.is-static span { border-bottom: 0; padding-bottom: 0; }
+
+.tone-doordash svg { color: var(--doordash); }
+.tone-doordash span { border-bottom-color: color-mix(in srgb, var(--doordash) 55%, transparent); }
+.tone-directions svg { color: var(--blue); }
+.tone-directions span { border-bottom-color: color-mix(in srgb, var(--blue) 55%, transparent); }
+
+@media (hover: hover) and (pointer: fine) {
+  .tone-doordash:hover span { border-bottom-color: var(--doordash); }
+  .tone-directions:hover span { border-bottom-color: var(--blue); }
+}
+
+/* Directions is read off the address directly above it, so it sits tight
+   to that block. DoorDash is a separate way to order, not a restatement of
+   the phone number, so it keeps its distance. Both still clear 40px of
+   tap target — the link's own leading supplies most of the visible gap. */
+.fact > .action-link { margin-top: -2px; }
+.fact > .dd { margin-top: 10px; }
+
+/* the footer is dark in both themes, so the tones need to lift off it */
+.footer .action-link { color: var(--sign-fg); }
+.footer .tone-doordash svg { color: #FF7A5E; }
+.footer .tone-doordash span { border-bottom-color: rgba(255, 122, 94, .6); }
+.footer .tone-directions svg { color: #93B6FF; }
+.footer .tone-directions span { border-bottom-color: rgba(147, 182, 255, .6); }

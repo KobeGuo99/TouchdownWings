@@ -28,18 +28,44 @@ export const rangeText = (dayIndex) => {
 // re-parsing a locale string, which is engine-dependent.
 export function nowInZone(date = new Date(), timeZone = restaurant.timeZone) {
   const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone, weekday: "short", hour: "numeric", minute: "numeric", hour12: false,
+    timeZone, weekday: "short",
+    hour: "numeric", minute: "numeric", second: "numeric", hour12: false,
   }).formatToParts(date);
   const get = (type) => parts.find((p) => p.type === type)?.value;
   const day = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }[get("weekday")];
   let hour = parseInt(get("hour"), 10);
   if (hour === 24) hour = 0; // some engines report midnight as 24
-  return { day, time: hour + parseInt(get("minute"), 10) / 60 };
+  const minute = parseInt(get("minute"), 10);
+  const second = parseInt(get("second"), 10);
+  return { day, time: hour + minute / 60 + second / 3600 };
+}
+
+// 9892 -> "02:44:52". Always three pairs so the digits never reflow and the
+// unlit segments behind them stay aligned.
+export function formatClock(totalSeconds) {
+  const s = Math.max(0, Math.floor(totalSeconds));
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${pad(Math.floor(s / 3600))}:${pad(Math.floor((s % 3600) / 60))}:${pad(s % 60)}`;
+}
+
+// Hours from "now" until a given day-of-week + opening hour, wrapping weeks.
+function hoursUntil(fromDay, fromTime, toDay, toTime) {
+  let dayGap = (toDay - fromDay + 7) % 7;
+  let diff = dayGap * 24 + toTime - fromTime;
+  if (diff < 0) diff += 7 * 24;
+  return diff;
 }
 
 export function getStatus({ day, time }) {
   if (specialClosure.isActive) {
-    return { isOpen: false, short: "Closed", headline: "Closed today", note: "", progress: 0 };
+    return {
+      isOpen: false,
+      short: "Closed",
+      note: "Closed today",
+      countdown: null,
+      countdownLabel: "",
+      target: "Closed today",
+    };
   }
 
   const today = hoursForDay(day);
@@ -48,11 +74,13 @@ export function getStatus({ day, time }) {
     return {
       isOpen: true,
       short: left <= 1 ? `Closing ${formatTime(today.close)}` : `Open till ${formatTime(today.close)}`,
-      headline: `Open until ${formatTime(today.close)}`,
-      // today's span is already in the hours list with today highlighted,
-      // so only speak up when there is something new to say
-      note: left <= 1 ? `Last call in about ${Math.round(left * 60)} minutes` : "",
-      progress: ((time - today.open) / (today.close - today.open)) * 100,
+      note: `We close at ${formatTime(today.close)}`,
+      countdown: left * 3600,
+      // Counts down to closing, not to some ordering deadline. Framing it as
+      // time you are entitled to order invites orders at the buzzer; a clock
+      // visibly running out does the opposite without having to say so.
+      countdownLabel: "Closing in",
+      target: `Closes ${formatTime(today.close)}`,
     };
   }
 
@@ -66,13 +94,23 @@ export function getStatus({ day, time }) {
     } while (!hoursForDay(d) && added < 8);
   }
   const next = hoursForDay(d);
+
+  if (!next) {
+    return {
+      isOpen: false, short: "Closed", note: "",
+      countdown: null, countdownLabel: "", target: "",
+    };
+  }
+
   const when = added === 0 ? "today" : added === 1 ? "tomorrow" : DAY_LABELS[d];
   return {
     isOpen: false,
     short: "Closed",
-    headline: "Closed",
-    note: next ? `Back ${when} at ${formatTime(next.open)}` : "",
-    progress: 0,
+    note: `Back ${when} at ${formatTime(next.open)}`,
+    // always something to count toward — a dark clock reads as broken
+    countdown: hoursUntil(day, time, d, next.open) * 3600,
+    countdownLabel: "Opens in",
+    target: `Opens ${added === 0 ? "" : when + " "}${formatTime(next.open)}`.replace("  ", " "),
   };
 }
 
@@ -103,19 +141,32 @@ export function weekRows(todayIndex) {
 // and sometimes flatly wrong — information until React took over. Everything
 // that does not depend on the current moment (the week's hours, the menu,
 // the contact details) still prerenders.
-export function useOpenStatus() {
+export function useOpenStatus(tickMs = 60000) {
   const [clock, setClock] = useState(null);
 
   useEffect(() => {
-    setClock(nowInZone());
-    const id = setInterval(() => setClock(nowInZone()), 60000);
-    return () => clearInterval(id);
-  }, []);
+    const read = () => setClock(nowInZone());
+    read();
+    let id = setInterval(read, tickMs);
+    // a clock the viewer cannot see does not need to tick
+    const onVisibility = () => {
+      clearInterval(id);
+      if (!document.hidden) {
+        read();
+        id = setInterval(read, tickMs);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      clearInterval(id);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [tickMs]);
 
   if (!clock) {
     return {
-      ready: false, isOpen: false, short: "", headline: "", note: "",
-      progress: 0, day: -1,
+      ready: false, isOpen: false, short: "", note: "",
+      countdown: null, countdownLabel: "", target: "", day: -1,
     };
   }
   return { ready: true, ...getStatus(clock), day: clock.day };

@@ -25,7 +25,8 @@ test("an active closure overrides the normal hours everywhere", () => {
     // Friday 3pm is squarely inside normal hours
     const status = getStatus({ day: 5, time: 15 });
     expect(status.isOpen).toBe(false);
-    expect(status.headline).toBe("Closed today");
+    expect(status.note).toBe("Closed today");
+    expect(status.countdown).toBeNull();
   } finally {
     specialClosure.isActive = previous;
   }

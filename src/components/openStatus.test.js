@@ -1,4 +1,4 @@
-import { getStatus, weekRows, formatTime, rangeText } from "./openStatus";
+import { getStatus, weekRows, formatTime, rangeText, formatClock } from "./openStatus";
 import { hours } from "./SiteSettings";
 
 // Day indexes: 0 Sun, 1 Mon, 2 Tue ... 6 Sat
@@ -50,20 +50,60 @@ describe("open/closed boundaries", () => {
 });
 
 describe("what the scoreboard says", () => {
-  it("names the closing time while open", () => {
-    expect(getStatus({ day: DAY.TUE, time: 15 }).headline).toBe("Open until 8:30pm");
+  it("counts down to closing, not to an ordering allowance", () => {
+    // wording that frames the window as time you may still order invites
+    // orders at the buzzer; this counts the restaurant down to closing
+    const midday = getStatus({ day: DAY.TUE, time: 15 });
+    expect(midday.countdownLabel).toBe("Closing in");
+    expect(formatClock(midday.countdown)).toBe("05:30:00"); // 3pm to 8:30pm
+    expect(midday.target).toBe("Closes 8:30pm");
+    expect(midday.note).toBe("We close at 8:30pm");
   });
 
-  it("warns in the last hour instead of repeating today's hours", () => {
-    const soon = getStatus({ day: DAY.TUE, time: 20.166 });
-    expect(soon.note).toMatch(/Last call/);
-    const midday = getStatus({ day: DAY.TUE, time: 15 });
-    expect(midday.note).toBe("");
+  it("never invites a late order in its wording", () => {
+    const phrases = [
+      getStatus({ day: DAY.TUE, time: 15 }),
+      getStatus({ day: DAY.TUE, time: 20.166 }),
+      getStatus({ day: DAY.MON, time: 12 }),
+    ].flatMap((s) => [s.countdownLabel, s.target, s.note, s.short]);
+    for (const text of phrases) {
+      expect(text.toLowerCase()).not.toMatch(/order|last call|kitchen/);
+    }
+  });
+
+  it("counts down to opening when shut", () => {
+    const beforeOpen = getStatus({ day: DAY.TUE, time: 10 });
+    expect(beforeOpen.countdownLabel).toBe("Opens in");
+    expect(formatClock(beforeOpen.countdown)).toBe("01:00:00");
+    expect(beforeOpen.note).toBe("Back today at 11am");
+    expect(beforeOpen.target).toBe("Opens 11am");
+  });
+
+  it("always gives the board something to count toward", () => {
+    // a dark clock reads as broken, so even Monday counts down to Tuesday
+    const monday = getStatus({ day: DAY.MON, time: 12 });
+    expect(monday.countdown).toBeGreaterThan(0);
+    expect(monday.countdownLabel).toBe("Opens in");
+    expect(formatClock(monday.countdown)).toBe("23:00:00");
+  });
+
+  it("formats the clock as three padded pairs", () => {
+    expect(formatClock(0)).toBe("00:00:00");
+    expect(formatClock(59)).toBe("00:00:59");
+    expect(formatClock(3600)).toBe("01:00:00");
+    expect(formatClock(9892)).toBe("02:44:52");
+    expect(formatClock(-5)).toBe("00:00:00");
+  });
+
+  it("still counts toward the next opening on a closed day", () => {
+    const monday = getStatus({ day: DAY.MON, time: 12 });
+    expect(monday.note).toBe("Back tomorrow at 11am");
+    expect(monday.target).toBe("Opens tomorrow 11am");
   });
 
   it("points at the next opening when shut", () => {
     expect(getStatus({ day: DAY.MON, time: 12 }).note).toBe("Back tomorrow at 11am");
-    expect(getStatus({ day: DAY.TUE, time: 9 }).note).toBe("Back today at 11am");
+    expect(getStatus({ day: DAY.TUE, time: 8 }).note).toBe("Back today at 11am");
     expect(getStatus({ day: DAY.SUN, time: 22 }).note).toBe("Back Tuesday at 11am");
   });
 });

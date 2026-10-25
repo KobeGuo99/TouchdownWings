@@ -32,10 +32,13 @@ const FONTS = `
 
 const PAPER = "#EDE3CF", INK = "#11284F", SAUCE = "#C8371D", GOLD = "#F2B126";
 
-const iconPage = (size) => `<style>${FONTS}
+// Browser tabs sit on light OR dark chrome, so favicons must be transparent.
+// iOS and Android maskable icons are the exception: they get composited onto
+// a background we do not control, and transparent areas come out black.
+const iconPage = (size, { background = "transparent", scale = 0.96 } = {}) => `<style>${FONTS}
   html,body{margin:0;width:${size}px;height:${size}px}
-  body{background:${PAPER};display:flex;align-items:center;justify-content:center}
-  img{width:${Math.round(size * 0.84)}px;image-rendering:auto}
+  body{background:${background};display:flex;align-items:center;justify-content:center}
+  img{width:${Math.round(size * scale)}px;image-rendering:auto}
 </style><img src="data:image/png;base64,${logo}">`;
 
 const ogPage = `<style>${FONTS}
@@ -57,14 +60,26 @@ const ogPage = `<style>${FONTS}
 
 const browser = await chromium.launch({ executablePath });
 
-for (const size of [192, 512, 180, 48, 32, 16]) {
-  const page = await browser.newPage({ viewport: { width: size, height: size } });
-  await page.setContent(iconPage(size));
+const ICONS = [
+  { size: 16,  name: "favicon-16.png" },
+  { size: 32,  name: "favicon-32.png" },
+  { size: 48,  name: "favicon-48.png" },
+  { size: 192, name: "logo192.png" },
+  { size: 512, name: "logo512.png" },
+  // opaque on purpose — these are composited by the OS
+  { size: 180, name: "apple-touch-icon.png", background: PAPER, scale: 0.84 },
+  { size: 512, name: "maskable512.png", background: PAPER, scale: 0.62 },
+];
+
+for (const { size, name, background, scale } of ICONS) {
+  const page = await browser.newPage({
+    viewport: { width: size, height: size },
+    deviceScaleFactor: 1,
+  });
+  await page.setContent(iconPage(size, { background, scale }));
   await page.waitForTimeout(120);
-  const name = { 192: "logo192.png", 512: "logo512.png", 180: "apple-touch-icon.png" }[size]
-    || `favicon-${size}.png`;
-  await page.screenshot({ path: resolve(pub, name) });
-  console.log("  wrote", name, `${size}x${size}`);
+  await page.screenshot({ path: resolve(pub, name), omitBackground: !background });
+  console.log(`  wrote ${name.padEnd(22)} ${size}x${size} ${background ? "opaque" : "transparent"}`);
   await page.close();
 }
 

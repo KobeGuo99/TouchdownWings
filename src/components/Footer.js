@@ -1,6 +1,7 @@
 import React from "react";
 import { restaurant } from "./SiteSettings";
 import DoorDashLink from "./DoorDashLink";
+import DirectionsLink from "./DirectionsLink";
 import { useOpenStatus, weekRows } from "./openStatus";
 import "./Footer.css";
 
@@ -37,11 +38,7 @@ function Footer() {
             <br />
             {restaurant.cityStateZip}
           </p>
-          <p>
-            <a href={restaurant.directionsUrl} target="_blank" rel="noopener noreferrer">
-              Get directions
-            </a>
-          </p>
+          <DirectionsLink />
           <DoorDashLink />
         </div>
 

@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  align-items: stretch;
+  align-items: flex-start;
 }
 /* Emblem + wordmark lockup. The gutter tracks the wordmark's cap-height
    (roughly 1.0-1.3x of it) rather than a fixed pixel value, so the pairing
@@ -63,41 +63,145 @@
   flex: none;
 }
 
-/* the one loud element on the page */
+/* ============ the scoreboard ============================================
+   Built like a real stadium board: a dark bezel, labelled zones, a status
+   lamp, and a seven-segment clock with its unlit segments showing behind
+   the lit ones. Every zone is labelled, because an unexplained countdown
+   reads as a sale timer or a delivery estimate.
+========================================================================= */
 .board {
+  width: 100%;
+  align-self: stretch;
   background: var(--board);
   border: 2px solid var(--board-edge);
-  border-radius: 3px;
-  padding: 9px 14px 11px;
+  border-radius: 4px;
   box-shadow: 4px 4px 0 var(--rule);
-}
-.board-k { color: #71819D; }  /* 4.62 on the plate */
-.board-v {
-  font-family: var(--slab);
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 17.5px;
-  line-height: 1.15;
-  color: var(--board-2);
-  margin-top: 2px;
-  overflow-wrap: break-word;
-}
-.board-v.shut { color: #F0664A; }
-.board-v.pending { color: #44506B; }
-.board-note {
-  font-size: 11.5px;
-  color: #8A98B3;
-  margin-top: 5px;
-  font-variant-numeric: tabular-nums lining-nums;
-}
-.gauge {
-  height: 4px;
-  background: #22304A;
-  border-radius: 2px;
   overflow: hidden;
-  margin-top: 8px;
 }
-.gauge i { display: block; height: 100%; background: var(--board-2); }
+
+/* top and bottom label strips, like the painted bands on a real board */
+.board-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 13px;
+  background: rgba(255, 255, 255, .05);
+  border-bottom: 1px solid rgba(255, 255, 255, .09);
+}
+.board-k { color: #7F8EAC; }
+
+.board-lamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sign);
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  font-size: 10px;
+  font-weight: 700;
+  color: #7F8EAC;
+  white-space: nowrap;
+}
+.board-lamp i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #41506E;
+}
+.board.is-open .board-lamp { color: #6FDC8C; }
+.board.is-open .board-lamp i { background: #6FDC8C; box-shadow: 0 0 7px #3FBE68; }
+.board.is-shut .board-lamp { color: #F0664A; }
+.board.is-shut .board-lamp i { background: #F0664A; box-shadow: 0 0 7px #C0351C; }
+
+/* the lit face */
+.board-face {
+  padding: 13px 13px 12px;
+  display: flex;
+  flex-direction: column;
+  /* the readout is the centrepiece of the board, as on the real thing */
+  align-items: center;
+  text-align: center;
+}
+.board-caption {
+  color: #7F8EAC;
+  margin-bottom: 7px;
+}
+
+/* unlit segments sit behind the lit ones, exactly as on a real display */
+.board-clock {
+  position: relative;
+  display: inline-block;
+  font-family: "DSEG7", var(--slab), monospace;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: .02em;
+}
+.seg-off {
+  color: #FFFFFF;
+  opacity: .07;
+}
+.seg-on {
+  position: absolute;
+  inset: 0;
+  color: var(--board-2);
+  text-shadow: 0 0 14px rgba(242, 177, 38, .45);
+}
+.board.is-shut .seg-on {
+  color: #F0664A;
+  text-shadow: 0 0 14px rgba(240, 102, 74, .4);
+}
+/* the "Closed" fallback is words, not digits, so it uses the slab face */
+.board-clock.is-text {
+  font-family: var(--slab);
+  text-transform: uppercase;
+  font-size: 30px;
+  letter-spacing: 0;
+}
+.board-clock.is-text .seg-on { position: static; }
+
+/* the readout owns the clock's exact width so the unit labels can line up
+   under their own pair of digits instead of guessing at a max-width */
+.board-readout { display: inline-block; }
+
+/* HRS MIN SEC, aligned under each pair of digits */
+.board-units {
+  display: flex;
+  width: 100%;
+  margin-top: 6px;
+  font-family: var(--sign);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #76829B;   /* WCAG AA on the board face: 4.72 */
+}
+.board-units span { flex: 1 1 0; text-align: center; }
+
+.board-foot {
+  justify-content: center;
+  border-bottom: 0;
+  border-top: 1px solid rgba(255, 255, 255, .09);
+  font-family: var(--sign);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 10px;
+  font-weight: 700;
+  color: #96A4BE;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 .facts {
   display: grid;
@@ -183,7 +287,7 @@
      the lockup takes what is left and wraps its own text, instead of
      flexbox breaking the whole row onto two lines at max-content */
   .mast-mark { flex: 1 1 0; min-width: 0; }
-  .board { flex: 0 1 auto; min-width: 240px; }
+  .board { flex: 0 0 300px; align-self: auto; }
 }
 @media (min-width: 760px) {
   .facts { grid-template-columns: repeat(3, 1fr); }

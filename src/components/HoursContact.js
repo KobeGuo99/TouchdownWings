@@ -4,13 +4,15 @@ import React from "react";
 import logo from "../assets/tdw_logo_mark.png";
 import { restaurant } from "./SiteSettings";
 import DoorDashLink from "./DoorDashLink";
-import { useOpenStatus, weekRows } from "./openStatus";
+import DirectionsLink from "./DirectionsLink";
+import { useOpenStatus, weekRows, formatClock } from "./openStatus";
 import "./HoursContact.css";
 
 // Printed masthead: wordmark, the scoreboard, and the three things a
 // takeout customer came for — phone, address, and the full week of hours.
 function HoursContact() {
-  const status = useOpenStatus();
+  // the board shows seconds, so it reads the clock every second
+  const status = useOpenStatus(1000);
   const week = weekRows(status.day);
 
   return (
@@ -36,21 +38,54 @@ function HoursContact() {
             </h1>
           </div>
 
-          <div className="board">
-            <div className="sign board-k">The Kitchen</div>
-            <div
-              className={`board-v ${!status.ready ? "pending" : status.isOpen ? "" : "shut"}`}
-            >
-              {status.ready ? status.headline : "\u2014"}
+          <div className={`board ${status.isOpen ? "is-open" : "is-shut"}`}>
+            <div className="board-bar">
+              <span className="sign board-k">The Clock</span>
+              <span className="board-lamp">
+                <i />
+                {status.ready ? (status.isOpen ? "Open" : "Closed") : "\u2014"}
+              </span>
             </div>
-            {status.ready && status.isOpen && (
-              <div className="gauge">
-                <i style={{ width: `${Math.max(0, Math.min(100, status.progress))}%` }} />
-              </div>
-            )}
-            {status.ready && status.note && (
-              <div className="board-note">{status.note}</div>
-            )}
+
+            <div className="board-face">
+              <span className="sign board-caption">
+                {status.ready ? status.countdownLabel || "Status" : "Status"}
+              </span>
+
+              <span className="board-readout">
+              {status.ready && status.countdown != null ? (
+                // aria-hidden: a clock announced every second is unusable with
+                // a screen reader. The sentence underneath carries the meaning.
+                <span className="board-clock" aria-hidden="true">
+                  <span className="seg-off">88:88:88</span>
+                  <span className="seg-on">{formatClock(status.countdown)}</span>
+                </span>
+              ) : (
+                <span className="board-clock is-text" aria-hidden="true">
+                  <span className="seg-on">{status.ready ? "Closed" : "\u2014"}</span>
+                </span>
+              )}
+
+              {status.ready && status.countdown != null && (
+                <span className="board-units" aria-hidden="true">
+                  <span>Hrs</span>
+                  <span>Min</span>
+                  <span>Sec</span>
+                </span>
+              )}
+              </span>
+
+            </div>
+
+            <div className="board-bar board-foot">
+              <span>{status.ready ? status.target || status.note : "\u00a0"}</span>
+            </div>
+
+            <span className="sr-only">
+              {status.ready
+                ? `${status.isOpen ? "Open now" : "Closed"}. ${status.note}`
+                : "Checking whether we are open"}
+            </span>
           </div>
         </div>
 
@@ -67,12 +102,8 @@ function HoursContact() {
           <div className="fact">
             <span className="sign">Come get it</span>
             <div className="fact-v">{restaurant.street}</div>
-            <div className="fact-sub">
-              {restaurant.cityStateZip} ·{" "}
-              <a href={restaurant.directionsUrl} target="_blank" rel="noopener noreferrer">
-                Directions
-              </a>
-            </div>
+            <div className="fact-sub">{restaurant.cityStateZip}</div>
+            <DirectionsLink />
           </div>
 
           <div className="fact fact-hours">

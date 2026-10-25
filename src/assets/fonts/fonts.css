@@ -5,6 +5,8 @@
    Rokkitt        — geometric slab. The open-licensed stand-in for
                     Rockwell, which only exists on Apple and Office
                     machines. Carries the wordmark and headings.
+   DSEG7 Classic — a real seven-segment face (SIL OFL, free for
+                    commercial use). Drives the scoreboard clock.
    Libre Franklin — the open descendant of Franklin Gothic, the
                     American vernacular: newspapers, storefront
                     signage, ballpark boards, diner menus. Body text
@@ -21,6 +23,14 @@
   font-family: "Libre Franklin";
   src: url("./librefranklin-var.woff2") format("woff2-variations");
   font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DSEG7";
+  src: url("./dseg7-bold.woff2") format("woff2");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
