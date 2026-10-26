@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.51d26a07.css",
-    "main.js": "/static/js/main.45498714.js",
+    "main.css": "/static/css/main.c969df7e.css",
+    "main.js": "/static/js/main.8bbbf5a2.js",
     "static/js/27.8b5363df.chunk.js": "/static/js/27.8b5363df.chunk.js",
     "static/media/tdw_logo_mark.png": "/static/media/tdw_logo_mark.535779a24769b2f22578.png",
     "static/media/librefranklin-var.woff2": "/static/media/librefranklin-var.94e2d90485e5eb51e331.woff2",
@@ -10,7 +10,7 @@
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.51d26a07.css",
-    "static/js/main.45498714.js"
+    "static/css/main.c969df7e.css",
+    "static/js/main.8bbbf5a2.js"
   ]
 }
