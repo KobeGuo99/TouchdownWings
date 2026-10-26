@@ -10,25 +10,79 @@
 // ═════════════════════════════════════════════════════════════
 
 
-// ── SUDDEN CLOSINGS ──────────────────────────────────────────
-//  TO CLOSE THE RESTAURANT RIGHT NOW:
-//    1. change isActive to  true
-//    2. write what you want customers to read in message
-//    3. save, then run:  npm run deploy
+// ── CLOSURE NOTICE ───────────────────────────────────────────
+//  A gold banner at the top of the page. Two ways to run it.
 //
-//  While isActive is true:
-//    • a yellow banner appears at the top of every page
-//    • the status reads CLOSED everywhere (top bar, scoreboard)
-//      no matter what the hours below say
+//  MANUAL — show it now, hide it when you are done.
+//      mode: "manual", isActive: true
+//    Write your own headline (and an optional second line). No
+//    dates needed. This is the one to use for anything sudden.
 //
-//  TO REOPEN: change isActive back to  false  and deploy again.
-//  You can leave the old message sitting there — it is hidden
-//  whenever isActive is false.
+//  SCHEDULED — show it only between two dates, then stop on its own.
+//      mode: "scheduled", isActive: true, from / to set
+//    Leave headline and message empty and the wording is written
+//    from the dates for you.
 //
-//  true and false are NOT in quotes. message IS in quotes.
+//  SHOWING A NOTICE AND BEING CLOSED ARE SEPARATE.
+//    closesRestaurant: true   we are shut — status reads CLOSED
+//                             everywhere and the countdown stops
+//    closesRestaurant: false  just an announcement — today's hours
+//                             carry on as normal
+//  So you can warn about next week's closure while open today.
+//
+//  ── EXAMPLES ────────────────────────────────────────────────
+//
+//  1. An announcement, visible right now, still open today:
+//        mode: "manual", isActive: true, closesRestaurant: false,
+//        headline: "Closed next Monday for a private event",
+//        message:  "Open as usual the rest of the week.",
+//
+//  2. Shut right now, in your own words:
+//        mode: "manual", isActive: true, closesRestaurant: true,
+//        headline: "Closed today — burst pipe",
+//        message:  "Back tomorrow at 11am.",
+//
+//  3. A booked week off, wording written for you:
+//        mode: "scheduled", isActive: true, closesRestaurant: true,
+//        from: "2026-06-14", to: "2026-06-18", reopenTime: 11,
+//        headline: "", message: "",
+//        → "Closed June 14-18" / "Reopening Friday, June 19 at 11am"
+//
+//  4. Same dates, your own words:
+//        mode: "scheduled", isActive: true, closesRestaurant: true,
+//        from: "2026-06-14", to: "2026-06-18",
+//        headline: "Closed for the Smith family reunion",
+//        message:  "See you Friday!",
+//
+//  Your wording never changes the schedule — dates come only from
+//  from / to, never from the text.
+//
+//  TO PREVIEW a scheduled notice outside its dates: run npm start
+//  and add  ?preview-notice  to the address. That works only on
+//  your machine; it does nothing on the live site.
 export const specialClosure = {
+  mode: "manual",
+
+  // the master switch — nothing shows while this is false
   isActive: false,
-  message: "Closed Sun., June 14 - Thurs., June 18. We reopen Friday the 19th.",
+
+  // are we actually shut, or just announcing something?
+  closesRestaurant: true,
+
+  // your own wording. Required in manual mode. In scheduled mode,
+  // leave both "" to have the dates written out for you.
+  headline: "Closed from Tues, June 11 to Wed., June 12",
+  message: "Reopening on 11am Thurs., June 13",
+
+  // scheduled mode only. Both days are INCLUDED; for a single day
+  // put the same date in both. Dates are "YYYY-MM-DD".
+  from: "2026-11-14",
+  to: "2026-11-18",
+
+  // the time you open again on the first day back, in the same
+  // 24-hour decimals as the hours below (11 = 11am, 20.5 = 8:30pm).
+  // Leave null if it is not confirmed — only the date is shown then.
+  reopenTime: null,
 };
 
 

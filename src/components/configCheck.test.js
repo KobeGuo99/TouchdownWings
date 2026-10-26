@@ -24,7 +24,7 @@ describe("configCheck catches bad edits", () => {
       __esModule: true,
       hours: hours ?? { sunday: null, monday: null, tuesday: null,
         wednesday: null, thursday: null, friday: null, saturday: null },
-      specialClosure: { isActive: false, message: "" },
+      specialClosure: { isActive: false, from: "", to: "", reopenTime: null },
       restaurant: {},
     }));
     const warn = jest.spyOn(console, "warn").mockImplementation(() => {});

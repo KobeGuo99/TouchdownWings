@@ -4,7 +4,6 @@ import HoursContact from "./components/HoursContact";
 import ModernMenu from "./components/ModernMenu";
 import Footer from "./components/Footer";
 import StructuredData from "./components/StructuredData";
-import { specialClosure } from "./components/SiteSettings";
 import checkConfig from "./components/configCheck";
 import "./App.css";
 
@@ -18,10 +17,7 @@ function App() {
       <a className="skip-link" href="#menu">Skip to the menu</a>
       <StructuredData />
       <Header />
-      <AlertMessage
-        isActive={specialClosure.isActive}
-        message={specialClosure.message}
-      />
+      <AlertMessage />
       <HoursContact />
       <ModernMenu />
       <Footer />

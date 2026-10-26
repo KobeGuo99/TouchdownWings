@@ -102,15 +102,21 @@ describe("the countdown agrees with the published hours", () => {
 
 describe("special closure", () => {
   it("stops the clock entirely rather than counting to a time we will not open", () => {
-    const previous = specialClosure.isActive;
+    const previous = { ...specialClosure };
     try {
-      specialClosure.isActive = true;
-      const s = getStatus({ day: FRI, time: 15 });
+      Object.assign(specialClosure, {
+        mode: "scheduled",
+        isActive: true,
+        closesRestaurant: true,
+        headline: "",
+        message: "", from: "2026-06-14", to: "2026-06-18", reopenTime: null,
+      });
+      const s = getStatus({ day: FRI, time: 15, date: "2026-06-15" });
       expect(s.isOpen).toBe(false);
       expect(s.countdown).toBeNull();
-      expect(s.target).toBe("Closed today");
+      expect(s.target).toMatch(/^Reopens Friday, June/);
     } finally {
-      specialClosure.isActive = previous;
+      Object.assign(specialClosure, previous);
     }
   });
 });

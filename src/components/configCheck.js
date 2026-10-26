@@ -1,5 +1,5 @@
 import menu from "./MenuData";
-import { hours } from "./SiteSettings";
+import { hours, specialClosure } from "./SiteSettings";
 
 // Development-only sanity checks on MenuData.js and SiteSettings.js.
 // They never run on the deployed site — they exist so that a typo made
@@ -95,6 +95,40 @@ export default function checkConfig() {
       );
     } else if (open < 0 || close > 24) {
       problems.push(`hours.${day}: times must be between 0 and 24.`);
+    }
+  }
+
+  const { mode, isActive, closesRestaurant, headline, message, from, to, reopenTime } =
+    specialClosure;
+  if (mode !== "manual" && mode !== "scheduled") {
+    problems.push(`specialClosure: mode is "${mode}"; it must be "manual" or "scheduled".`);
+  }
+  if (closesRestaurant !== true && closesRestaurant !== false) {
+    problems.push("specialClosure: closesRestaurant must be true or false (no quotes).");
+  }
+  for (const [field, value] of [["headline", headline], ["message", message]]) {
+    if (value != null && typeof value !== "string") {
+      problems.push(`specialClosure: ${field} must be text in quotes, or "" for none.`);
+    }
+  }
+  if (isActive) {
+    if (mode === "manual") {
+      if (!String(headline || "").trim()) {
+        problems.push(
+          "specialClosure: manual mode is on but headline is empty, so nothing will show. " +
+            'Write what you want customers to read, e.g. headline: "Closed today — burst pipe".'
+        );
+      }
+    } else if (mode === "scheduled") {
+      const iso = /^\d{4}-\d{2}-\d{2}$/;
+      if (!iso.test(from || "") || !iso.test(to || "")) {
+        problems.push('specialClosure: from and to must look like "2026-06-14".');
+      } else if (to < from) {
+        problems.push(`specialClosure: to (${to}) is before from (${from}).`);
+      }
+      if (reopenTime != null && (typeof reopenTime !== "number" || reopenTime < 0 || reopenTime > 24)) {
+        problems.push("specialClosure: reopenTime must be a number between 0 and 24, or null.");
+      }
     }
   }
 
