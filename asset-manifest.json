@@ -1,16 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.c969df7e.css",
-    "main.js": "/static/js/main.8bbbf5a2.js",
+    "main.css": "/static/css/main.18ecb44f.css",
+    "main.js": "/static/js/main.075ad733.js",
     "static/js/27.8b5363df.chunk.js": "/static/js/27.8b5363df.chunk.js",
-    "static/media/tdw_logo_mark.png": "/static/media/tdw_logo_mark.535779a24769b2f22578.png",
+    "static/media/tdw-badge-dark-720.png": "/static/media/tdw-badge-dark-720.f1411c323aa595433dec.png",
+    "static/media/tdw-badge-dark-480.png": "/static/media/tdw-badge-dark-480.ba4f0dbd3b9d4cc02b7e.png",
+    "static/media/tdw-badge-dark-720.webp": "/static/media/tdw-badge-dark-720.42e42417ffb5c1c59e81.webp",
+    "static/media/tdw-badge-dark-240.png": "/static/media/tdw-badge-dark-240.dc0837169fd2e310651b.png",
+    "static/media/tdw-badge-dark-480.webp": "/static/media/tdw-badge-dark-480.b3e77c8a7b96efdb3e0c.webp",
     "static/media/librefranklin-var.woff2": "/static/media/librefranklin-var.94e2d90485e5eb51e331.woff2",
     "static/media/rokkitt-var.woff2": "/static/media/rokkitt-var.07dbae931dd623fa79f6.woff2",
+    "static/media/tdw-badge-dark-240.webp": "/static/media/tdw-badge-dark-240.3127a6a5d1a4638c60f1.webp",
     "static/media/dseg7-bold.woff2": "/static/media/dseg7-bold.4dca6a7ccd2a657aa766.woff2",
-    "index.html": "/index.html"
+    "index.html": "/index.html",
+    "static/media/tdw-icon.svg": "/static/media/tdw-icon.e90549f8897e6ef4b334308097e32b50.svg"
   },
   "entrypoints": [
-    "static/css/main.c969df7e.css",
-    "static/js/main.8bbbf5a2.js"
+    "static/css/main.18ecb44f.css",
+    "static/js/main.075ad733.js"
   ]
 }
