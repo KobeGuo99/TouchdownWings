@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ad6a31"/>
+      <stop offset="1" stop-color="#6c391a"/>
+    </linearGradient>
+    <g id="w">
+      <path d="M28 21C22 11 12 4.5 2.5 3.5Q0 4 2 6.5C6 10 10 11.5 13 12C9 11.5 4 12 1.8 12.8Q0 14.5 2.2 16C6 19 10 20 13.5 20C9 20.2 5 21 2.8 22.6Q1.2 24.5 3.4 25.8C7 28 11 28.5 14.5 28.5C11 29 7.5 30.5 5.8 32Q4.6 34 7 35C10.5 36.4 14 36 17.5 35.5C14.5 37 12 39 11 40.6Q10.4 42.6 12.8 43C17 43.6 22 43 27 41.5Z" fill="#f2b126" stroke="#0a0e18" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M13 12Q20 15 25 22M13.5 20Q20 22 25 27M14.5 28.5Q20 29.5 25 32M17.5 35.5Q21 36 25 37" fill="none" stroke="#bd7f0b" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </defs>
+  <use href="#w"/>
+  <use href="#w" transform="matrix(-1 0 0 1 64 0)"/>
+  <path d="M32 12.5c9 5.5 13 13.5 13 23s-4 17.5-13 23c-9-5.5-13-13.5-13-23s4-17.5 13-23z" fill="url(#b)" stroke="#0a0e18" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M32 25v22M28.5 28h7M28.5 33h7M28.5 38h7M28.5 43h7" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

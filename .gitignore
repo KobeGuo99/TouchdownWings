@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# logo pipeline: local tooling (venv, node tools) and QA screenshots
+/scripts/brand/.tools
+/.logo-qa
+__pycache__/

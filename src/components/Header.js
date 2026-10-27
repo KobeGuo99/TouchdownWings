@@ -1,7 +1,7 @@
 import React from "react";
-// trimmed copy of tdw_logo.png — the original has ~20% transparent
-// padding baked in, which pushed the mark out of alignment
-import logo from "../assets/tdw_logo_mark.png";
+// the simplified winged football: the full badge's lettering is ~3px tall
+// at bar size, so the bar uses a hand-drawn icon that reads at 16-44px
+import icon from "../assets/brand/tdw-icon.svg";
 import { restaurant } from "./SiteSettings";
 import { useOpenStatus } from "./openStatus";
 import "./Header.css";
@@ -28,7 +28,7 @@ function Header() {
         >
           {/* alt is empty: the masthead heading already names the
               restaurant, so the button's own label is what matters */}
-          <img src={logo} alt="" />
+          <img src={icon} alt="" width="36" height="36" />
         </button>
         <div className="spacer" />
 

@@ -1,7 +1,11 @@
 import React from "react";
-// trimmed copy of tdw_logo.png — the original has ~20% transparent
-// padding baked in, which pushed the mark out of alignment
-import logo from "../assets/tdw_logo_mark.png";
+// badge for dark backgrounds, built by scripts/brand/build_logo.py
+import badge1x from "../assets/brand/tdw-badge-dark-240.webp";
+import badge2x from "../assets/brand/tdw-badge-dark-480.webp";
+import badge3x from "../assets/brand/tdw-badge-dark-720.webp";
+import badgePng1x from "../assets/brand/tdw-badge-dark-240.png";
+import badgePng2x from "../assets/brand/tdw-badge-dark-480.png";
+import badgePng3x from "../assets/brand/tdw-badge-dark-720.png";
 import { restaurant } from "./SiteSettings";
 import DoorDashLink from "./DoorDashLink";
 import DirectionsLink from "./DirectionsLink";
@@ -25,7 +29,21 @@ function HoursContact() {
                 wordmark beside it already says the name, so a screen reader
                 would otherwise announce it twice. */}
             <h1 className="mast-mark">
-              <img src={logo} alt="" />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet={`${badge1x} 1x, ${badge2x} 2x, ${badge3x} 3x`}
+                />
+                <img
+                  src={badgePng1x}
+                  srcSet={`${badgePng1x} 1x, ${badgePng2x} 2x, ${badgePng3x} 3x`}
+                  alt=""
+                  width="240"
+                  height="181"
+                  fetchpriority="high"
+                  decoding="async"
+                />
+              </picture>
               <span className="mast-name">
                 <span className="mast-word">
                   Touchdown <b>Wings</b>

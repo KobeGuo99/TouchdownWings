@@ -1,7 +1,8 @@
-// Generates the icon set and the social share image from the logo, so they
-// always match the site. Run with: npm run assets
+// Generates the icon set and the social share image from the brand assets in
+// src/assets/brand, so they always match the site. Run with: npm run assets
+// (the badges themselves come from scripts/brand/build_logo.py)
 import { chromium } from "playwright-core";
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, copyFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import os from "node:os";
@@ -21,7 +22,11 @@ if (!executablePath) {
   process.exit(1);
 }
 
-const logo = readFileSync(resolve(root, "src/assets/tdw_logo_mark.png")).toString("base64");
+const brand = resolve(root, "src/assets/brand");
+// icons: the hand-drawn winged football, which reads at 16px; the share
+// image has room for the full badge (light-background variant)
+const icon = readFileSync(resolve(brand, "tdw-icon.svg")).toString("base64");
+const badge = readFileSync(resolve(brand, "tdw-badge-light-720.png")).toString("base64");
 const rokkitt = readFileSync(resolve(root, "src/assets/fonts/rokkitt-var.woff2")).toString("base64");
 const franklin = readFileSync(resolve(root, "src/assets/fonts/librefranklin-var.woff2")).toString("base64");
 
@@ -35,18 +40,20 @@ const PAPER = "#EDE3CF", INK = "#11284F", SAUCE = "#C8371D", GOLD = "#F2B126";
 // Browser tabs sit on light OR dark chrome, so favicons must be transparent.
 // iOS and Android maskable icons are the exception: they get composited onto
 // a background we do not control, and transparent areas come out black.
-const iconPage = (size, { background = "transparent", scale = 0.96 } = {}) => `<style>${FONTS}
+const iconPage = (size, { background = "transparent", scale = 1 } = {}) => `<style>
   html,body{margin:0;width:${size}px;height:${size}px}
   body{background:${background};display:flex;align-items:center;justify-content:center}
-  img{width:${Math.round(size * scale)}px;image-rendering:auto}
-</style><img src="data:image/png;base64,${logo}">`;
+  img{width:${Math.round(size * scale)}px;height:${Math.round(size * scale)}px}
+</style><img src="data:image/svg+xml;base64,${icon}">`;
 
 const ogPage = `<style>${FONTS}
   html,body{margin:0;width:1200px;height:630px}
   body{background:${PAPER};display:flex;flex-direction:column;justify-content:center;
        padding:0 86px;box-sizing:border-box;font-family:'Libre Franklin',sans-serif}
   .row{display:flex;align-items:center;gap:40px}
-  img{height:168px}
+  /* the badge file carries 4% clear space; the negative margin keeps the
+     layout box the size the old trimmed mark had (168px tall, ~219 wide) */
+  img{height:182px;margin:-7px -4.8px}
   h1{font-family:Rokkitt,serif;font-weight:800;text-transform:uppercase;font-size:104px;
      line-height:.95;letter-spacing:-.015em;color:${INK};margin:0}
   h1 b{color:${SAUCE};font-weight:800}
@@ -54,9 +61,12 @@ const ogPage = `<style>${FONTS}
   p{margin:0;font-size:34px;font-weight:600;color:${INK};letter-spacing:.01em}
   .gold{color:${GOLD};-webkit-text-stroke:1px ${INK}}
 </style>
-<div class="row"><img src="data:image/png;base64,${logo}"><h1>Touchdown <b>Wings</b></h1></div>
+<div class="row"><img src="data:image/png;base64,${badge}"><h1>Touchdown <b>Wings</b></h1></div>
 <div class="rule"></div>
 <p>Wings &middot; Tenders &middot; Hibachi &nbsp;<span class="gold">&#9670;</span>&nbsp; Tullahoma, TN &nbsp;<span class="gold">&#9670;</span>&nbsp; (931) 913-2888</p>`;
+
+copyFileSync(resolve(brand, "tdw-icon.svg"), resolve(pub, "favicon.svg"));
+console.log("  wrote favicon.svg");
 
 const browser = await chromium.launch({ executablePath });
 
@@ -64,11 +74,13 @@ const ICONS = [
   { size: 16,  name: "favicon-16.png" },
   { size: 32,  name: "favicon-32.png" },
   { size: 48,  name: "favicon-48.png" },
-  { size: 192, name: "logo192.png" },
-  { size: 512, name: "logo512.png" },
+  { size: 192, name: "logo192.png", scale: 0.88 },   // 6% clear space each side
+  { size: 512, name: "logo512.png", scale: 0.88 },
   // opaque on purpose — these are composited by the OS
-  { size: 180, name: "apple-touch-icon.png", background: PAPER, scale: 0.84 },
-  { size: 512, name: "maskable512.png", background: PAPER, scale: 0.62 },
+  { size: 180, name: "apple-touch-icon.png", background: PAPER, scale: 0.75 },
+  // the wing tips sit 0.65 of the icon box from its centre, so a 60% box
+  // keeps all of the art inside the maskable 80% safe circle
+  { size: 512, name: "maskable512.png", background: PAPER, scale: 0.6 },
 ];
 
 for (const { size, name, background, scale } of ICONS) {

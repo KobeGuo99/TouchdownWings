@@ -16,10 +16,13 @@
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#060C17" />
 
     <!-- icons -->
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-32.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!-- ?v= busts caches when the icons change; SVG last so browsers that
+         support it pick it over the bitmaps -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico?v=2" sizes="32x32" />
+    <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-32.png?v=2" sizes="32x32" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.svg?v=2" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png?v=2" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json?v=2" />
 
     <!-- link previews when the site is shared in a text or post -->
     <meta property="og:type" content="website" />

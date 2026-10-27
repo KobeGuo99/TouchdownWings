@@ -19,10 +19,9 @@
   line-height: 1;
   min-width: 0;
 }
+.mast-mark picture { flex: 0 0 auto; display: block; }
 .mast-mark img {
-  /* The artwork is 180x138 real pixels, so the rendered width has to stay
-     under 60px to be sharp on a 3x phone and under 90px on a 2x screen.
-     Sized to that budget rather than scaled past it. */
+  /* srcset carries 240/480/720px files, sharp at 1x-3x for every size here */
   height: clamp(44px, 11vw, 62px);
   width: auto;
   flex: 0 0 auto;
@@ -305,6 +304,11 @@
      where the row is tightest, does not get the full increase. */
   .mast-mark img { height: clamp(72px, 7.4vw, 80px); }
   .board { flex: 0 0 300px; align-self: auto; }
+}
+/* the badge file carries 4% clear space the old trimmed mark did not, so
+   wide screens get it back; the row is the scoreboard's height, not this */
+@media (min-width: 1024px) {
+  .mast-mark img { height: 88px; }
 }
 @media (min-width: 760px) {
   .facts { grid-template-columns: repeat(3, 1fr); }
